@@ -1,7 +1,11 @@
 
 # NOTEtorious
 
-# Minimum Viable Product
+[Trello][trello]
+
+[trello]: https://trello.com/b/BAHg7c4m/notetorious-evernote-app
+
+# MVP
 
 My project is a full-stack web application inspired by Evernote and built using the PERN stack (Postgres, Express, React/Redux and NodeJS). Like Evernote, NOTEtorious helps users stay organized by allowing them to create, modify, tag, and store notes in notebooks.  By the end of the production period, this app will, at a minimum, satisfy the following criteria:
 
