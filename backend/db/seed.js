@@ -67,16 +67,15 @@ for (let i = 0; i < 10; i++) {
 taggings = taggings.join(", ");
 
 const populateData = async() => {
-  await db.none(`INSERT INTO users(username, email, password, profile_pic) VALUES ${users};`, { users })
-          .catch(err => console.log(err));
-  await db.none(`INSERT INTO notebooks(author_id, title) VALUES ${notebooks};`, { notebooks })
-          .catch(err => console.log(err));
-  await db.none(`INSERT INTO notes(title, body, author_id, notebook_id) VALUES ${notes};`, { notes })
-          .catch(err => console.log(err));
-  await db.none(`INSERT INTO tags(name) VALUES ${tags};`, { tags })
-          .catch(err => console.log(err));
-  await db.none(`INSERT INTO taggings(note_id, tag_id) VALUES ${taggings};`, { taggings })
-          .catch(err => console.log(err));
+  try {
+    await db.none(`INSERT INTO users(username, email, password, profile_pic) VALUES ${users};`, { users })
+    await db.none(`INSERT INTO notebooks(author_id, title) VALUES ${notebooks};`, { notebooks })
+    await db.none(`INSERT INTO notes(title, body, author_id, notebook_id) VALUES ${notes};`, { notes })
+    await db.none(`INSERT INTO tags(name) VALUES ${tags};`, { tags })
+    await db.none(`INSERT INTO taggings(note_id, tag_id) VALUES ${taggings};`, { taggings })
+  } catch (error) {
+    console.error('Error from ASYNC/AWAIT:', error);
+  }
 }
 
 populateData();
