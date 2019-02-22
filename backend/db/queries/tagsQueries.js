@@ -1,0 +1,102 @@
+const { db } = require("../index.js");
+
+const getAllTags = (req, res, next) => {
+  let user_id = +req.params.user_id;
+
+  db.any(
+    "SELECT name FROM taggings JOIN notes ON taggings.note_id=notes.id JOIN tags ON tags.id=taggings.tag_id WHERE notes.author_id=$1",
+    [user_id]
+  )
+    .then(tags => {
+      res.status(200).json({
+        status: "success",
+        message: "Got all tags from this user.  (From all notebooks!)",
+        body: tags
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+const getSingleTag = (req, res, next) => {
+  let user_id = +req.params.user_id;
+  let tag_id = req.params.tag_id;
+
+  db.one(
+    "SELECT * FROM taggings JOIN notes ON taggings.note_id=notes.id JOIN tags ON tags.id=taggings.tag_id WHERE notes.author_id=$1 AND tags.name=$2",
+    [user_id, tag_id]
+  )
+    .then(note => {
+      res.status(200).json({
+        status: "success",
+        message:
+          "Got single tag from this user and all notes related to that tag. (ignoring notebooks!)",
+        body: note
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+const addTag = async (req, res, next) => {
+  let note_id = +req.params.note_id;
+
+  try {
+    let tag_id = await db.one(
+      "INSERT INTO tags(name) VALUES (${name}) RETURNING id",
+      req.body
+    );
+    await db.none("INSERT INTO taggings(note_id, tag_id) VALUES ($1, $2)", [
+      note_id,
+      tag_id.id
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      message: "Note successfully added to notebook!"
+    });
+  } catch (error) {
+    console.error("Error from ASYNC/AWAIT");
+    next(error);
+  }
+};
+
+const editTag = (req, res, next) => {
+  db.none("UPDATE tags SET name=${name}, id=${id} WHERE id=${id}", {
+    name: req.body.name,
+    id: +req.params.tag_id
+  })
+    .then(() => {
+      res.status(200).json({
+        status: "success",
+        message: "Tag successfully updated!"
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+const deleteTag = (req, res, next) => {
+  db.result("DELETE FROM tags WHERE id=$1", [+req.params.tag_id])
+    .then(result => {
+      res.status(200).json({
+        status: "success",
+        message: "Tag deleted!",
+        body: result
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+module.exports = {
+  getAllTags,
+  getSingleTag,
+  addTag,
+  editTag,
+  deleteTag
+};

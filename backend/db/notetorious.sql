@@ -38,6 +38,6 @@ CREATE TABLE tags (
 
 CREATE TABLE taggings (
   id SERIAL PRIMARY KEY,
-  note_id INT REFERENCES notes(id) NOT NULL,
-  tag_id INT REFERENCES tags(id) NOT NULL
+  note_id INT REFERENCES notes(id),
+  tag_id INT REFERENCES tags(id) ON DELETE CASCADE
 );
