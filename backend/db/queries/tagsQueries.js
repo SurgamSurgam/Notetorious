@@ -1,4 +1,4 @@
-const { db } = require("../index.js");
+const db = require("../index.js");
 
 const getAllTags = (req, res, next) => {
   let user_id = +req.params.user_id;

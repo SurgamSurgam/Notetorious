@@ -20,7 +20,7 @@ users = users.join(", ");
 let notebooks = [];
 
 for (let i = 0; i < 10; i++) {
-  let author_id = Math.ceil(Math.random()*5);
+  let author_id = Math.ceil(Math.random() * 5);
   let title = faker.lorem.words();
 
   notebooks.push(`(${author_id}, '${title}')`);
@@ -35,8 +35,8 @@ let notes = [];
 for (let i = 0; i < 20; i++) {
   let title = faker.lorem.words();
   let body = faker.lorem.paragraph();
-  let author_id = Math.ceil(Math.random()*5);
-  let notebook_id = Math.ceil(Math.random()*10);
+  let author_id = Math.ceil(Math.random() * 5);
+  let notebook_id = Math.ceil(Math.random() * 10);
 
   notes.push(`('${title}', '${body}', ${author_id}, ${notebook_id} )`);
 }
@@ -59,23 +59,34 @@ tags = tags.join(", ");
 let taggings = [];
 
 for (let i = 0; i < 10; i++) {
-  let note_id = Math.ceil(Math.random()*20);
-  let tag_id = Math.ceil(Math.random()*20);
+  let note_id = Math.ceil(Math.random() * 20);
+  let tag_id = Math.ceil(Math.random() * 20);
   taggings.push(`(${note_id}, ${tag_id})`);
 }
 
 taggings = taggings.join(", ");
 
-const populateData = async() => {
+const populateData = async () => {
   try {
-    await db.none(`INSERT INTO users(username, email, password, profile_pic) VALUES ${users};`, { users })
-    await db.none(`INSERT INTO notebooks(author_id, title) VALUES ${notebooks};`, { notebooks })
-    await db.none(`INSERT INTO notes(title, body, author_id, notebook_id) VALUES ${notes};`, { notes })
-    await db.none(`INSERT INTO tags(name) VALUES ${tags};`, { tags })
-    await db.none(`INSERT INTO taggings(note_id, tag_id) VALUES ${taggings};`, { taggings })
+    await db.none(
+      `INSERT INTO users(username, email, password_digest, profile_pic) VALUES ${users};`,
+      { users }
+    );
+    await db.none(
+      `INSERT INTO notebooks(author_id, title) VALUES ${notebooks};`,
+      { notebooks }
+    );
+    await db.none(
+      `INSERT INTO notes(title, body, author_id, notebook_id) VALUES ${notes};`,
+      { notes }
+    );
+    await db.none(`INSERT INTO tags(name) VALUES ${tags};`, { tags });
+    await db.none(`INSERT INTO taggings(note_id, tag_id) VALUES ${taggings};`, {
+      taggings
+    });
   } catch (error) {
-    console.error('Error from ASYNC/AWAIT:', error);
+    console.error("Error from ASYNC/AWAIT:", error);
   }
-}
+};
 
 populateData();

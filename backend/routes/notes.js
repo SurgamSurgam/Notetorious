@@ -10,13 +10,16 @@ const {
   deleteNote
 } = require("../db/queries/notesQueries.js");
 
+const { loginRequired } = require("../auth/helpers.js");
+
 /* GET users listing. */
-router.get("/user/:user_id", getAllNotes);
-router.get("/user/:user_id/:notebook_id", getAllNotesFromSingleNotebook);
-router.get("/user/:user_id/tag/:tag_name", getAllNotesFromTag);
-router.get("/user/:user_id/:notebook_id/:note_id", getSingleNoteFromNotebook);
-router.post("/user/:user_id/:notebook_id", addNote);
-router.patch("/user/:user_id/:notebook_id/:note_id", editNote);
-router.delete("/user/:user_id/:notebook_id/:note_id", deleteNote);
+router.get("/user/:user_id", loginRequired, getAllNotes);
+router.get("/user/:user_id/:notebook_id", loginRequired, getAllNotesFromSingleNotebook);
+router.get("/user/:user_id/tag/:tag_name", loginRequired, getAllNotesFromTag);
+router.get("/user/:user_id/:notebook_id/:note_id", loginRequired, getSingleNoteFromNotebook);
+router.post("/user/:user_id/:notebook_id", loginRequired, addNote);
+router.patch("/user/:user_id/:notebook_id/:note_id", loginRequired, editNote);
+router.delete("/user/:user_id/:notebook_id/:note_id", loginRequired, deleteNote
+);
 
 module.exports = router;

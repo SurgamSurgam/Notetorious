@@ -1,9 +1,12 @@
-const db = require("../index.js");
+const { db } = require("../index.js");
+const authHelpers = require("../../auth/helpers");
 
 const addUser = (req, res, next) => {
+  const hash = authHelpers.createHash(req.body.password);
+
   db.none(
-    "INSERT INTO users(username, email, password) VALUES (${username}, ${email}, ${password})",
-    req.body
+    "INSERT INTO users(username, email, password_digest) VALUES (${username}, ${email}, ${password})",
+    { username: req.body.username, email: req.body.email, password: hash }
   )
     .then(() => {
       res.status(200).json({

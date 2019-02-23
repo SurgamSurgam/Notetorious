@@ -7,7 +7,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR (50) NOT NULL UNIQUE,
   email VARCHAR (355) NOT NULL UNIQUE,
-  password VARCHAR (50) NOT NULL,
+  password_digest VARCHAR (50) NOT NULL,
   profile_pic VARCHAR
 );
 

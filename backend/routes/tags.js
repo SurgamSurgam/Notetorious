@@ -8,11 +8,13 @@ const {
   deleteTag
 } = require("../db/queries/tagsQueries.js");
 
+const { loginRequired } = require("../auth/helpers.js");
+
 /* GET users listing. */
-router.get("/user/:user_id", getAllTags);
-router.get("/user/:user_id/:tag_id", getSingleTag);
-router.post("/user/note/:note_id", addTag);
-router.patch("/:tag_id", editTag);
-router.delete("/:tag_id", deleteTag);
+router.get("/user/:user_id", loginRequired, getAllTags);
+router.get("/user/:user_id/:tag_id", loginRequired, getSingleTag);
+router.post("/user/note/:note_id", loginRequired, addTag);
+router.patch("/:tag_id", loginRequired, editTag);
+router.delete("/:tag_id", loginRequired, deleteTag);
 
 module.exports = router;
