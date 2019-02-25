@@ -1,58 +1,64 @@
 import React from "react";
+import axios from "axios";
+import Auth from "../../utils/Auth";
+import SignUpDisplay from "./SignUpDisplay.js";
 
 class SignUp extends React.Component {
   state = {
+    username: "",
     email: "",
     password: ""
-  }
+  };
 
-  handleOnChange = e => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
-  handleOnSubmit = async e => {
+  registerUser = async e => {
     e.preventDefault();
-    // await this.props.addUser(this.state.newUser);
+    const { username, email, password } = this.state;
+
+    await axios.post("/api/users/", { username, email, password });
+    Auth.authenticateUser(username);
+    await axios.post("/sessions/login", { username, password });
+    await this.props.checkAuthenticateStatus();
+
     this.setState({
-      email: '',
-      password: ''
+      username: "",
+      email: "",
+      password: ""
     });
-    // this.props.history.push(`/users`);
   };
 
+  // handleOnSubmit = async e => {
+  //   e.preventDefault();
+  //   // await this.props.addUser(this.state.newUser);
+  //   this.setState({
+  //     username: "",
+  //     password: ""
+  //   });
+  //   // this.props.history.push(`/users`);
+  // };
 
-  render () {
-    console.log(this.state);
-    let { email, password } = this.state;
+  render() {
+    const { username, email, password } = this.state;
+    const { isLoggedIn } = this.props;
 
     return (
-      <div className="formDiv">
-        <form onSubmit={this.handleOnSubmit}>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={this.handleOnChange}
-            required
-          />
-          <br />
-          <input
-            type="text"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={this.handleOnChange}
-            required
-          />
-          <br />
-          <button className='registerUserButton'>Continue</button>
-        </form>
+      <div className="signUpDisplayWrapper">
+        <SignUpDisplay
+          username={username}
+          email={email}
+          password={password}
+          isLoggedIn={isLoggedIn}
+          registerUser={this.registerUser}
+          handleChange={this.handleChange}
+        />
       </div>
     );
-  };
+  }
 }
 
 export default SignUp;

@@ -1,23 +1,24 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-const LoginDisplay = ({
-  username,
-  password,
-  isLoggedIn,
-  loginUser,
-  handleChange,
-  demoLogin
-}) => {
+const SignUpDisplay = ({ username, email, password, registerUser, handleChange }) => {
   return (
     <React.Fragment>
-      <h1>Login Page</h1>
-      <form onSubmit={loginUser}>
+      <h1>Sign Up Page</h1>
+      <form onSubmit={registerUser}>
         <input
           type="text"
           value={username}
           name="username"
           placeholder="username"
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          value={email}
+          name="email"
+          placeholder="email"
           onChange={handleChange}
           required
         />
@@ -29,13 +30,10 @@ const LoginDisplay = ({
           onChange={handleChange}
           required
         />
-        <button type="submit">Sign in</button>
-        <button className='demoButton' onClick={demoLogin}>Demo log in</button>
+        <button type="submit">Continue</button>
       </form>
-
-      <p>{isLoggedIn ? "Logged In!" : ""}</p>
     </React.Fragment>
   );
 };
 
-export default withRouter(LoginDisplay);
+export default withRouter(SignUpDisplay);

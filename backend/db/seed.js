@@ -1,4 +1,6 @@
-const { db } = require("./index.js");
+const pgp = require("pg-promise")({});
+const db = pgp("postgres://localhost:5432/notetorious");
+
 const faker = require("faker");
 
 //USERS TABLE
