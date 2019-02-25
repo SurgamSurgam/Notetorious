@@ -1,21 +1,25 @@
-import * as Utils from "../utils/Utils.js";
 import Auth from "../utils/Auth.js";
-import { USER_STATUS } from "./actionTypes";
+import axios from "axios";
+import { RECEIVE_USER } from "./actionTypes";
 
 export const receiveUserStatus = user => {
-  return { type: USER_STATUS, user };
+  console.log("AUTH ACTIONS !!", user);
+  return { type: RECEIVE_USER, user };
 };
+
 
 export const checkAuthenticateStatus = () => dispatch => {
   return axios.get("/sessions/isLoggedIn").then(user => {
     if (user.data.username === Auth.getToken()) {
-      return dispatch receiveUserStatus({
-        isLoggedIn: Auth.isUserAuthenticated(),
-        user: Auth.getToken()
-      })
+      return dispatch(
+        receiveUserStatus({
+          isLoggedIn: Auth.isUserAuthenticated(),
+          user: Auth.getToken()
+        })
+      );
     } else {
       if (user.data.username) {
-        this.logoutUser();
+        logoutUser();
       } else {
         Auth.deauthenticateUser();
       }
@@ -31,5 +35,11 @@ export const logoutUser = () => dispatch => {
     })
     .then(() => {
       checkAuthenticateStatus();
+      dispatch(
+        receiveUserStatus({
+          isLoggedIn: false,
+          user: null
+        })
+      );
     });
-}
+};

@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-export const LoggedInLinks = (props) => {
+const LoggedInLinks = (props) => {
   return (
     <div>
       <ul className="right">
@@ -11,9 +12,10 @@ export const LoggedInLinks = (props) => {
           <li><NavLink to='/'><span className="black-text ">Favorites</span></NavLink></li>
           <li><NavLink to='/'><span className="black-text ">All Notes</span></NavLink></li>
           <li><NavLink to='/notebooks'><span className="black-text ">Notebooks </span></NavLink></li>
-          <li><NavLink to='/'><span className="black-text ">Tags</span></NavLink></li>
-          <li>{props.logoutButton}</li>
+          <li><button onClick={props.logoutUser}>Logout</button></li>
       </ul>
     </div>
   );
 };
+
+export default withRouter(LoggedInLinks)

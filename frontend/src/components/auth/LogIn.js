@@ -63,7 +63,7 @@ class LogIn extends React.Component {
   // };
 
   render() {
-    console.log(this.props);
+    console.log("LOGIN PROPS!!", this.props);
     const { username, password } = this.state;
     const { isLoggedIn } = this.props;
 

@@ -1,5 +1,3 @@
 export const RECEIVE_ALL_NOTEBOOKS = "RECEIVE_ALL_NOTEBOOKS";
 
-
-//Auth
-export const USER_STATUS = "USER_STATUS";
+export const RECEIVE_USER = "RECEIVE_USER";
