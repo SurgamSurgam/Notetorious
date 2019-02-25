@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 
 let store = createStore(RootReducer, {}, applyMiddleware(thunk, logger));
 
-// window.store = store;
+window.store = store;
 
 ReactDOM.render(
   <Provider store={store}>

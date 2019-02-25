@@ -59,7 +59,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Navbar user={user} logoutButton={logoutButton} isLoggedIn={isLoggedIn} />
+        <Navbar
+          user={user}
+          logoutButton={logoutButton}
+          isLoggedIn={isLoggedIn}
+        />
         <Switch>
           <Route
             path="/login"
