@@ -1,4 +1,4 @@
-import Notebooks from "../components/Notebooks.js";
+import Notebooks from "../components/notebooks/Notebooks.js";
 import { connect } from "react-redux";
 import { fetchNotebooks } from "../actions/NotebooksActions.js";
 

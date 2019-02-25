@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router';
 
-export const LoggedOutLinks = () => {
+const LoggedOutLinks = () => {
   return (
     <div>
       <ul className="right">
@@ -12,3 +13,5 @@ export const LoggedOutLinks = () => {
     </div>
   );
 };
+
+export default withRouter(LoggedOutLinks);
