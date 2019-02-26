@@ -2,7 +2,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const init = require("./passport");
 const helpers = require("./helpers");
-const {getCurrentUser} = require('../db/queries/notebooksQueries.js')
 
 const db = require("../db/index.js");
 
@@ -15,7 +14,6 @@ passport.use(
         if (!helpers.comparePass(password, user.password_digest)) {
           return done(null, false);
         } else {
-          getCurrentUser(user);
           return done(null, user);
         }
       })

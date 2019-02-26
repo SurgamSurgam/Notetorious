@@ -1,15 +1,9 @@
 const db = require("../index.js");
 
-let currentUser;
-
-const getCurrentUser = (user) =>{
-  currentUser=user;
-}
-
 const getAllNotebooks = (req, res, next) => {
-  console.log('DEYVI', req.user, 'currentUser', currentUser)// add this id to all params.user_id - iow - when user is logged in then I would have access to all ids
-  let user_id = +req.params.user_id;
-  db.any("SELECT * FROM notebooks WHERE author_id=$1", [user_id])
+  console.log('DEYVI req session:', req.session.currentUser)
+
+  db.any("SELECT * FROM notebooks WHERE author_id=$1", [req.session.currentUser.id])
     .then(notebooks => {
       res.status(200).json({
         status: "success",
@@ -23,10 +17,10 @@ const getAllNotebooks = (req, res, next) => {
 };
 
 const getSingleNotebook = (req, res, next) => {
-  let user_id = +req.params.user_id;
+  // let user_id = +req.params.user_id;
   let notebook_id = +req.params.notebook_id;
   db.one("SELECT * FROM notebooks WHERE author_id=$1 AND id=$2", [
-    user_id,
+    req.session.currentUser.id,
     notebook_id
   ])
     .then(notebook => {
@@ -44,8 +38,8 @@ const getSingleNotebook = (req, res, next) => {
 const addNotebook = (req, res, next) => {
   req.body.is_default = req.body.is_default ? req.body.is_default : false;
   db.none(
-    "INSERT INTO notebooks(author_id, title, is_default) VALUES (${author_id}, ${title}, ${is_default})",
-    req.body
+    "INSERT INTO notebooks(author_id, title, is_default) VALUES ($1, $2, $3)",
+    [req.session.currentUser.id, req.body.title, req.body.is_default]
   )
     .then(() => {
       res.status(200).json({
@@ -76,7 +70,7 @@ const editNotebook = (req, res, next) => {
     "UPDATE notebooks SET " +
       queryString +
       " WHERE author_id=" +
-      +req.params.user_id +
+      req.session.currentUser.id +
       " AND id=" +
       +req.params.notebook_id,
     req.body
@@ -94,7 +88,7 @@ const editNotebook = (req, res, next) => {
 
 const deleteNotebook = (req, res, next) => {
   db.result("DELETE FROM notebooks WHERE author_id=$1 AND id=$2", [
-    +req.params.user_id,
+    req.session.currentUser.id,
     +req.params.notebook_id
   ])
     .then(result => {
@@ -115,5 +109,4 @@ module.exports = {
   addNotebook,
   editNotebook,
   deleteNotebook,
-  getCurrentUser
 };
