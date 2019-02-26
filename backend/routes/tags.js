@@ -11,8 +11,8 @@ const {
 const { loginRequired } = require("../auth/helpers.js");
 
 /* GET users listing. */
-router.get("/user/:user_id", loginRequired, getAllTags);
-router.get("/user/:user_id/:tag_id", loginRequired, getSingleTag);
+router.get("/", loginRequired, getAllTags);
+router.get("/:tag_id", loginRequired, getSingleTag);
 router.post("/user/note/:note_id", loginRequired, addTag);
 router.patch("/:tag_id", loginRequired, editTag);
 router.delete("/:tag_id", loginRequired, deleteTag);
