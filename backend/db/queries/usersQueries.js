@@ -41,7 +41,7 @@ const editUser = (req, res, next) => {
   }
 
   db.none(
-    "UPDATE users SET " + queryString + " WHERE id=" + req.params.id,
+    "UPDATE users SET " + queryString + " WHERE id=" + req.session.currentUser.id,
     req.body
   )
     .then(() => {
@@ -56,7 +56,7 @@ const editUser = (req, res, next) => {
 };
 
 const deleteUser = (req, res, next) => {
-  db.result("DELETE FROM users WHERE id=$1", [+req.params.id])
+  db.result("DELETE FROM users WHERE id=$1", [req.session.currentUser.id])
     .then(result => {
       res.status(200).json({
         status: "success",
