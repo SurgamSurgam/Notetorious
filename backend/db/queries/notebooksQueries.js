@@ -1,6 +1,13 @@
 const db = require("../index.js");
 
+let currentUser;
+
+const getCurrentUser = (user) =>{
+  currentUser=user;
+}
+
 const getAllNotebooks = (req, res, next) => {
+  console.log('DEYVI', req.user, 'currentUser', currentUser)// add this id to all params.user_id - iow - when user is logged in then I would have access to all ids
   let user_id = +req.params.user_id;
   db.any("SELECT * FROM notebooks WHERE author_id=$1", [user_id])
     .then(notebooks => {
@@ -107,5 +114,6 @@ module.exports = {
   getSingleNotebook,
   addNotebook,
   editNotebook,
-  deleteNotebook
+  deleteNotebook,
+  getCurrentUser
 };

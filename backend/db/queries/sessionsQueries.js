@@ -1,4 +1,4 @@
-const db = require("../index.js");
+// const db = require("../index.js");
 
 const logoutUser = (req, res, next) => {
   req.logout();
@@ -6,6 +6,7 @@ const logoutUser = (req, res, next) => {
 };
 
 const loginUser = (req, res) => {
+  console.log('backend REQ.USER', req.user);
   res.json(req.user);
 };
 
