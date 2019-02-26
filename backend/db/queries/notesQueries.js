@@ -1,8 +1,8 @@
 const db = require("../index.js");
 
 const getAllNotes = (req, res, next) => {
-  let user_id = +req.params.user_id;
-  db.any("SELECT * FROM notes WHERE author_id=$1", [user_id])
+
+  db.any("SELECT * FROM notes WHERE author_id=$1", [req.session.currentUser.id])
     .then(notes => {
       res.status(200).json({
         status: "success",
@@ -17,7 +17,7 @@ const getAllNotes = (req, res, next) => {
 
 const getAllNotesFromSingleNotebook = (req, res, next) => {
   db.any("SELECT * FROM notes WHERE author_id=$1 AND notebook_id=$2", [
-    +req.params.user_id,
+    req.session.currentUser.id,
     +req.params.notebook_id
   ])
     .then(notes => {
@@ -35,7 +35,7 @@ const getAllNotesFromSingleNotebook = (req, res, next) => {
 const getAllNotesFromTag = (req, res, next) => {
   db.any(
     "SELECT * FROM taggings JOIN notes ON taggings.note_id=notes.id JOIN tags ON taggings.tag_id=tags.id WHERE notes.author_id=$1 AND tags.name=$2",
-    [+req.params.user_id, req.params.tag_name]
+    [req.session.currentUser.id, req.params.tag_name]
   )
     .then(tagnotes => {
       res.status(200).json({
@@ -50,12 +50,11 @@ const getAllNotesFromTag = (req, res, next) => {
 };
 
 const getSingleNoteFromNotebook = (req, res, next) => {
-  let user_id = +req.params.user_id;
   let notebook_id = +req.params.notebook_id;
   let note_id = +req.params.note_id;
   db.one(
     "SELECT * FROM notes WHERE author_id=$1 AND notebook_id=$2 AND id=$3",
-    [user_id, notebook_id, note_id]
+    [req.session.currentUser.id, notebook_id, note_id]
   )
     .then(note => {
       res.status(200).json({
@@ -71,10 +70,9 @@ const getSingleNoteFromNotebook = (req, res, next) => {
 
 const addNote = (req, res, next) => {
   req.body.favorited = req.body.favorited ? req.body.favorited : false;
-  console.log(req.body);
   db.none(
-    "INSERT INTO notes(title, body, author_id, notebook_id, favorited) VALUES (${title}, ${body}, ${user_id}, ${notebook_id}, ${favorited})",
-    req.body
+    "INSERT INTO notes(title, body, author_id, notebook_id, favorited) VALUES ($1, $2, $3, $4, $5)",
+    [req.body.title, req.body.body, req.session.currentUser.id, req.body.notebook_id, req.body.favorited]
   )
     .then(() => {
       res.status(200).json({
@@ -108,7 +106,7 @@ const editNote = (req, res, next) => {
     "UPDATE notes SET " +
       queryString +
       " WHERE author_id=" +
-      +req.params.user_id +
+      req.session.currentUser.id +
       " AND notebook_id=" +
       +req.params.notebook_id +
       " AND id=" +
@@ -129,7 +127,7 @@ const editNote = (req, res, next) => {
 const deleteNote = (req, res, next) => {
   db.result(
     "DELETE FROM notes WHERE author_id=$1 AND notebook_id=$2 AND id=$3",
-    [+req.params.user_id, +req.params.notebook_id, +req.params.note_id]
+    [req.session.currentUser.id, +req.params.notebook_id, +req.params.note_id]
   )
     .then(result => {
       res.status(200).json({
