@@ -8,6 +8,16 @@ const normalizeData = arr => {
   return obj;
 };
 
+// implement this into new state in a way easily accessible by all components:
+//================== GOOD CODE BELOW
+// const isDefault = obj => {
+// 	let result = Object.values(obj).filter( notebook => {
+// 		return notebook.is_default
+// 	})
+// 	return result[0].title
+// }
+//================== GOOD CODE ABOVE
+
 const NotebooksReducer = (oldState = [], action) => {
   Object.freeze(oldState);
   switch (action.type) {

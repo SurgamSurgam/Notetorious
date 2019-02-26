@@ -1,3 +1,9 @@
+
+//Auth
+export const RECEIVE_USER = "RECEIVE_USER";
+
+//Notebooks
 export const RECEIVE_ALL_NOTEBOOKS = "RECEIVE_ALL_NOTEBOOKS";
 
-export const RECEIVE_USER = "RECEIVE_USER";
+//Tags
+export const RECEIVE_ALL_TAGS = "RECEIVE_ALL_TAGS";
