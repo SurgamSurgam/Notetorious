@@ -2,7 +2,7 @@ const db = require("../index.js");
 
 const getAllNotes = (req, res, next) => {
 
-  db.any("SELECT * FROM notes WHERE author_id=$1", [req.session.currentUser.id])
+  db.any("SELECT * FROM notes WHERE author_id=$1 ORDER BY created_at DESC", [req.session.currentUser.id])
     .then(notes => {
       res.status(200).json({
         status: "success",
@@ -16,7 +16,7 @@ const getAllNotes = (req, res, next) => {
 };
 
 const getAllNotesFromSingleNotebook = (req, res, next) => {
-  db.any("SELECT * FROM notes WHERE author_id=$1 AND notebook_id=$2", [
+  db.any("SELECT * FROM notes WHERE author_id=$1 AND notebook_id=$2 ORDER BY created_at DESC", [
     req.session.currentUser.id,
     +req.params.notebook_id
   ])
@@ -34,7 +34,7 @@ const getAllNotesFromSingleNotebook = (req, res, next) => {
 
 const getAllNotesFromTag = (req, res, next) => {
   db.any(
-    "SELECT * FROM taggings JOIN notes ON taggings.note_id=notes.id JOIN tags ON taggings.tag_id=tags.id WHERE notes.author_id=$1 AND tags.name=$2",
+    "SELECT * FROM taggings JOIN notes ON taggings.note_id=notes.id JOIN tags ON taggings.tag_id=tags.id WHERE notes.author_id=$1 AND tags.name=$2 ORDER BY created_at DESC",
     [req.session.currentUser.id, req.params.tag_name]
   )
     .then(tagnotes => {

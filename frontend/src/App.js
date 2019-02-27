@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import NavAuthContainer from "./containers/NavAuthContainer.js";
 import NotebooksContainer from "./containers/NotebooksContainer.js";
+import NotesContainer from "./containers/NotesContainer.js";
 import TagsContainer from "./containers/TagsContainer.js";
 import LandingPage from "./components/landing/LandingPage.js";
 import LogInAuthContainer from "./containers/LogInAuthContainer.js";
@@ -18,12 +19,13 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Route component= {NavAuthContainer} />
+        <Route component={NavAuthContainer} />
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/login" component={LogInAuthContainer} />
           <Route path="/signup" component={SignInAuthContainer} />
           <PrivateRoute path="/notebooks" component={NotebooksContainer} />
+          <PrivateRoute path="/notes" component={NotesContainer} />
           <PrivateRoute path="/tags" component={TagsContainer} />
         </Switch>
       </div>
@@ -31,5 +33,4 @@ class App extends Component {
   }
 }
 
-
-export default App
+export default App;

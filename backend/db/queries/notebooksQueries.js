@@ -3,7 +3,7 @@ const db = require("../index.js");
 const getAllNotebooks = (req, res, next) => {
   console.log('DEYVI req session:', req.session.currentUser)
 
-  db.any("SELECT * FROM notebooks WHERE author_id=$1", [req.session.currentUser.id])
+  db.any("SELECT * FROM notebooks WHERE author_id=$1 ORDER BY created_at DESC", [req.session.currentUser.id])
     .then(notebooks => {
       res.status(200).json({
         status: "success",
@@ -19,7 +19,7 @@ const getAllNotebooks = (req, res, next) => {
 const getSingleNotebook = (req, res, next) => {
   // let user_id = +req.params.user_id;
   let notebook_id = +req.params.notebook_id;
-  db.one("SELECT * FROM notebooks WHERE author_id=$1 AND id=$2", [
+  db.one("SELECT * FROM notebooks WHERE author_id=$1 AND id=$2 ORDER BY created_at DESC", [
     req.session.currentUser.id,
     notebook_id
   ])

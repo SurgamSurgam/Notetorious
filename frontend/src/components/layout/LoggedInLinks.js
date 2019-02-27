@@ -10,7 +10,7 @@ const LoggedInLinks = (props) => {
           <li><NavLink to='/'><span className="black-text ">Search Field</span></NavLink></li>
           <li><NavLink to='/'><span className="black-text ">New Note</span></NavLink></li>
           <li><NavLink to='/'><span className="black-text ">Favorites</span></NavLink></li>
-          <li><NavLink to='/'><span className="black-text ">All Notes</span></NavLink></li>
+          <li><NavLink to='/notes'><span className="black-text ">All Notes</span></NavLink></li>
           <li><NavLink to='/notebooks'><span className="black-text ">Notebooks</span></NavLink></li>
           <li><NavLink to='/tags'><span className="black-text ">Tags</span></NavLink></li>
           <li><button onClick={props.logoutUser}>Logout</button></li>
