@@ -15,11 +15,11 @@ export default class Notes extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchNotes();
-    this.props.fetchNotebooks();
+  async componentDidMount() {
+    await this.props.fetchNotes();
+    await this.props.fetchNotebooks();
 
-    let notes = Object.values(this.props.notes).find((note, i) => i === 0);
+    let notes = Object.values(this.props.notes.notes).find((note, i) => i === 0);
     let defaultNotebook = Object.values(this.props.notebooks).find(
       notebook => notebook.is_default === true
     );
@@ -47,10 +47,11 @@ export default class Notes extends React.Component {
     }
   };
 
-  toggleNewNote = () => {
-    this.setState({
-      toggleNewNote: !this.state.toggleNewNote
-    });
+  handleToggleNewNote = () => {
+    // this.setState({
+    //   toggleNewNote: !this.state.toggleNewNote
+    // });
+    this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote)
   };
 
   setCurrentNotetoFirstNote = (firstNote, defaultNotebookId) => {
@@ -82,48 +83,57 @@ export default class Notes extends React.Component {
   };
 
   handleCancel = () => {
-    this.toggleNewNote();
+    // this.toggleNewNote();
+    this.handleToggleNewNote();
     this.setState({
       newNote: { ...this.state.newNote, title: "", body: "" }
     });
   };
 
+  handleCreateNewNote = () => {
+
+  }
+
   render() {
+
     console.log("STATE", this.state);
     console.log("PROPS", this.props);
-    // console.log("PROPS", this.props.location.pathname);
+    console.log("PROPS", this.props.location.pathname);
 
-    let notes = Object.values(this.props.notes).map((note, i) => {
-      let updated_at = new Date(note.updated_at);
-      let created_at = new Date(note.created_at);
+    let notes;
+    if (this.props.notes.notes) {
+      notes = Object.values(this.props.notes.notes).map((note, i) => {
+        let updated_at = new Date(note.updated_at);
+        let created_at = new Date(note.created_at);
 
-      return (
-        <div
+        return (
+          <div
           className="allNotesDiv"
           key={note.id}
           onClick={e => this.getSelectionDetails(e, note)}
-        >
+          >
           <p>
-            Id: {note.id}
-            <br />
-            Title: {note.title}
-            <br />
-            Body: {note.body}
-            <br />
-            {note.updated_at
-              ? "Updated at " + updated_at
-              : "Created at " + created_at}
+          Id: {note.id}
+          <br />
+          Title: {note.title}
+          <br />
+          Body: {note.body}
+          <br />
+          {note.updated_at
+            ? "Updated at " + updated_at
+            : "Created at " + created_at}
             <br />
             Favorited:{String(note.favorited)}
-          </p>
-        </div>
-      );
-    });
+            </p>
+            </div>
+          );
+        });
+    }
 
     return (
       <>
         <h1>All Notes</h1>
-        {this.state.toggleNewNote ? (
+        {this.props.notes.generalUtil.toggleNewNote ? (
           <AddNoteDisplay
             newNote={this.state.newNote}
             handleNewNoteChange={this.handleNewNoteChange}

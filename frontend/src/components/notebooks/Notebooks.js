@@ -1,6 +1,7 @@
 import React from "react";
 import { NotebooksDisplay } from "./NotebooksDisplay.js";
 import { AddNotebookDisplay } from "./AddNotebookDisplay.js";
+// import { AddNoteDisplay } from "../notes/AddNoteDisplay.js";
 import axios from "axios";
 
 export default class Notebooks extends React.Component {
@@ -57,6 +58,7 @@ export default class Notebooks extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
+        {/*<AddNoteDisplay/>*/}
       </>
     );
   }

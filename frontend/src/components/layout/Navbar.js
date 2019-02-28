@@ -5,6 +5,7 @@ import LoggedOutLinks from "./LoggedOutLinks.js";
 
 export const Navbar = props => {
   console.log("NAV PROPS!", props);
+  debugger;
   let { isLoggedIn, user } = props.user;
   return (
     <nav className="nav-wrapper grey lighten-5">
@@ -13,7 +14,7 @@ export const Navbar = props => {
           <span className="black-text valign-wrapper ">Notetorious </span>
         </Link>
         {isLoggedIn ? (
-          <LoggedInLinks user={user} logoutUser={props.logoutUser} />
+          <LoggedInLinks user={user} logoutUser={props.logoutUser} toggleNewNote={props.toggleNewNote} />
         ) : (
           <LoggedOutLinks />
         )}

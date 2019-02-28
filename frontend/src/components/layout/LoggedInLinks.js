@@ -3,12 +3,19 @@ import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 const LoggedInLinks = (props) => {
+
+  let addNoteInAllNotes = (props.location.pathname === '/notebooks') ? ('boo!') : (
+    <NavLink to='/notes' onClick={props.toggleNewNote}><span className="black-text ">New Note</span></NavLink>
+  )
+  debugger;
   return (
     <div>
       <ul className="right">
           <li><span className="black-text ">{props.user}</span></li>
           <li><NavLink to='/'><span className="black-text ">Search Field</span></NavLink></li>
-          <li><NavLink to='/'><span className="black-text ">New Note</span></NavLink></li>
+          <li>
+            {addNoteInAllNotes}
+          </li>
           <li><NavLink to='/'><span className="black-text ">Favorites</span></NavLink></li>
           <li><NavLink to='/notes'><span className="black-text ">All Notes</span></NavLink></li>
           <li><NavLink to='/notebooks'><span className="black-text ">Notebooks</span></NavLink></li>
