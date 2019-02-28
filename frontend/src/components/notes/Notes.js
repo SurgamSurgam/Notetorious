@@ -1,22 +1,48 @@
 import React from "react";
 import { NotesDisplay } from "./NotesDisplay.js";
-import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
+// import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
 // import { AddNotebookDisplay } from "./AddNotebookDisplay.js";
+import ReactQuill from "react-quill";
 import axios from "axios";
 
 export default class Notes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentNoteObj: ""
+      // newNotebook: { title: "", is_default: false }
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchNotes();
+
+    let notes = Object.values(this.props.notes).find((note, i) => i === 0);
+
+    if (notes) {
+      this.setCurrentNotetoFirstNote(notes);
+    }
   }
-  //
-  // handleChange = e => {
-  //   this.setState({
-  //     newNote: {
-  //       ...this.state.newNote,
-  //       [e.target.name]: e.target.value
-  //     }
-  //   });
-  // };
+
+  handleChange = e => {
+    this.setState({
+      currentNoteObj: { ...this.state.currentNoteObj, body: e }
+    });
+  };
+
+  setCurrentNotetoFirstNote = firstNote => {
+    this.setState({
+      currentNoteObj: { ...firstNote }
+    });
+  };
+
+  getSelectionDetails =(e, selectedNoteObj) => {
+    debugger;
+    this.setState({
+      currentNoteObj: { ...selectedNoteObj, body: selectedNoteObj.body }
+    })
+  }
   //
   // handleSubmit = e => {
   //   e.preventDefault();
@@ -33,24 +59,24 @@ export default class Notes extends React.Component {
   // };
 
   render() {
-    // console.log(this.state);
-    let firstNote;
+    console.log('STATE', this.state);
     let notes = Object.values(this.props.notes).map((note, i) => {
       let updated_at = new Date(note.updated_at);
       let created_at = new Date(note.created_at);
-      if (i === 0) {firstNote = note}
 
       return (
-        <div className="allNotesDiv" key={note.id}>
+        <div className="allNotesDiv" key={note.id} onClick={(e)=>this.getSelectionDetails(e, note)}>
           <p>
             Id: {note.id}
-            <br/>
+            <br />
             Title: {note.title}
-            <br/>
+            <br />
             Body: {note.body}
-            <br/>
-            {updated_at ? 'Updated at ' + updated_at : 'Created at ' + created_at}
-            <br/>
+            <br />
+            {note.updated_at
+              ? "Updated at " + updated_at
+              : "Created at " + created_at}
+            <br />
             Favorited:{String(note.favorited)}
           </p>
         </div>
@@ -60,7 +86,21 @@ export default class Notes extends React.Component {
     return (
       <>
         <h1>All Notes</h1>
-        <SingleNoteDisplay firstNote={firstNote} />
+        {/*<SingleNoteDisplay
+          currentNoteObj={this.state.currentNoteObj}
+          handleChange={this.handleChange}
+        />*/}
+
+        {this.state.currentNoteObj.body ? (
+          <ReactQuill
+            value={this.state.currentNoteObj.body}
+            onChange={this.handleChange}
+            placeholder="Start writing/editing"
+          />
+        ) : (
+          console.log("hell")
+        )}
+
         <NotesDisplay notes={notes} />
         {/*<AddNotebookDisplay
           newNotebook={this.state.newNotebook}

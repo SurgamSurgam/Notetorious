@@ -1,9 +1,18 @@
 import React from "react";
+import ReactQuill from "react-quill";
 
-export const SingleNoteDisplay = ({ firstNote }) => {
-
-  if (!!firstNote) {
-    return <div>{firstNote.title}  {firstNote.body}</div>;
+export const SingleNoteDisplay = ({ currentNoteObj, handleChange }) => {
+  if (!!currentNoteObj) {
+    return (
+      <div>
+        <ReactQuill
+          name="currentNote"
+          value={currentNoteObj.body}
+          onChange={handleChange}
+          placeholder="Start writing/editing"
+        />
+      </div>
+    );
   } else {
     return null;
   }
