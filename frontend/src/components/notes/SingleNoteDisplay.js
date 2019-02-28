@@ -6,7 +6,6 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange }) => {
     return (
       <div>
         <ReactQuill
-          name="currentNote"
           value={currentNoteObj.body}
           onChange={handleChange}
           placeholder="Start writing/editing"

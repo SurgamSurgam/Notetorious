@@ -1,27 +1,31 @@
 import React from "react";
 import { NotesDisplay } from "./NotesDisplay.js";
-// import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
-// import { AddNotebookDisplay } from "./AddNotebookDisplay.js";
-import ReactQuill from "react-quill";
+import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
+import { AddNoteDisplay } from "./AddNoteDisplay.js";
 import axios from "axios";
 
 export default class Notes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentNoteObj: ""
-      // newNotebook: { title: "", is_default: false }
+      currentNoteObj: "",
+      toggleNewNote: true,
+      newNote: { title: "", body: "", notebook_id: "" }
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchNotes();
+    this.props.fetchNotebooks();
 
     let notes = Object.values(this.props.notes).find((note, i) => i === 0);
+    let defaultNotebook = Object.values(this.props.notebooks).find(
+      notebook => notebook.is_default === true
+    );
 
     if (notes) {
-      this.setCurrentNotetoFirstNote(notes);
+      this.setCurrentNotetoFirstNote(notes, defaultNotebook.id);
     }
   }
 
@@ -31,41 +35,74 @@ export default class Notes extends React.Component {
     });
   };
 
-  setCurrentNotetoFirstNote = firstNote => {
+  handleNewNoteChange = e => {
+    if (typeof e === "string") {
+      this.setState({
+        newNote: { ...this.state.newNote, body: e }
+      });
+    } else {
+      this.setState({
+        newNote: { ...this.state.newNote, title: e.target.value }
+      });
+    }
+  };
+
+  toggleNewNote = () => {
     this.setState({
-      currentNoteObj: { ...firstNote }
+      toggleNewNote: !this.state.toggleNewNote
     });
   };
 
-  getSelectionDetails =(e, selectedNoteObj) => {
-    debugger;
+  setCurrentNotetoFirstNote = (firstNote, defaultNotebookId) => {
+    this.setState({
+      currentNoteObj: { ...firstNote },
+      newNote: { ...this.state.newNote, notebook_id: +defaultNotebookId }
+    });
+  };
+
+  getSelectionDetails = (e, selectedNoteObj) => {
     this.setState({
       currentNoteObj: { ...selectedNoteObj, body: selectedNoteObj.body }
-    })
-  }
-  //
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   axios
-  //     .post("/api/notebooks", this.state.newNote)
-  //     .then(() => {
-  //       this.setState({
-  //         newNote: { title: "", favorited: false }
-  //       });
-  //     })
-  //     .then(() => {
-  //       this.props.fetchNotebooks();
-  //     });
-  // };
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    axios
+      .post(`/api/notes/${+this.state.newNote.notebook_id}`, this.state.newNote)
+      .then(() => {
+        this.setState({
+          newNote: { ...this.state.newNote, title: "", body: "" }
+        });
+      })
+      .then(() => {
+        this.props.fetchNotebooks();
+        this.props.fetchNotes();
+      });
+  };
+
+  handleCancel = () => {
+    this.toggleNewNote();
+    this.setState({
+      newNote: { ...this.state.newNote, title: "", body: "" }
+    });
+  };
 
   render() {
-    console.log('STATE', this.state);
+    console.log("STATE", this.state);
+    console.log("PROPS", this.props);
+    // console.log("PROPS", this.props.location.pathname);
+
     let notes = Object.values(this.props.notes).map((note, i) => {
       let updated_at = new Date(note.updated_at);
       let created_at = new Date(note.created_at);
 
       return (
-        <div className="allNotesDiv" key={note.id} onClick={(e)=>this.getSelectionDetails(e, note)}>
+        <div
+          className="allNotesDiv"
+          key={note.id}
+          onClick={e => this.getSelectionDetails(e, note)}
+        >
           <p>
             Id: {note.id}
             <br />
@@ -86,28 +123,23 @@ export default class Notes extends React.Component {
     return (
       <>
         <h1>All Notes</h1>
-        {/*<SingleNoteDisplay
-          currentNoteObj={this.state.currentNoteObj}
-          handleChange={this.handleChange}
-        />*/}
-
-        {this.state.currentNoteObj.body ? (
-          <ReactQuill
-            value={this.state.currentNoteObj.body}
-            onChange={this.handleChange}
-            placeholder="Start writing/editing"
+        {this.state.toggleNewNote ? (
+          <AddNoteDisplay
+            newNote={this.state.newNote}
+            handleNewNoteChange={this.handleNewNoteChange}
+            handleSubmit={this.handleSubmit}
+            handleCancel={this.handleCancel}
           />
         ) : (
-          console.log("hell")
+          <SingleNoteDisplay
+            currentNoteObj={this.state.currentNoteObj}
+            handleChange={this.handleChange}
+          />
         )}
-
         <NotesDisplay notes={notes} />
-        {/*<AddNotebookDisplay
-          newNotebook={this.state.newNotebook}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />*/}
       </>
     );
   }
 }
+
+// handleSubmit={this.handleSubmit}

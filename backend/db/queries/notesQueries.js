@@ -1,8 +1,9 @@
 const db = require("../index.js");
 
 const getAllNotes = (req, res, next) => {
-
-  db.any("SELECT * FROM notes WHERE author_id=$1 ORDER BY created_at DESC", [req.session.currentUser.id])
+  db.any("SELECT * FROM notes WHERE author_id=$1 ORDER BY created_at ASC", [
+    req.session.currentUser.id
+  ])
     .then(notes => {
       res.status(200).json({
         status: "success",
@@ -16,10 +17,10 @@ const getAllNotes = (req, res, next) => {
 };
 
 const getAllNotesFromSingleNotebook = (req, res, next) => {
-  db.any("SELECT * FROM notes WHERE author_id=$1 AND notebook_id=$2 ORDER BY created_at DESC", [
-    req.session.currentUser.id,
-    +req.params.notebook_id
-  ])
+  db.any(
+    "SELECT * FROM notes WHERE author_id=$1 AND notebook_id=$2 ORDER BY created_at DESC",
+    [req.session.currentUser.id, +req.params.notebook_id]
+  )
     .then(notes => {
       res.status(200).json({
         status: "success",
@@ -72,7 +73,13 @@ const addNote = (req, res, next) => {
   req.body.favorited = req.body.favorited ? req.body.favorited : false;
   db.none(
     "INSERT INTO notes(title, body, author_id, notebook_id, favorited) VALUES ($1, $2, $3, $4, $5)",
-    [req.body.title, req.body.body, req.session.currentUser.id, req.body.notebook_id, req.body.favorited]
+    [
+      req.body.title,
+      req.body.body,
+      req.session.currentUser.id,
+      req.body.notebook_id,
+      req.body.favorited
+    ]
   )
     .then(() => {
       res.status(200).json({
