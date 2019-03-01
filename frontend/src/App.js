@@ -8,7 +8,7 @@ import LandingPage from "./components/landing/LandingPage.js";
 import LogInAuthContainer from "./containers/LogInAuthContainer.js";
 import SignInAuthContainer from "./containers/SignInAuthContainer.js";
 import PrivateRoute from "./utils/AuthRouting";
-import AddNoteDisplay from './components/notes/AddNoteDisplay.js';
+import AddNoteDisplayContainer from './containers/AddNoteDisplayContainer.js';
 
 class App extends Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ class App extends Component {
           <Route path="/login" component={LogInAuthContainer} />
           <Route path="/signup" component={SignInAuthContainer} />
           <PrivateRoute path="/notebooks" component={NotebooksContainer} />
-          <PrivateRoute path="/newNote" component={AddNoteDisplay} />
+          <PrivateRoute path="/newNote" component={AddNoteDisplayContainer} />
           <PrivateRoute path="/notes" component={NotesContainer} />
           <PrivateRoute path="/tags" component={TagsContainer} />
         </Switch>

@@ -1,7 +1,7 @@
 import React from "react";
 import { NotesDisplay } from "./NotesDisplay.js";
 import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
-import AddNoteDisplay from "./AddNoteDisplay.js";
+import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import axios from "axios";
 
 export default class Notes extends React.Component {
@@ -135,9 +135,7 @@ export default class Notes extends React.Component {
       <>
         <h1>All Notes</h1>
         {this.props.notes.generalUtil.toggleNewNote ? (
-          <AddNoteDisplay fetchNotebooks={this.props.fetchNotebooks}
-          handleToggleNewNote={this.handleToggleNewNote}
-          />
+          <AddNoteDisplayContainer/>
         ) : (
           <SingleNoteDisplay
             currentNoteObj={this.state.currentNoteObj}

@@ -9,12 +9,15 @@ class AddNoteDisplay extends React.Component {
     this.state = {
       newNote: { title: "", body: "", notebook_id: "" }
     };
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   async componentDidMount() {
     console.log('CDM!!!!');
+    // debugger;
     if (this.props.fetchNotebooks) {
       await this.props.fetchNotebooks();
+
 
       let defaultNotebook = Object.values(this.props.notebooks).find(
         notebook => notebook.is_default === true
@@ -40,7 +43,6 @@ class AddNoteDisplay extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.fetchNotes();
     axios
       .post(`/api/notes/${+this.state.newNote.notebook_id}`, this.state.newNote)
       .then(() => {
@@ -50,14 +52,17 @@ class AddNoteDisplay extends React.Component {
       })
       .then(() => {
         this.props.fetchNotebooks();
+        this.props.fetchNotes();
 
       });
   };
 
-  handleCancel = () => {
-    this.props.handleToggleNewNote();
+  handleCancel = async() => {
+    debugger
+    // this.props.handleToggleNewNote();
+    // debugger;
+    this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote);
 
-    // this.handleToggleNewNote();
     this.setState({
       newNote: { ...this.state.newNote, title: "", body: "" }
     });
