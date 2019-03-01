@@ -2,14 +2,14 @@ import React from "react";
 import { NotesDisplay } from "./NotesDisplay.js";
 import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
-import axios from "axios";
 
 export default class Notes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentNoteObj: "",
+      currentNoteObj: '',
       toggleNewNote: true,
+      toggleViewNoteInfo: false
       // newNote: { title: "", body: "", notebook_id: "" }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -33,6 +33,12 @@ export default class Notes extends React.Component {
   handleChange = e => {
     this.setState({
       currentNoteObj: { ...this.state.currentNoteObj, body: e }
+    });
+  };
+
+  handleChangeTitle = e => {
+    this.setState({
+      currentNoteObj: { ...this.state.currentNoteObj, title: e.target.value }
     });
   };
 
@@ -91,8 +97,10 @@ export default class Notes extends React.Component {
   //   });
   // };
 
-  handleCreateNewNote = () => {
-
+  handleToggleViewNoteInfo = () => {
+    this.setState({
+      toggleViewNoteInfo: !this.state.toggleViewNoteInfo
+    })
   }
 
   render() {
@@ -140,6 +148,9 @@ export default class Notes extends React.Component {
           <SingleNoteDisplay
             currentNoteObj={this.state.currentNoteObj}
             handleChange={this.handleChange}
+            handleChangeTitle={this.handleChangeTitle}
+            handleToggleViewNoteInfo={this.handleToggleViewNoteInfo}
+            toggleViewNoteInfo={this.state.toggleViewNoteInfo}
           />
         )}
         <NotesDisplay notes={notes} />

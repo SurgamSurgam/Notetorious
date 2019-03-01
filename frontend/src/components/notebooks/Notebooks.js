@@ -36,6 +36,13 @@ export default class Notebooks extends React.Component {
       });
   };
 
+
+  handleCancel = () => {
+    this.setState({
+      newNotebook: { title: "", is_default: false }
+    });
+  };
+
   render() {
     console.log(this.state);
     let notebooks = Object.values(this.props.notebooks).map(notebook => {
@@ -57,6 +64,7 @@ export default class Notebooks extends React.Component {
           newNotebook={this.state.newNotebook}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          handleCancel={this.handleCancel}
         />
         {/*<AddNoteDisplay/>*/}
       </>

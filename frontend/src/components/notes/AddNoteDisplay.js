@@ -58,7 +58,6 @@ class AddNoteDisplay extends React.Component {
   };
 
   handleCancel = async() => {
-    debugger
     // this.props.handleToggleNewNote();
     // debugger;
     this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote);
@@ -69,7 +68,7 @@ class AddNoteDisplay extends React.Component {
   };
 
   render() {
-debugger;
+
     console.log(this.state);
     let { newNote } = this.state
     return (
