@@ -1,7 +1,7 @@
 import React from "react";
 import { NotesDisplay } from "./NotesDisplay.js";
 import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
-import { AddNoteDisplay } from "./AddNoteDisplay.js";
+import AddNoteDisplay from "./AddNoteDisplay.js";
 import axios from "axios";
 
 export default class Notes extends React.Component {
@@ -10,22 +10,23 @@ export default class Notes extends React.Component {
     this.state = {
       currentNoteObj: "",
       toggleNewNote: true,
-      newNote: { title: "", body: "", notebook_id: "" }
+      // newNote: { title: "", body: "", notebook_id: "" }
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   async componentDidMount() {
     await this.props.fetchNotes();
-    await this.props.fetchNotebooks();
+    // await this.props.fetchNotebooks();
 
     let notes = Object.values(this.props.notes.notes).find((note, i) => i === 0);
-    let defaultNotebook = Object.values(this.props.notebooks).find(
-      notebook => notebook.is_default === true
-    );
 
+    // let defaultNotebook = Object.values(this.props.notebooks).find(
+    //   notebook => notebook.is_default === true
+    // );
+    // //
     if (notes) {
-      this.setCurrentNotetoFirstNote(notes, defaultNotebook.id);
+      this.setCurrentNotetoFirstNote(notes);
     }
   }
 
@@ -35,17 +36,17 @@ export default class Notes extends React.Component {
     });
   };
 
-  handleNewNoteChange = e => {
-    if (typeof e === "string") {
-      this.setState({
-        newNote: { ...this.state.newNote, body: e }
-      });
-    } else {
-      this.setState({
-        newNote: { ...this.state.newNote, title: e.target.value }
-      });
-    }
-  };
+  // handleNewNoteChange = e => {
+  //   if (typeof e === "string") {
+  //     this.setState({
+  //       newNote: { ...this.state.newNote, body: e }
+  //     });
+  //   } else {
+  //     this.setState({
+  //       newNote: { ...this.state.newNote, title: e.target.value }
+  //     });
+  //   }
+  // };
 
   handleToggleNewNote = () => {
     // this.setState({
@@ -54,10 +55,10 @@ export default class Notes extends React.Component {
     this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote)
   };
 
-  setCurrentNotetoFirstNote = (firstNote, defaultNotebookId) => {
+  setCurrentNotetoFirstNote = (firstNote) => {
     this.setState({
       currentNoteObj: { ...firstNote },
-      newNote: { ...this.state.newNote, notebook_id: +defaultNotebookId }
+      // newNote: { ...this.state.newNote, notebook_id: +defaultNotebookId }
     });
   };
 
@@ -67,35 +68,35 @@ export default class Notes extends React.Component {
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    axios
-      .post(`/api/notes/${+this.state.newNote.notebook_id}`, this.state.newNote)
-      .then(() => {
-        this.setState({
-          newNote: { ...this.state.newNote, title: "", body: "" }
-        });
-      })
-      .then(() => {
-        this.props.fetchNotebooks();
-        this.props.fetchNotes();
-      });
-  };
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(`/api/notes/${+this.state.newNote.notebook_id}`, this.state.newNote)
+  //     .then(() => {
+  //       this.setState({
+  //         newNote: { ...this.state.newNote, title: "", body: "" }
+  //       });
+  //     })
+  //     .then(() => {
+  //       this.props.fetchNotebooks();
+  //       this.props.fetchNotes();
+  //     });
+  // };
 
-  handleCancel = () => {
-    // this.toggleNewNote();
-    this.handleToggleNewNote();
-    this.setState({
-      newNote: { ...this.state.newNote, title: "", body: "" }
-    });
-  };
+  // handleCancel = () => {
+  //   // this.toggleNewNote();
+  //   this.handleToggleNewNote();
+  //   this.setState({
+  //     newNote: { ...this.state.newNote, title: "", body: "" }
+  //   });
+  // };
 
   handleCreateNewNote = () => {
 
   }
 
   render() {
-
+    debugger;
     console.log("STATE", this.state);
     console.log("PROPS", this.props);
     console.log("PROPS", this.props.location.pathname);
@@ -134,11 +135,8 @@ export default class Notes extends React.Component {
       <>
         <h1>All Notes</h1>
         {this.props.notes.generalUtil.toggleNewNote ? (
-          <AddNoteDisplay
-            newNote={this.state.newNote}
-            handleNewNoteChange={this.handleNewNoteChange}
-            handleSubmit={this.handleSubmit}
-            handleCancel={this.handleCancel}
+          <AddNoteDisplay fetchNotebooks={this.props.fetchNotebooks}
+          handleToggleNewNote={this.handleToggleNewNote}
           />
         ) : (
           <SingleNoteDisplay

@@ -4,10 +4,9 @@ import { withRouter } from 'react-router';
 
 const LoggedInLinks = (props) => {
 
-  let addNoteInAllNotes = (props.location.pathname === '/notebooks') ? ('boo!') : (
+  let addNoteInAllNotes = (props.location.pathname === '/notebooks') ? (<NavLink to='/newNote' ><span className="black-text ">New Note</span></NavLink>) : (
     <NavLink to='/notes' onClick={props.toggleNewNote}><span className="black-text ">New Note</span></NavLink>
   )
-  debugger;
   return (
     <div>
       <ul className="right">
