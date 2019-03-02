@@ -44,7 +44,17 @@ class AddNoteDisplay extends React.Component {
         });
       }
     }
+
+    //allows me to listen to when route is hit and what to fire ala CDM.. and it returns an unlisten function that I can fire on CWU.  This function helps to always keep first note showing and not the edited mode (of create newNote) if people don't cancel it.
+    this.unlisten = this.props.history.listen((location, action) => {
+      this.props.toggleNewNote();
+   });
   };
+
+  // needed to
+  componentWillUnmount = () => {
+    this.unlisten()
+  }
 
   handleNewNoteChange = e => {
     if (typeof e === "string") {
