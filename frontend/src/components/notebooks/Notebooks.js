@@ -7,12 +7,11 @@ export default class Notebooks extends React.Component {
   state = {
     newNotebook: { title: "", is_default: false },
     notesFromNBMapped: [],
-    notebookMappedId: null,
+    notebookMappedId: null
   };
 
   componentDidMount() {
     this.props.fetchNotebooks();
-
   }
 
   handleChange = e => {
@@ -25,6 +24,7 @@ export default class Notebooks extends React.Component {
   };
 
   handleSubmit = e => {
+    debugger;
     e.preventDefault();
     axios
       .post("/api/notebooks", this.state.newNotebook)
@@ -50,7 +50,11 @@ export default class Notebooks extends React.Component {
         let notesFromNBMapped = Object.values(this.props.notesFromNB).map(
           note => {
             return (
-              <div className="allNotesFromNB" key={note.id} onClick={this.onClickTest}>
+              <div
+                className="allNotesFromNB"
+                key={note.id}
+                onClick={this.onClickTest}
+              >
                 <ul>
                   <li value={note.id}>{note.title}</li>
                 </ul>
@@ -72,12 +76,13 @@ export default class Notebooks extends React.Component {
     }
   };
 
-  onClickTest = async(e) => {
+  onClickTest = async e => {
     await this.props.receiveIdForSelectedNoteFromNotebook(+e.target.value);
-    this.props.history.push("/newNote")
-  }
+    this.props.history.push("/newNote");
+  };
 
   render() {
+    console.log(this.state);
     let notebooks = Object.values(this.props.notebooks).map((notebook, i) => {
       return (
         <div

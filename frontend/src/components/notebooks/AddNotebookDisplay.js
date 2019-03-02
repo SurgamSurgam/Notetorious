@@ -5,7 +5,7 @@ export const AddNotebookDisplay = props => {
 
   return (
     <div className="newNotebookFormDiv">
-      <form onSubmit={handleSubmit} onClick={handleCancel}>
+      <form  >
         <h3>Create new notebook</h3>
         <p>Notebooks are useful for grouping notes around a common topic. They can be private or shared.</p>
         <p><b>Name</b></p>
@@ -18,10 +18,9 @@ export const AddNotebookDisplay = props => {
           onChange={handleChange}
           required
         />
-        <button className='CancelAddNotebookButton' type="reset" value="Reset">Cancel</button>
-
-        <button className='addNotebookButton' type='submit'>Continue</button>
       </form>
+      <button className='CancelAddNotebookButton' onClick={handleCancel}>Cancel</button>
+      {newNotebook.title ? (<button className='addNotebookButton' onClick={handleSubmit}>Create Notebook</button>) : null}
     </div>
   );
 };
