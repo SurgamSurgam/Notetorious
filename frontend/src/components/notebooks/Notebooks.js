@@ -46,22 +46,29 @@ export default class Notebooks extends React.Component {
 
   getNotesByNB = notebook_id => {
     if (!!this.props.notesFromNB) {
-      let notesFromNBMapped = Object.values(this.props.notesFromNB).map(
-        note => {
-          return (
-            <div className="allNotesFromNB" key={note.id}>
-              <ul>
-                <li>{note.title}</li>
-              </ul>
-            </div>
-          );
-        }
-      );
+      if (notebook_id !== this.state.notebookMappedId) {
+        let notesFromNBMapped = Object.values(this.props.notesFromNB).map(
+          note => {
+            return (
+              <div className="allNotesFromNB" key={note.id}>
+                <ul>
+                  <li>{note.title}</li>
+                </ul>
+              </div>
+            );
+          }
+        );
 
-      this.setState({
-        notesFromNBMapped: notesFromNBMapped,
-        notebookMappedId: notebook_id
-      });
+        this.setState({
+          notesFromNBMapped: notesFromNBMapped,
+          notebookMappedId: notebook_id
+        });
+      } else {
+        this.setState({
+          notesFromNBMapped: [],
+          notebookMappedId: ""
+        });
+      }
     }
   };
 
