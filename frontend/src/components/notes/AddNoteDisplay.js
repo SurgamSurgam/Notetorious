@@ -1,20 +1,28 @@
 import React from "react";
 import ReactQuill from "react-quill";
 import axios from "axios";
-// import {withRouter} from 'react-router';
 
 class AddNoteDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newNote: { title: "", body: "", notebook_id: "" }
+      newNote: { title: "", body: "", notebook_id: "" },
+      selectedNoteId: '',
     };
     this.handleCancel = this.handleCancel.bind(this);
   }
 
-  async componentDidMount() {
-    console.log("CDM!!!!");
-    // debugger;
+  componentDidMount = async() =>{
+
+    if (this.props.noteIdForSelectedNoteFromNotebook) {
+      await this.setState({
+        selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook
+      })
+      if (this.state.selectedNoteId) {
+        this.setNotebookSelectedNote()
+      };
+    };
+
     if (this.props.fetchNotebooks) {
       await this.props.fetchNotebooks();
 
@@ -25,8 +33,7 @@ class AddNoteDisplay extends React.Component {
       this.setState({
         newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
       });
-      // this.setNotebookSelectedNote();
-    }
+    };
   }
 
   handleNewNoteChange = e => {
@@ -57,9 +64,9 @@ class AddNoteDisplay extends React.Component {
   };
 
   handleCancel = async () => {
-    // this.props.handleToggleNewNote();
-    // debugger;
-    this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote);
+    if (!this.state.selectedNoteId) {
+      this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote);
+    }
 
     this.setState({
       newNote: { ...this.state.newNote, title: "", body: "" }
@@ -67,21 +74,18 @@ class AddNoteDisplay extends React.Component {
   };
 
   setNotebookSelectedNote = () => {
-    let selectedNoteFromNotesFromNB = Object.values(
-      this.props.notesFromNB
-    ).find(note => note.id === +this.props.noteIdForSelectedNoteFromNotebook);
+    let selectedNoteFromNotesFromNB = Object.values(this.props.notesFromNB).find(note => note.id === this.state.selectedNoteId);
 
     this.setState({
       newNote: {
         ...this.state.newNote,
         title: selectedNoteFromNotesFromNB.title,
         body: selectedNoteFromNotesFromNB.body,
-        notebook_id: +this.props.noteIdForSelectedNoteFromNotebook
+        notebook_id: this.state.selectedNoteId
       }
     });
   };
   render() {
-    console.log(this.state);
     let { newNote } = this.state;
     return (
       <div className="newNoteFormDiv">

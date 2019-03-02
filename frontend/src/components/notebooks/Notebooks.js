@@ -1,7 +1,6 @@
 import React from "react";
 import NotebooksDisplay from "./NotebooksDisplay.js";
 import { AddNotebookDisplay } from "./AddNotebookDisplay.js";
-// import { AddNoteDisplay } from "../notes/AddNoteDisplay.js";
 import axios from "axios";
 
 export default class Notebooks extends React.Component {
@@ -9,7 +8,6 @@ export default class Notebooks extends React.Component {
     newNotebook: { title: "", is_default: false },
     notesFromNBMapped: [],
     notebookMappedId: null,
-    isMounted: false
   };
 
   componentDidMount() {
@@ -75,11 +73,8 @@ export default class Notebooks extends React.Component {
   };
 
   onClickTest = async(e) => {
-    // debugger;
-    // console.log('Clicked!!!', e.target.value);
-
     await this.props.receiveIdForSelectedNoteFromNotebook(+e.target.value);
-    // this.props.history.push("/newNote")
+    this.props.history.push("/newNote")
   }
 
   render() {
@@ -120,7 +115,6 @@ export default class Notebooks extends React.Component {
           handleSubmit={this.handleSubmit}
           handleCancel={this.handleCancel}
         />
-        {/*<AddNoteDisplay/>*/}
       </>
     );
   }
