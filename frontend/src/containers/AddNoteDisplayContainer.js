@@ -4,13 +4,15 @@ import { fetchNotebooks } from "../actions/NotebooksActions.js";
 import { fetchNotes } from "../actions/NotesActions.js";
 import { withRouter } from "react-router";
 import { toggleNewNote } from "../actions/NotesActions.js";
+import { fetchAllNotesFromSingleNotebook } from "../actions/NotesActions.js";
 
 const mapStateToProps = state => {
   return {
     notes: state.notes,
     notebooks: state.notebooks,
     notesFromNB: state.notes.notesFromNB,
-    noteIdForSelectedNoteFromNotebook: state.notebooks.noteIdForSelectedNoteFromNotebook
+    noteIdForSelectedNoteFromNotebook:
+      state.notebooks.noteIdForSelectedNoteFromNotebook
   };
 };
 
@@ -18,7 +20,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchNotebooks: () => dispatch(fetchNotebooks()),
     fetchNotes: () => dispatch(fetchNotes()),
-    toggleNewNote: value => dispatch(toggleNewNote(value))
+    toggleNewNote: value => dispatch(toggleNewNote(value)),
+    fetchAllNotesFromSingleNotebook: notebook_id =>
+      dispatch(fetchAllNotesFromSingleNotebook(notebook_id))
   };
 };
 

@@ -22,7 +22,7 @@ export const fetchNotes = () => dispatch => {
   });
 };
 
-export const fetchAllNotesFromSingleNotebook = (notebook_id) => dispatch => {
+export const fetchAllNotesFromSingleNotebook = notebook_id => dispatch => {
   return axios.get(`/api/notes/${notebook_id}`).then(notes => {
     return dispatch(receiveAllNotesFromSingleNotebook(notes.data.body));
   });

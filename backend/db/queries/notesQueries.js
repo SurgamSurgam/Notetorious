@@ -109,6 +109,7 @@ const editNote = (req, res, next) => {
     req.body.favorited = false;
   }
 
+  console.log("BODY: ", req.body, "PARAMS: ", req.params);
   db.none(
     "UPDATE notes SET " +
       queryString +

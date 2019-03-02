@@ -7,21 +7,21 @@ class AddNoteDisplay extends React.Component {
     super(props);
     this.state = {
       newNote: { title: "", body: "", notebook_id: "" },
-      selectedNoteId: '',
+      selectedNotebookId: "",
+      selectedNoteId: ""
     };
     this.handleCancel = this.handleCancel.bind(this);
   }
 
-  componentDidMount = async() =>{
-
+  componentDidMount = async () => {
     if (this.props.noteIdForSelectedNoteFromNotebook) {
       await this.setState({
         selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook
-      })
+      });
       if (this.state.selectedNoteId) {
-        this.setNotebookSelectedNote()
-      };
-    };
+        this.setNotebookSelectedNote();
+      }
+    }
 
     if (this.props.fetchNotebooks) {
       await this.props.fetchNotebooks();
@@ -30,11 +30,20 @@ class AddNoteDisplay extends React.Component {
         notebook => notebook.is_default === true
       );
 
-      this.setState({
-        newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
-      });
-    };
-  }
+      if (this.state.selectedNotebookId) {
+        this.setState({
+          newNote: {
+            ...this.state.newNote,
+            notebook_id: +this.state.selectedNotebookId
+          }
+        });
+      } else {
+        this.setState({
+          newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
+        });
+      }
+    }
+  };
 
   handleNewNoteChange = e => {
     if (typeof e === "string") {
@@ -69,24 +78,57 @@ class AddNoteDisplay extends React.Component {
     }
 
     this.setState({
-      newNote: { ...this.state.newNote, title: "", body: "" }
+      newNote: { ...this.state.newNote, title: "", body: "", notebook_id: "" },
+      selectedNoteId: ""
     });
   };
 
   setNotebookSelectedNote = () => {
-    let selectedNoteFromNotesFromNB = Object.values(this.props.notesFromNB).find(note => note.id === this.state.selectedNoteId);
+    let selectedNoteFromNotesFromNB = Object.values(
+      this.props.notesFromNB
+    ).find(note => note.id === this.state.selectedNoteId);
 
     this.setState({
       newNote: {
         ...this.state.newNote,
         title: selectedNoteFromNotesFromNB.title,
-        body: selectedNoteFromNotesFromNB.body,
-        notebook_id: this.state.selectedNoteId
-      }
+        body: selectedNoteFromNotesFromNB.body
+      },
+      selectedNotebookId: selectedNoteFromNotesFromNB.notebook_id
     });
   };
+
+  handleEdit = async e => {
+    e.preventDefault();
+
+    await this.setState({
+      ...this.state.newNote,
+      notebook_id: this.state.selectedNotebookId
+    });
+
+    axios
+      .patch(
+        `/api/notes/${+this.state.selectedNotebookId}/${
+          this.state.selectedNoteId
+        }`,
+        this.state.newNote
+      )
+      // .then(() => {
+      //   this.setState({
+      //     newNote: { ...this.state.newNote, title: "", body: "" }
+      //   });
+      // })
+      .then(() => {
+        this.props.fetchNotebooks();
+        this.props.fetchNotes();
+        this.props.fetchAllNotesFromSingleNotebook(
+          this.state.selectedNotebookId
+        );
+      });
+  };
+
   render() {
-    let { newNote } = this.state;
+    let { newNote, selectedNoteId } = this.state;
     return (
       <div className="newNoteFormDiv">
         <input
@@ -106,9 +148,15 @@ class AddNoteDisplay extends React.Component {
         <button className="CancelAddNoteButton" onClick={this.handleCancel}>
           Cancel
         </button>
-        <button className="addNoteButton" onClick={this.handleSubmit}>
-          Continue
-        </button>
+        {!!selectedNoteId ? (
+          <button className="addNoteButton" onClick={this.handleEdit}>
+            Submit Edit
+          </button>
+        ) : (
+          <button className="addNoteButton" onClick={this.handleSubmit}>
+            Save Note
+          </button>
+        )}
       </div>
     );
   }
