@@ -1,5 +1,6 @@
 import { RECEIVE_ALL_NOTES } from "../actions/actionTypes.js";
 import { TOGGLE_NEW_NOTE } from "../actions/actionTypes.js";
+import { RECEIVE_ALL_NOTES_FROM_SINGLE_NOTEBOOK } from "../actions/actionTypes.js";
 import merge from 'lodash/merge';
 
 const normalizeData = arr => {
@@ -26,6 +27,11 @@ const NotesReducer = (oldState = initialState, action) => {
       let newState2 = merge({}, oldState);
       return {
         ...newState2, generalUtil: {toggleNewNote: action.value}
+      }
+    case RECEIVE_ALL_NOTES_FROM_SINGLE_NOTEBOOK:
+      let newState3 = merge({}, oldState);
+      return {
+        ...newState3, notesFromNB: normalizeData(action.notes)
       }
     default:
       return oldState;

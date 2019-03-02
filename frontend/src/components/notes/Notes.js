@@ -7,7 +7,7 @@ export default class Notes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentNoteObj: '',
+      currentNoteObj: "",
       toggleNewNote: true,
       toggleViewNoteInfo: false
       // newNote: { title: "", body: "", notebook_id: "" }
@@ -19,7 +19,9 @@ export default class Notes extends React.Component {
     await this.props.fetchNotes();
     // await this.props.fetchNotebooks();
 
-    let notes = Object.values(this.props.notes.notes).find((note, i) => i === 0);
+    let notes = Object.values(this.props.notes.notes).find(
+      (note, i) => i === 0
+    );
 
     // let defaultNotebook = Object.values(this.props.notebooks).find(
     //   notebook => notebook.is_default === true
@@ -58,12 +60,12 @@ export default class Notes extends React.Component {
     // this.setState({
     //   toggleNewNote: !this.state.toggleNewNote
     // });
-    this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote)
+    this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote);
   };
 
-  setCurrentNotetoFirstNote = (firstNote) => {
+  setCurrentNotetoFirstNote = firstNote => {
     this.setState({
-      currentNoteObj: { ...firstNote },
+      currentNoteObj: { ...firstNote }
       // newNote: { ...this.state.newNote, notebook_id: +defaultNotebookId }
     });
   };
@@ -100,11 +102,10 @@ export default class Notes extends React.Component {
   handleToggleViewNoteInfo = () => {
     this.setState({
       toggleViewNoteInfo: !this.state.toggleViewNoteInfo
-    })
-  }
+    });
+  };
 
   render() {
-    debugger;
     console.log("STATE", this.state);
     console.log("PROPS", this.props);
     console.log("PROPS", this.props.location.pathname);
@@ -117,33 +118,35 @@ export default class Notes extends React.Component {
 
         return (
           <div
-          className="allNotesDiv"
-          key={note.id}
-          onClick={e => this.getSelectionDetails(e, note)}
+            className="allNotesDiv"
+            key={note.id}
+            onClick={e => this.getSelectionDetails(e, note)}
           >
-          <p>
-          Id: {note.id}
-          <br />
-          Title: {note.title}
-          <br />
-          Body: {note.body}
-          <br />
-          {note.updated_at
-            ? "Updated at " + updated_at
-            : "Created at " + created_at}
-            <br />
-            Favorited:{String(note.favorited)}
+            <p>
+              Id: {note.id}
+              <br />
+              Title: {note.title}
+              <br />
+              Body: {note.body}
+              <br />
+              {note.updated_at
+                ? "Updated at " + updated_at
+                : "Created at " + created_at}
+              <br />
+              Parent Notebook: {note.notebook_id}
+              <br />
+              Favorited:{String(note.favorited)}
             </p>
-            </div>
-          );
-        });
+          </div>
+        );
+      });
     }
 
     return (
       <>
         <h1>All Notes</h1>
         {this.props.notes.generalUtil.toggleNewNote ? (
-          <AddNoteDisplayContainer/>
+          <AddNoteDisplayContainer />
         ) : (
           <SingleNoteDisplay
             currentNoteObj={this.state.currentNoteObj}

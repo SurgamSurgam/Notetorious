@@ -11,6 +11,7 @@ export const deleteNotebook = () => axios.delete("/api/notebooks/:notebook_id");
 
 //notes
 export const getAllNotes = () => axios.get("/api/notes/");
+// export const getAllNotesFromSingleNotebook = () => axios.get("/api/notes/:notebook_id");
 
 //tags
 export const getAllTags = () => axios.get("/api/tags/");

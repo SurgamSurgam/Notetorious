@@ -4,6 +4,7 @@ import { fetchNotes } from "../actions/NotesActions.js";
 import { toggleNewNote } from "../actions/NotesActions.js";
 import { fetchNotebooks } from "../actions/NotebooksActions.js";
 
+
 const mapStateToProps = state => {
   return {
     notes: state.notes,

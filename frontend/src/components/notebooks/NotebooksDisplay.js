@@ -1,9 +1,13 @@
 import React from "react";
 
-export const NotebooksDisplay = ({ notebook }) => {
-  if (!!notebook) {
-    return <div>{notebook}</div>;
-  } else {
-    return null;
+class NotebooksDisplay extends React.Component {
+  render() {
+    if (!!this.props.notebook.length) {
+      return <div>{this.props.notebook}</div>;
+    } else {
+      return null;
+    }
   }
-};
+}
+
+export default NotebooksDisplay;
