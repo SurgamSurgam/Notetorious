@@ -52,7 +52,7 @@ class AddNoteDisplay extends React.Component {
       });
     } else {
       this.setState({
-        newNote: { ...this.state.newNote, title: e.target.value }
+        newNote: { ...this.state.newNote, title: e.target.value, notebook_id: this.state.selectedNotebookId }
       });
     }
   };
@@ -79,7 +79,7 @@ class AddNoteDisplay extends React.Component {
 
     this.setState({
       newNote: { ...this.state.newNote, title: "", body: "", notebook_id: "" },
-      selectedNoteId: ""
+
     });
   };
 
@@ -149,9 +149,9 @@ class AddNoteDisplay extends React.Component {
           Cancel
         </button>
         {!!selectedNoteId ? (
-          <button className="addNoteButton" onClick={this.handleEdit}>
+          !!newNote.title  && !!newNote.body  ? (<button className="addNoteButton" onClick={this.handleEdit}>
             Submit Edit
-          </button>
+          </button>) : (null)
         ) : (
           <button className="addNoteButton" onClick={this.handleSubmit}>
             Save Note
