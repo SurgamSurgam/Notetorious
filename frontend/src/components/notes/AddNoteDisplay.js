@@ -76,6 +76,7 @@ class AddNoteDisplay extends React.Component {
       .then(() => {
         this.props.fetchNotebooks();
         this.props.fetchNotes();
+        this.props.history.push('/notes');
       });
   };
 
