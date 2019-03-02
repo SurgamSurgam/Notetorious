@@ -146,9 +146,8 @@ class AddNoteDisplay extends React.Component {
   };
 
   render() {
-    let { newNote, selectedNoteId, selectedNotebookId } = this.state;
-    console.log('newNote', newNote);
-    console.log('selectedNotebookId', selectedNotebookId);
+    let { newNote, selectedNoteId } = this.state;
+
     return (
       <div className="newNoteFormDiv">
         <input

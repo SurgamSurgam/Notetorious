@@ -1,7 +1,7 @@
 import React from "react";
 import ReactQuill from "react-quill";
 
-export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTitle, handleToggleViewNoteInfo, toggleViewNoteInfo }) => {
+export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTitle, handleToggleViewNoteInfo, toggleViewNoteInfo, discrepancyBtwnCurrentAndEdited, handleEditSubmit, handleEditCancel }) => {
   let noteInfo =
     (<ul>
       <li>Title: {currentNoteObj.title}</li>
@@ -13,8 +13,6 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
     </ul>)
 
   if (!!currentNoteObj) {
-    let originalCurrenNoteObjTitle = currentNoteObj.title;
-    let originalCurrenNoteObjBody = currentNoteObj.body
     return (
       <div>
         <button onClick={handleToggleViewNoteInfo}>View note info...</button>
@@ -32,7 +30,15 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
           onChange={handleChange}
           placeholder="Start writing/editing"
         />
-        {}
+        { discrepancyBtwnCurrentAndEdited ? (
+          <div className='submitEditDiv'>
+            <button onClick={handleEditCancel}>Cancel</button>
+            <button onClick={handleEditSubmit}>Submit Edit</button>
+            <br/>
+            <br/>
+            </div>
+          ): (null)
+        }
       </div>
     );
   } else {
