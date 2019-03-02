@@ -13,6 +13,8 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
     </ul>)
 
   if (!!currentNoteObj) {
+    let originalCurrenNoteObjTitle = currentNoteObj.title;
+    let originalCurrenNoteObjBody = currentNoteObj.body
     return (
       <div>
         <button onClick={handleToggleViewNoteInfo}>View note info...</button>
@@ -30,6 +32,7 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
           onChange={handleChange}
           placeholder="Start writing/editing"
         />
+        {}
       </div>
     );
   } else {

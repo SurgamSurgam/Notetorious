@@ -11,6 +11,7 @@ class AddNoteDisplay extends React.Component {
       selectedNoteId: ""
     };
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleNewNoteChange = this.handleNewNoteChange.bind(this);
   }
 
   componentDidMount = async () => {
@@ -50,9 +51,15 @@ class AddNoteDisplay extends React.Component {
       this.setState({
         newNote: { ...this.state.newNote, body: e }
       });
-    } else {
+    }
+    else if (this.props.location.pathname === '/newNote' ){
       this.setState({
-        newNote: { ...this.state.newNote, title: e.target.value, notebook_id: this.state.selectedNotebookId }
+        newNote: { ...this.state.newNote, title: e.target.value  }
+      });
+    }
+    else {
+      this.setState({
+        newNote: { ...this.state.newNote, title: e.target.value }
       });
     }
   };
@@ -128,7 +135,9 @@ class AddNoteDisplay extends React.Component {
   };
 
   render() {
-    let { newNote, selectedNoteId } = this.state;
+    let { newNote, selectedNoteId, selectedNotebookId } = this.state;
+    console.log('newNote', newNote);
+    console.log('selectedNotebookId', selectedNotebookId);
     return (
       <div className="newNoteFormDiv">
         <input
@@ -154,7 +163,7 @@ class AddNoteDisplay extends React.Component {
           </button>) : (null)
         ) : (
           <button className="addNoteButton" onClick={this.handleSubmit}>
-            Save Note
+            Save New Note
           </button>
         )}
       </div>
