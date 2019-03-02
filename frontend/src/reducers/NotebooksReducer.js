@@ -1,4 +1,6 @@
 import { RECEIVE_ALL_NOTEBOOKS } from "../actions/actionTypes.js";
+import { RECEIVE_ID_FOR_NOTE_SELECTED_FROM_ALL_NOTEBOOKS } from "../actions/actionTypes.js";
+import merge from "lodash/merge";
 
 const normalizeData = arr => {
   let obj = {};
@@ -23,6 +25,12 @@ const NotebooksReducer = (oldState = [], action) => {
   switch (action.type) {
     case RECEIVE_ALL_NOTEBOOKS:
       return normalizeData(action.notebooks);
+    case RECEIVE_ID_FOR_NOTE_SELECTED_FROM_ALL_NOTEBOOKS:
+      let newState1 = merge({}, oldState);
+      return {
+        ...newState1,
+        noteIdForSelectedNoteFromNotebook: action.id
+      };
     default:
       return oldState;
   }

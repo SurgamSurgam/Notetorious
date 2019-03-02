@@ -106,6 +106,7 @@ export default class Notes extends React.Component {
   };
 
   render() {
+
     console.log("STATE", this.state);
     console.log("PROPS", this.props);
     console.log("PROPS", this.props.location.pathname);

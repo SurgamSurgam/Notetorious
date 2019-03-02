@@ -13,11 +13,10 @@ class AddNoteDisplay extends React.Component {
   }
 
   async componentDidMount() {
-    console.log('CDM!!!!');
+    console.log("CDM!!!!");
     // debugger;
     if (this.props.fetchNotebooks) {
       await this.props.fetchNotebooks();
-
 
       let defaultNotebook = Object.values(this.props.notebooks).find(
         notebook => notebook.is_default === true
@@ -25,7 +24,8 @@ class AddNoteDisplay extends React.Component {
 
       this.setState({
         newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
-      })
+      });
+      // this.setNotebookSelectedNote();
     }
   }
 
@@ -53,11 +53,10 @@ class AddNoteDisplay extends React.Component {
       .then(() => {
         this.props.fetchNotebooks();
         this.props.fetchNotes();
-
       });
   };
 
-  handleCancel = async() => {
+  handleCancel = async () => {
     // this.props.handleToggleNewNote();
     // debugger;
     this.props.toggleNewNote(!this.props.notes.generalUtil.toggleNewNote);
@@ -67,10 +66,23 @@ class AddNoteDisplay extends React.Component {
     });
   };
 
-  render() {
+  setNotebookSelectedNote = () => {
+    let selectedNoteFromNotesFromNB = Object.values(
+      this.props.notesFromNB
+    ).find(note => note.id === +this.props.noteIdForSelectedNoteFromNotebook);
 
+    this.setState({
+      newNote: {
+        ...this.state.newNote,
+        title: selectedNoteFromNotesFromNB.title,
+        body: selectedNoteFromNotesFromNB.body,
+        notebook_id: +this.props.noteIdForSelectedNoteFromNotebook
+      }
+    });
+  };
+  render() {
     console.log(this.state);
-    let { newNote } = this.state
+    let { newNote } = this.state;
     return (
       <div className="newNoteFormDiv">
         <input
@@ -94,7 +106,7 @@ class AddNoteDisplay extends React.Component {
           Continue
         </button>
       </div>
-    )
+    );
   }
 }
 

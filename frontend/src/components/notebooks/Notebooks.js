@@ -8,11 +8,13 @@ export default class Notebooks extends React.Component {
   state = {
     newNotebook: { title: "", is_default: false },
     notesFromNBMapped: [],
-    notebookMappedId: null
+    notebookMappedId: null,
+    isMounted: false
   };
 
   componentDidMount() {
     this.props.fetchNotebooks();
+
   }
 
   handleChange = e => {
@@ -50,9 +52,9 @@ export default class Notebooks extends React.Component {
         let notesFromNBMapped = Object.values(this.props.notesFromNB).map(
           note => {
             return (
-              <div className="allNotesFromNB" key={note.id}>
+              <div className="allNotesFromNB" key={note.id} onClick={this.onClickTest}>
                 <ul>
-                  <li>{note.title}</li>
+                  <li value={note.id}>{note.title}</li>
                 </ul>
               </div>
             );
@@ -72,12 +74,20 @@ export default class Notebooks extends React.Component {
     }
   };
 
+  onClickTest = async(e) => {
+    // debugger;
+    // console.log('Clicked!!!', e.target.value);
+
+    await this.props.receiveIdForSelectedNoteFromNotebook(+e.target.value);
+    // this.props.history.push("/newNote")
+  }
+
   render() {
-    let notebooks = Object.values(this.props.notebooks).map(notebook => {
+    let notebooks = Object.values(this.props.notebooks).map((notebook, i) => {
       return (
         <div
           className="allNotebooksDiv"
-          key={notebook.id}
+          key={i}
           onClick={async () => {
             await this.props.fetchAllNotesFromSingleNotebook(notebook.id);
             this.getNotesByNB(notebook.id);
@@ -85,8 +95,8 @@ export default class Notebooks extends React.Component {
         >
           <ul>
             <li>
-              Id: {notebook.id} Title: {notebook.title} Default NB:{" "}
-              {String(notebook.is_default)} #ofNotes:{}
+              Id: {notebook.id} Title: <b>{notebook.title}</b> Default NB:{" "}
+              {String(notebook.is_default)} Note Count:{}
             </li>
             <ul className="notesForNbUl">
               <li>
