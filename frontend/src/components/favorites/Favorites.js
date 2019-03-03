@@ -22,6 +22,11 @@ export default class Favorites extends React.Component {
     }
   }
 
+  handleOnClick = async e => {
+    await this.props.receiveIdForSelectedNoteFromFavorites(+e.target.value);
+    this.props.history.push("/newNote");
+  };
+
   render() {
     let { favoritedNotes } = this.state;
 
@@ -29,10 +34,10 @@ export default class Favorites extends React.Component {
     if (favoritedNotes.length) {
       notes = favoritedNotes.map(note => {
         return (
-          <div className="allFavoritesDiv" key={note.id}>
-            <p>
-              <b>Title</b> {note.title}
-            </p>
+          <div className="allFavoritesDiv" key={note.id} onClick={this.handleOnClick}>
+            <ul>
+              <li value={note.id}><b>Title</b> {note.title}</li>
+            </ul>
           </div>
         );
       });

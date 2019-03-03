@@ -8,19 +8,42 @@ class AddNoteDisplay extends React.Component {
     this.state = {
       newNote: { title: "", body: "", notebook_id: "" },
       selectedNotebookId: "",
-      selectedNoteId: ""
+      selectedNoteId: "",
+      allowShowFavorites: true,
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.handleNewNoteChange = this.handleNewNoteChange.bind(this);
   }
 
   componentDidMount = async () => {
-    if (this.props.noteIdForSelectedNoteFromNotebook) {
+    //Favs>selectedNote>loadingEditor
+    if (this.props.noteIdForSelectedNoteFromFavorites && this.state.allowShowFavorites) {
+      debugger;
       await this.setState({
-        selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook
+        selectedNoteId: this.props.noteIdForSelectedNoteFromFavorites
       });
       if (this.state.selectedNoteId) {
-        this.setNotebookSelectedNote();
+        this.setState({
+          newNote: {
+            ...this.state.newNote,
+            title: this.props.notes.notes[this.state.selectedNoteId].title,
+            body: this.props.notes.notes[this.state.selectedNoteId].body
+          },
+          selectedNotebookId: this.props.notes.notes[this.state.selectedNoteId].notebook_id
+        });
+      }
+    }
+
+    //NB>selectedNote>loadingEditor
+    if (this.props.noteIdForSelectedNoteFromNotebook) {
+      await this.setState({
+        selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook,
+        allowShowFavorites: false,
+      });
+      if (this.allowShowFavorites) {
+        if (this.state.selectedNoteId) {
+          this.setNotebookSelectedNote();
+        }
       }
     }
 
@@ -48,12 +71,15 @@ class AddNoteDisplay extends React.Component {
     //allows me to listen to when route is hit and what to fire ala CDM.. and it returns an unlisten function that I can fire on CWU.  This function helps to always keep first note showing and not the edited mode (of create newNote) if people don't cancel it.
     this.unlisten = this.props.history.listen((location, action) => {
       this.props.toggleNewNote();
-   });
+    });
   };
 
   // needed to
   componentWillUnmount = () => {
     this.unlisten()
+    this.setState({
+      allowShowFavorites: true
+    })
   }
 
   handleNewNoteChange = e => {
@@ -102,6 +128,7 @@ class AddNoteDisplay extends React.Component {
   };
 
   setNotebookSelectedNote = () => {
+    debugger;
     let selectedNoteFromNotesFromNB = Object.values(
       this.props.notesFromNB
     ).find(note => note.id === this.state.selectedNoteId);
@@ -142,11 +169,16 @@ class AddNoteDisplay extends React.Component {
         this.props.fetchAllNotesFromSingleNotebook(
           this.state.selectedNotebookId
         );
-      });
+      })
+      .then(() => {
+        this.props.history.push('/notes')
+      })
   };
 
   render() {
+    debugger;
     let { newNote, selectedNoteId } = this.state;
+    console.log('STATE:',this.state);
 
     return (
       <div className="newNoteFormDiv">

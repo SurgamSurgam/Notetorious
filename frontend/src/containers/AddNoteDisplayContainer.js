@@ -12,7 +12,9 @@ const mapStateToProps = state => {
     notebooks: state.notebooks,
     notesFromNB: state.notes.notesFromNB,
     noteIdForSelectedNoteFromNotebook:
-      state.notebooks.noteIdForSelectedNoteFromNotebook
+      state.notebooks.noteIdForSelectedNoteFromNotebook,
+    noteIdForSelectedNoteFromFavorites:
+      state.notebooks.noteIdForSelectedNoteFromNotebook,
   };
 };
 
