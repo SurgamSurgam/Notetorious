@@ -1,7 +1,7 @@
 import React from "react";
 import ReactQuill from "react-quill";
 
-export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTitle, handleToggleViewNoteInfo, toggleViewNoteInfo, discrepancyBtwnCurrentAndEdited, handleEditSubmit, handleEditCancel }) => {
+export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTitle, handleToggleViewNoteInfo, toggleViewNoteInfo, discrepancyBtwnCurrentAndEdited, handleEditSubmit, handleEditCancel, handleAddToFavorite, isFavorited }) => {
   let noteInfo =
     (<ul>
       <li>Title: {currentNoteObj.title}</li>
@@ -17,6 +17,16 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
       <div>
         <button onClick={handleToggleViewNoteInfo}>View note info...</button>
         {toggleViewNoteInfo ? (noteInfo):(null)}
+        {' '}
+
+        {isFavorited? (  <label htmlFor="favoriteCheckbox">
+            <input id='favoriteCheckbox' className= 'favoriteInput' type="checkbox" value={currentNoteObj.favorited} onClick={handleAddToFavorite}/>
+            <span>Remove from Favorites</span>
+          </label>):(  <label htmlFor="favoriteCheckbox">
+              <input id='favoriteCheckbox' className= 'favoriteInput' type="checkbox" value={currentNoteObj.favorited} onClick={handleAddToFavorite}/>
+              <span>Add to Favorites</span>
+            </label>)}
+
         <input
           type="text"
           name="title"
@@ -36,7 +46,7 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
             <button onClick={handleEditSubmit}>Submit Edit</button>
             <br/>
             <br/>
-            </div>
+          </div>
           ): (null)
         }
       </div>

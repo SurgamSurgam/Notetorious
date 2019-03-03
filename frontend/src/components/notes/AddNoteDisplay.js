@@ -165,7 +165,7 @@ class AddNoteDisplay extends React.Component {
           placeholder="Start writing/editing"
         />
         <button className="CancelAddNoteButton" onClick={this.handleCancel}>
-          Cancel
+          Clear Note
         </button>
         {!!selectedNoteId ? (
           !!newNote.title  && !!newNote.body  ? (<button className="addNoteButton" onClick={this.handleEdit}>

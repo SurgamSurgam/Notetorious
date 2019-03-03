@@ -12,7 +12,6 @@ export default class Notes extends React.Component {
       toggleNewNote: true,
       toggleViewNoteInfo: false,
       editedNoteObj: '',
-
       discrepancyBtwnCurrentAndEdited: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -91,7 +90,7 @@ export default class Notes extends React.Component {
   handleEditSubmit = e => {
     e.preventDefault();
     axios
-      .post(`/api/notes/${+this.state.editedNoteObj.notebook_id}`, this.state.editedNoteObj)
+      .patch(`/api/notes/${+this.state.editedNoteObj.notebook_id}/${+this.state.editedNoteObj.id}`, this.state.editedNoteObj)
       .then(() => {
         this.setState({
           editedNoteObj: { ...this.state.editedNoteObj, title: "", body: "" }
@@ -108,6 +107,19 @@ export default class Notes extends React.Component {
       currentNoteObj: { ...this.state.editedNoteObj }
     });
   };
+
+  addToFavorite = async () => {
+    await this.setState({
+      currentNoteObj: { ...this.state.currentNoteObj, favorited: !this.state.currentNoteObj.favorited }
+    });
+
+    await axios.patch(`/api/notes/${+this.state.currentNoteObj.notebook_id}/${+this.state.currentNoteObj.id}`, this.state.currentNoteObj)
+
+
+    this.props.fetchNotebooks();
+    this.props.fetchNotes();
+
+  }
 
   render() {
     // console.log("STATE", this.state);
@@ -164,6 +176,8 @@ export default class Notes extends React.Component {
             discrepancyBtwnCurrentAndEdited = {this.state.discrepancyBtwnCurrentAndEdited}
             handleEditSubmit={this.handleEditSubmit}
             handleEditCancel={this.handleEditCancel}
+            handleAddToFavorite={this.addToFavorite}
+            isFavorited={this.state.currentNoteObj.favorited}
           />
         )}
         <NotesDisplay notes={notes} />

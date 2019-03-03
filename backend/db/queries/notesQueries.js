@@ -93,6 +93,7 @@ const addNote = (req, res, next) => {
 };
 
 const editNote = (req, res, next) => {
+  console.log("BODY: ", req.body, "PARAMS: ", req.params);
   let queryStringArray = [];
   let bodyKeys = Object.keys(req.body);
   bodyKeys.forEach(key => {
@@ -105,11 +106,11 @@ const editNote = (req, res, next) => {
   if (req.body.body && req.body.body.toLowerCase() === "null") {
     req.body.body = null;
   }
-  if (req.body.favorited && req.body.favorited.toLowerCase() === "null") {
+  if (req.body.favorited && req.body.favorited.toString().toLowerCase() === "null") {
     req.body.favorited = false;
   }
 
-  console.log("BODY: ", req.body, "PARAMS: ", req.params);
+
   db.none(
     "UPDATE notes SET " +
       queryString +
