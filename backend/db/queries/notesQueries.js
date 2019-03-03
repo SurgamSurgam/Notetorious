@@ -1,7 +1,7 @@
 const db = require("../index.js");
 
 const getAllNotes = (req, res, next) => {
-  db.any("SELECT * FROM notes WHERE author_id=$1 ORDER BY created_at ASC", [
+  db.any("SELECT * FROM notes WHERE author_id=$1 ORDER BY created_at DESC", [
     req.session.currentUser.id
   ])
     .then(notes => {

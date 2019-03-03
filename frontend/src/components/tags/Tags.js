@@ -38,7 +38,7 @@ export default class Tags extends React.Component {
     let tags;
 
     if (this.props.tags) {
-      tags = Object.values(this.props.tags).map(tag => {
+      tags = Object.values(this.props.tags).reverse().map(tag => {
         return (
           <div className="allTagsDiv" key={tag.id}>
             <p>

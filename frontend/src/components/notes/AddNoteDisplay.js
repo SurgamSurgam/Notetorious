@@ -18,7 +18,7 @@ class AddNoteDisplay extends React.Component {
   componentDidMount = async () => {
     //Favs>selectedNote>loadingEditor
     if (this.props.noteIdForSelectedNoteFromFavorites && this.state.allowShowFavorites) {
-      debugger;
+
       await this.setState({
         selectedNoteId: this.props.noteIdForSelectedNoteFromFavorites
       });
@@ -128,7 +128,6 @@ class AddNoteDisplay extends React.Component {
   };
 
   setNotebookSelectedNote = () => {
-    debugger;
     let selectedNoteFromNotesFromNB = Object.values(
       this.props.notesFromNB
     ).find(note => note.id === this.state.selectedNoteId);
@@ -176,7 +175,7 @@ class AddNoteDisplay extends React.Component {
   };
 
   render() {
-    debugger;
+
     let { newNote, selectedNoteId } = this.state;
     console.log('STATE:',this.state);
 

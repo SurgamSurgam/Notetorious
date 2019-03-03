@@ -47,7 +47,7 @@ export default class Notebooks extends React.Component {
   getNotesByNB = notebook_id => {
     if (!!this.props.notesFromNB) {
       if (notebook_id !== this.state.notebookMappedId) {
-        let notesFromNBMapped = Object.values(this.props.notesFromNB).map(
+        let notesFromNBMapped = Object.values(this.props.notesFromNB).reverse().map(
           note => {
             return (
               <div
@@ -83,7 +83,7 @@ export default class Notebooks extends React.Component {
 
   render() {
     console.log(this.state);
-    let notebooks = Object.values(this.props.notebooks).map((notebook, i) => {
+    let notebooks = Object.values(this.props.notebooks).reverse().map((notebook, i) => {
       return (
         <div
           className="allNotebooksDiv"
