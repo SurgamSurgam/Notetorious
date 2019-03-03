@@ -104,7 +104,8 @@ export default class Notes extends React.Component {
 
   handleEditCancel = async () => {
     this.setState({
-      currentNoteObj: { ...this.state.editedNoteObj }
+      currentNoteObj: { ...this.state.editedNoteObj },
+      discrepancyBtwnCurrentAndEdited: false
     });
   };
 
@@ -122,8 +123,9 @@ export default class Notes extends React.Component {
   }
 
   render() {
-    // console.log("STATE", this.state);
-    // console.log("PROPS", this.props);
+
+    console.log("STATE", this.state);
+    console.log("PROPS", this.props);
     // console.log("PROPS", this.props.location.pathname);
     console.log("STATE Obj", this.state.currentNoteObj);
     console.log("EDITED: ", this.state.editedNoteObj);
