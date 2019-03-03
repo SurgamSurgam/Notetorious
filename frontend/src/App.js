@@ -9,6 +9,7 @@ import LogInAuthContainer from "./containers/LogInAuthContainer.js";
 import SignInAuthContainer from "./containers/SignInAuthContainer.js";
 import PrivateRoute from "./utils/AuthRouting";
 import AddNoteDisplayContainer from './containers/AddNoteDisplayContainer.js';
+import FavoritesContainer from './containers/FavoritesContainer.js';
 
 class App extends Component {
   componentDidMount() {
@@ -25,9 +26,10 @@ class App extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route path="/login" component={LogInAuthContainer} />
           <Route path="/signup" component={SignInAuthContainer} />
-          <PrivateRoute path="/notebooks" component={NotebooksContainer} />
           <PrivateRoute path="/newNote" component={AddNoteDisplayContainer} />
+          <PrivateRoute path="/favorites" component={FavoritesContainer} />
           <PrivateRoute path="/notes" component={NotesContainer} />
+          <PrivateRoute path="/notebooks" component={NotebooksContainer} />
           <PrivateRoute path="/tags" component={TagsContainer} />
         </Switch>
       </div>

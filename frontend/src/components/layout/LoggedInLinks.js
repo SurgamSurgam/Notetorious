@@ -15,7 +15,7 @@ const LoggedInLinks = (props) => {
           <li>
             {addNoteInAllNotes}
           </li>
-          <li><NavLink to='/'><span className="black-text ">Favorites</span></NavLink></li>
+          <li><NavLink to='/favorites'><span className="black-text ">Favorites</span></NavLink></li>
           <li><NavLink to='/notes'><span className="black-text ">All Notes</span></NavLink></li>
           <li><NavLink to='/notebooks'><span className="black-text ">Notebooks</span></NavLink></li>
           <li><NavLink to='/tags'><span className="black-text ">Tags</span></NavLink></li>
