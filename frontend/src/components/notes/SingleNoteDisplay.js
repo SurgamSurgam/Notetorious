@@ -1,7 +1,7 @@
 import React from "react";
 import ReactQuill from "react-quill";
 
-export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTitle, handleToggleViewNoteInfo, toggleViewNoteInfo, discrepancyBtwnCurrentAndEdited, handleEditSubmit, handleEditCancel, handleAddToFavorite, isFavorited }) => {
+export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTitle, handleToggleViewNoteInfo, toggleViewNoteInfo, discrepancyBtwnCurrentAndEdited, handleEditSubmit, handleEditCancel, handleAddToFavorite, isFavorited, handleDelete }) => {
   let noteInfo =
     (<ul>
       <li>Title: {currentNoteObj.title}</li>
@@ -26,6 +26,7 @@ export const SingleNoteDisplay = ({ currentNoteObj, handleChange, handleChangeTi
               <input id='favoriteCheckbox' className= 'favoriteInput' type="checkbox" value={currentNoteObj.favorited} onClick={handleAddToFavorite}/>
               <span>Add to Favorites</span>
             </label>)}
+        <button onClick={()=>handleDelete(currentNoteObj.id)}>Delete note</button>
 
         <input
           type="text"

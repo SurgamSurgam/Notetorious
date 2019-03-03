@@ -122,6 +122,26 @@ export default class Notes extends React.Component {
 
   }
 
+  handleDelete = async (deleteId) => {
+    let note = Object.values(this.props.notes.notes).reverse().find(
+      (note) => note.id === deleteId
+    );
+
+    await axios.delete(`/api/notes/${note.notebook_id}/${note.id}`)
+
+    await this.props.fetchNotebooks();
+    await this.props.fetchNotes();
+
+    //this resets what note is showing to whatever is first in notes array
+    let reSetMainNoteShown = Object.values(this.props.notes.notes).reverse().find(
+      (note, i) => i === 0
+    );
+
+    if (reSetMainNoteShown) {
+      this.setCurrentNotetoFirstNote(reSetMainNoteShown);
+    }
+  }
+
   render() {
 
     console.log("STATE", this.state);
@@ -141,23 +161,25 @@ export default class Notes extends React.Component {
           <div
             className="allNotesDiv"
             key={note.id}
-            onClick={e => this.getSelectionDetails(e, note)}
           >
-            <p>
-              Id: {note.id}
-              <br />
-              Title: {note.title}
-              <br />
-              Body: {note.body}
-              <br />
-              {note.updated_at
-                ? "Updated at " + updated_at
-                : "Created at " + created_at}
-              <br />
-              Parent Notebook: {note.notebook_id}
-              <br />
-              Favorited:{String(note.favorited)}
-            </p>
+            <div className='allNotesContentInnerDiv' onClick={e => this.getSelectionDetails(e, note)}>
+              <p>
+                Id: {note.id}
+                <br />
+                Title: {note.title}
+                <br />
+                Body: {note.body}
+                <br />
+                {note.updated_at
+                  ? "Updated at " + updated_at
+                  : "Created at " + created_at}
+                <br />
+                Parent Notebook: {note.notebook_id}
+                <br />
+                Favorited:{String(note.favorited)}
+              </p>
+            </div>
+            <button onClick={()=>this.handleDelete(note.id)}>Delete note</button>
           </div>
         );
       });
@@ -180,6 +202,7 @@ export default class Notes extends React.Component {
             handleEditCancel={this.handleEditCancel}
             handleAddToFavorite={this.addToFavorite}
             isFavorited={this.state.currentNoteObj.favorited}
+            handleDelete={this.handleDelete}
           />
         )}
         <NotesDisplay notes={notes} />
