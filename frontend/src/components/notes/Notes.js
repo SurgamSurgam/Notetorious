@@ -131,7 +131,7 @@ export default class Notes extends React.Component {
 
     let notes;
     if (this.props.notes.notes) {
-      notes = Object.values(this.props.notes.notes).map((note, i) => {
+      notes = Object.values(this.props.notes.notes).reverse().map((note, i) => {
         let updated_at = new Date(note.updated_at);
         let created_at = new Date(note.created_at);
 

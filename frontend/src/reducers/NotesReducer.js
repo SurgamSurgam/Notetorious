@@ -3,7 +3,9 @@ import { TOGGLE_NEW_NOTE } from "../actions/actionTypes.js";
 import { RECEIVE_ALL_NOTES_FROM_SINGLE_NOTEBOOK } from "../actions/actionTypes.js";
 import merge from 'lodash/merge';
 
+//also causes losing ORDER BY order as it rearranges items in an obj
 const normalizeData = arr => {
+  console.log('ARRAY all notes: ', arr);
   let obj = {};
   arr.forEach(item => {
     obj[item.id] = item;
