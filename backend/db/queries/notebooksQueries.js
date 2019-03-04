@@ -62,7 +62,7 @@ const editNotebook = (req, res, next) => {
   if (req.body.title && req.body.title.toLowerCase() === "null") {
     req.body.title = null;
   }
-  if (req.body.is_default && req.body.is_default.toLowerCase() === "null") {
+  if (req.body.is_default && req.body.is_default.toString().toLowerCase() === "null") {
     req.body.is_default = false;
   }
 
