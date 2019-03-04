@@ -54,17 +54,23 @@ class AddNoteDisplay extends React.Component {
         notebook => notebook.is_default === true
       );
 
-      if (this.state.selectedNotebookId) {
-        this.setState({
-          newNote: {
-            ...this.state.newNote,
-            notebook_id: +this.state.selectedNotebookId
-          }
-        });
+      //top if will create new users a default notebook if none found
+
+      if (defaultNotebook) {
+        if (this.state.selectedNotebookId) {
+          this.setState({
+            newNote: {
+              ...this.state.newNote,
+              notebook_id: +this.state.selectedNotebookId
+            }
+          });
+        } else {
+          this.setState({
+            newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
+          });
+        }
       } else {
-        this.setState({
-          newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
-        });
+        console.log(' create a default nb here?');
       }
     }
 

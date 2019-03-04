@@ -30,6 +30,8 @@ class SignUp extends React.Component {
       email: "",
       password: ""
     });
+
+    this.props.history.push('/notebooks')
   };
 
   // handleOnSubmit = async e => {
