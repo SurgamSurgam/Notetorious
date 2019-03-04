@@ -7,11 +7,19 @@ export default class Notebooks extends React.Component {
   state = {
     newNotebook: { title: "", is_default: false },
     notesFromNBMapped: [],
-    notebookMappedId: null
+    notebookMappedId: null,
+    noteCountinNotebooks: {}
   };
 
-  componentDidMount() {
-    this.props.fetchNotebooks();
+  componentDidMount = async () => {
+    await this.props.fetchNotebooks();
+    await this.props.fetchNotes(); // in case user goes directly to /notebooks
+    this.setNoteCount();
+
+  }
+
+  setNoteCount = () => {
+    debugger;
   }
 
   handleChange = e => {
@@ -81,6 +89,17 @@ export default class Notebooks extends React.Component {
     this.props.history.push("/newNote");
   };
 
+  handleDelete = async (deleteId) => {
+    debugger;
+    let notebook = Object.values(this.props.notebooks).find(
+      (notebook) => notebook.id === deleteId
+    );
+
+    await axios.delete(`/api/notebooks/${notebook.id}`)
+    await this.props.fetchNotebooks();
+    await this.props.fetchNotes();
+  }
+
   render() {
     console.log(this.state);
     let notebooks = Object.values(this.props.notebooks).reverse().map((notebook, i) => {
@@ -94,9 +113,10 @@ export default class Notebooks extends React.Component {
           }}
         >
           <ul>
-            <li>
+            <li className='individualNotebookDiv'>
               Id: {notebook.id} Title: <b>{notebook.title}</b> Default NB:{" "}
-              {String(notebook.is_default)} Note Count:{}
+              {String(notebook.is_default)} Note Count:{' '}
+              <button onClick={()=>this.handleDelete(notebook.id)}>Delete note</button>
             </li>
             <ul className="notesForNbUl">
               <li>
