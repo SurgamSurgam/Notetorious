@@ -8,7 +8,7 @@ export default class Notebooks extends React.Component {
     newNotebook: { title: "", is_default: false },
     notesFromNBMapped: [],
     notebookMappedId: null,
-    noteCountInNotebooks: {},
+    noteCountInNotebooks: '',
     currentDefaultNotebook: '',
     toBeNewDefaultNotebook: ''
   };
@@ -16,12 +16,35 @@ export default class Notebooks extends React.Component {
   componentDidMount = async () => {
     await this.props.fetchNotebooks();
     await this.props.fetchNotes(); // in case user goes directly to /notebooks
-    // this.setNoteCount();
+    this.setNoteCount();
 
   }
 
-  setNoteCount = () => {
-    debugger;
+  setNoteCount = async () => {
+    let count = await this.noteCountTracker();
+    await this.setState({
+      noteCountInNotebooks: count
+    })
+  }
+
+  noteCountTracker = () => {
+    let output = {};
+
+    Object.values(this.props.notebooks).forEach(notebook => {
+      let allNotesInArrObj = Object.values(this.props.notes);
+      //While in each note iterate through and if NB id match keep count in output otherwise create it
+      for (let i = 0; i < allNotesInArrObj.length; i++) {
+
+        if (allNotesInArrObj[i].notebook_id === notebook.id) {
+          if(output[notebook.id]) {
+            output[notebook.id] = output[notebook.id] + 1
+          } else {
+            output[notebook.id] = 1;
+          }
+        }
+      }
+    })
+    return output;
   }
 
   handleChange = e => {
@@ -134,14 +157,13 @@ export default class Notebooks extends React.Component {
   }
 
   render() {
-
     console.log('NB STATE!', this.state);
     let notebooks = Object.values(this.props.notebooks).reverse().map((notebook, i) => {
       //check for default nb and save in state
       if (notebook.is_default) {
         this.setInitialNotebookDefault(notebook)
       }
-
+      let noteCountInNotebooks = this.state.noteCountInNotebooks[notebook.id]
       return (
         <div
           className="allNotebooksDiv"
@@ -154,7 +176,7 @@ export default class Notebooks extends React.Component {
           <ul>
             <li className='individualNotebookDiv'>
               Id: {notebook.id} Title: <b>{notebook.title}</b> Default NB:{" "}
-              {String(notebook.is_default)} Note Count:{' '}
+              {String(notebook.is_default)} Note Count:{ noteCountInNotebooks ? noteCountInNotebooks : 0 }
 
               {notebook.is_default ? (  <label htmlFor="defaultNotebookCheckbox">
                   <input id='defaultNotebookCheckbox' className= 'defaultNotebookInput' type="checkbox" checked="checked" disabled="disabled"/>
