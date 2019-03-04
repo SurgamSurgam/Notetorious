@@ -21,12 +21,14 @@ export default class Notes extends React.Component {
   async componentDidMount() {
     await this.props.fetchNotes();
 
-    let notes = Object.values(this.props.notes.notes).reverse().find(
+    let note = Object.values(this.props.notes.notes).reverse().find(
       (note, i) => i === 0
     );
 
-    if (notes) {
-      this.setCurrentNotetoFirstNote(notes);
+    if (note) {
+      this.setCurrentNotetoFirstNote(note);
+    } else {
+      this.setCurrentNotetoFirstNote({title: 'Welcome to Notetorious!', body: `Please create a Notebook and/or Notes to get started! Thanks!`});
     }
   }
 
