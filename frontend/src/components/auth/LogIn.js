@@ -50,7 +50,10 @@ class LogIn extends React.Component {
           username: "",
           password: ""
         });
-      });
+      })
+      .then(() => {
+        this.props.history.push('/notes')
+      })
   };
   // handleOnSubmit = async e => {
   //   e.preventDefault();

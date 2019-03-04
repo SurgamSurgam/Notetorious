@@ -31,11 +31,7 @@ class SignUp extends React.Component {
       password: ""
     });
 
-<<<<<<< HEAD
     this.props.history.push('/notes')
-=======
-    this.props.history.push('/notebooks')
->>>>>>> 7d062dab77c5f7699e64c0cae13feda3f9dc342a
   };
 
   // handleOnSubmit = async e => {
