@@ -113,7 +113,7 @@ class AddNoteDisplay extends React.Component {
         this.props.fetchNotebooks();
         this.props.fetchNotes();
         this.props.history.push('/notes');
-      });
+      })
   };
 
   handleCancel = async () => {
@@ -143,6 +143,7 @@ class AddNoteDisplay extends React.Component {
   };
 
   handleEdit = async e => {
+
     e.preventDefault();
 
     await this.setState({

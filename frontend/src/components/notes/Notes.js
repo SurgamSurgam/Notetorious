@@ -13,6 +13,7 @@ export default class Notes extends React.Component {
       toggleViewNoteInfo: false,
       editedNoteObj: '',
       discrepancyBtwnCurrentAndEdited: false,
+      originalNoteObj: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -50,14 +51,16 @@ export default class Notes extends React.Component {
 
   setCurrentNotetoFirstNote = firstNote => {
     this.setState({
-      currentNoteObj: { ...firstNote }
+      currentNoteObj: { ...firstNote },
+      originalNoteObj: { ...firstNote }
     });
     this.handleEditedNoteObj();
   };
 
   getSelectionDetails = async (e, selectedNoteObj) => {
     await this.setState({
-      currentNoteObj: { ...selectedNoteObj, body: selectedNoteObj.body }
+      currentNoteObj: { ...selectedNoteObj, body: selectedNoteObj.body },
+      originalNoteObj: { ...selectedNoteObj, body: selectedNoteObj.body }
     });
     this.handleEditedNoteObj();
   };
@@ -75,14 +78,15 @@ export default class Notes extends React.Component {
   }
 
   checkDiscrepancyCurrentObjVsEditedObj = () => {
-
     if (this.state.currentNoteObj.title !== this.state.editedNoteObj.title || this.state.currentNoteObj.body !== this.state.editedNoteObj.body) {
       this.setState({
         discrepancyBtwnCurrentAndEdited: true
       })
+      this.handleEditedNoteObj(); // updates edited obj to reflect change
     } else {
       this.setState({
-        discrepancyBtwnCurrentAndEdited: false
+        discrepancyBtwnCurrentAndEdited: false,
+        currentNoteObj: { ...this.state.originalNoteObj }
       })
     }
   }
@@ -105,8 +109,9 @@ export default class Notes extends React.Component {
   handleEditCancel = async () => {
     this.setState({
       currentNoteObj: { ...this.state.editedNoteObj },
-      discrepancyBtwnCurrentAndEdited: false
     });
+    this.checkDiscrepancyCurrentObjVsEditedObj() // rechecks for changes
+
   };
 
   addToFavorite = async () => {
@@ -149,6 +154,7 @@ export default class Notes extends React.Component {
     // console.log("PROPS", this.props.location.pathname);
     console.log("STATE Obj", this.state.currentNoteObj);
     console.log("EDITED: ", this.state.editedNoteObj);
+    console.log("ORIGINAL : ", this.state.originalNoteObj);
 
 
     let notes;
@@ -189,7 +195,7 @@ export default class Notes extends React.Component {
       <>
         <h1>All Notes</h1>
         {this.props.notes.generalUtil.toggleNewNote ? (
-          <AddNoteDisplayContainer />
+          <AddNoteDisplayContainer  setCurrentNotetoFirstNote={this.setCurrentNotetoFirstNote}/>
         ) : (
           <SingleNoteDisplay
             currentNoteObj={this.state.currentNoteObj}

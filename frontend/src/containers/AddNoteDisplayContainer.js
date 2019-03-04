@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 import { toggleNewNote } from "../actions/NotesActions.js";
 import { fetchAllNotesFromSingleNotebook } from "../actions/NotesActions.js";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     notes: state.notes,
     notebooks: state.notebooks,
@@ -15,6 +15,7 @@ const mapStateToProps = state => {
       state.notebooks.noteIdForSelectedNoteFromNotebook,
     noteIdForSelectedNoteFromFavorites:
       state.notebooks.noteIdForSelectedNoteFromNotebook,
+    setCurrentNotetoFirstNote: ownProps.setCurrentNotetoFirstNote,
   };
 };
 
