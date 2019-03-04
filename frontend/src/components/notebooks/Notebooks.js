@@ -175,9 +175,8 @@ export default class Notebooks extends React.Component {
         >
           <ul>
             <li className='individualNotebookDiv'>
-              Id: {notebook.id} Title: <b>{notebook.title}</b> Default NB:{" "}
-              {String(notebook.is_default)} Note Count:{ noteCountInNotebooks ? noteCountInNotebooks : 0 }
-
+              Id: {notebook.id} Title: <b>{notebook.title}</b> <i>({noteCountInNotebooks ? noteCountInNotebooks : 0})</i>
+              { "      " }
               {notebook.is_default ? (  <label htmlFor="defaultNotebookCheckbox">
                   <input id='defaultNotebookCheckbox' className= 'defaultNotebookInput' type="checkbox" checked="checked" disabled="disabled"/>
                   <span>Current Default Notebook</span>
