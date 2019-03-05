@@ -9,7 +9,7 @@ class AddNoteDisplay extends React.Component {
       newNote: { title: "", body: "", notebook_id: "" },
       selectedNotebookId: "",
       selectedNoteId: "",
-      allowShowFavorites: true
+      // allowShowFavorites: true
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.handleNewNoteChange = this.handleNewNoteChange.bind(this);
@@ -18,23 +18,19 @@ class AddNoteDisplay extends React.Component {
   componentDidMount = async () => {
     //Favs>selectedNote>loadingEditor
     if (
-      this.props.noteIdForSelectedNoteFromFavorites &&
-      this.state.allowShowFavorites
+      this.props.noteIdForSelectedNoteFromFavorites
+      // && this.state.allowShowFavorites
     ) {
       await this.setState({
-        selectedNoteId: this.props.noteIdForSelectedNoteFromFavorites
+        selectedNoteId: this.props.noteIdForSelectedNoteFromFavorites,
+        newNote: {
+          ...this.state.newNote,
+          title: this.props.notes.notes[this.props.noteIdForSelectedNoteFromFavorites].title,
+          body: this.props.notes.notes[this.props.noteIdForSelectedNoteFromFavorites].body
+        },
+        selectedNotebookId: this.props.notes.notes[this.props.noteIdForSelectedNoteFromFavorites].notebook_id
       });
-      if (this.state.selectedNoteId) {
-        this.setState({
-          newNote: {
-            ...this.state.newNote,
-            title: this.props.notes.notes[this.state.selectedNoteId].title,
-            body: this.props.notes.notes[this.state.selectedNoteId].body
-          },
-          selectedNotebookId: this.props.notes.notes[this.state.selectedNoteId]
-            .notebook_id
-        });
-      }
+      // }
     }
 
     //NB>selectedNote>loadingEditor
@@ -42,15 +38,15 @@ class AddNoteDisplay extends React.Component {
       debugger;
       await this.setState({
         selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook,
-        allowShowFavorites: false
+        // allowShowFavorites: false
       });
-      if (this.allowShowFavorites) {
-        debugger;
-        if (this.state.selectedNoteId) {
-          debugger;
+      // if (this.allowShowFavorites) {
+      //   debugger;
+        // if (this.state.selectedNoteId) {
+        //   debugger;
           this.setNotebookSelectedNote();
-        }
-      }
+        // }
+      // }
     }
 
     if (this.props.fetchNotebooks) {
@@ -185,7 +181,6 @@ class AddNoteDisplay extends React.Component {
   };
 
   render() {
-    debugger;
     let { newNote, selectedNoteId } = this.state;
     console.log("STATE:", this.state);
 

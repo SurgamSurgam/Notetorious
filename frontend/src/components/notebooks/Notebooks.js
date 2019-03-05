@@ -85,10 +85,10 @@ export default class Notebooks extends React.Component {
               <div
                 className="allNotesFromNB"
                 key={note.id}
-                onClick={this.onClickTest}
+
               >
                 <ul>
-                  <li value={note.id}>
+                  <li onClick={(e)=>this.onClickTest(e,note.id)}>
                     <i>{note.title}</i>
                   </li>
                 </ul>
@@ -109,8 +109,9 @@ export default class Notebooks extends React.Component {
     }
   };
 
-  onClickTest = async e => {
-    await this.props.receiveIdForSelectedNoteFromNotebook(+e.target.value);
+  onClickTest = async (e, note_id) => {
+    debugger;
+    await this.props.receiveIdForSelectedNoteFromNotebook(note_id);
     this.props.history.push("/newNote");
   };
 

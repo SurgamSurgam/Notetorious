@@ -5,6 +5,8 @@ import NotesReducer from "./NotesReducer.js";
 import TagsReducer from './TagsReducer.js';
 // import SessionsReducer from './SessionsReducer.js';
 import AuthReducer from "./AuthReducer.js";
+import FavoritesReducer from "./FavoritesReducer.js";
+
 
 const RootReducer = combineReducers({
   // users: UsersReducer,
@@ -12,7 +14,8 @@ const RootReducer = combineReducers({
   notes: NotesReducer,
   tags: TagsReducer,
   // sessions: SessionsReducer
-  auth: AuthReducer
+  auth: AuthReducer,
+  favorites: FavoritesReducer
 });
 
 export default RootReducer;

@@ -22,8 +22,9 @@ export default class Favorites extends React.Component {
     }
   }
 
-  handleOnClick = async e => {
-    await this.props.receiveIdForSelectedNoteFromFavorites(+e.target.value);
+  handleOnClick = async (e,note_id) => {
+    debugger;
+    await this.props.receiveIdForSelectedNoteFromFavorites(note_id);
     this.props.history.push("/newNote");
   };
 
@@ -37,10 +38,10 @@ export default class Favorites extends React.Component {
           <div
             className="allFavoritesDiv"
             key={note.id}
-            onClick={this.handleOnClick}
+
           >
             <ul>
-              <li value={note.id}>
+              <li onClick={(e)=>this.handleOnClick(e,note.id)}>
                 Title <b>{note.title}</b>
               </li>
             </ul>

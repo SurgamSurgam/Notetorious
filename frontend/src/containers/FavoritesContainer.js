@@ -2,7 +2,7 @@ import Favorites from "../components/favorites/Favorites.js";
 import { connect } from "react-redux";
 import { fetchNotes } from "../actions/NotesActions.js";
 import { fetchNotebooks } from "../actions/NotebooksActions.js";
-import { receiveIdForSelectedNoteFromNotebook } from "../actions/NotebooksActions.js";
+import { receiveIdForSelectedNoteFromFavorites } from "../actions/FavoritesActions.js";
 
 const mapStateToProps = state => {
   return {
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
     fetchNotes: () => dispatch(fetchNotes()),
     fetchNotebooks: () => dispatch(fetchNotebooks()),
     receiveIdForSelectedNoteFromFavorites: note_id =>
-      dispatch(receiveIdForSelectedNoteFromNotebook(note_id))
+      dispatch(receiveIdForSelectedNoteFromFavorites(note_id))
   };
 };
 
