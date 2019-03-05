@@ -1,8 +1,8 @@
 import React from "react";
 
-export const TagsDisplay = ({ tags }) => {
-  if (!!tags) {
-    return <div>{tags}</div>;
+export const TagsDisplay = ({ tagsFromEveryone }) => {
+  if (!!tagsFromEveryone) {
+    return <div>{tagsFromEveryone}</div>;
   } else {
     return null;
   }

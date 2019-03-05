@@ -1,12 +1,23 @@
 import * as Utils from "../utils/Utils.js";
-import { RECEIVE_ALL_TAGS } from "./actionTypes";
+import { RECEIVE_ALL_TAGS_FROM_SINGLE_USER } from "./actionTypes";
+import { RECEIVE_ALL_TAGS_FROM_EVERYONE } from "./actionTypes";
 
-export const receiveAllTags = tags => {
-  return { type: RECEIVE_ALL_TAGS, tags };
+export const receiveAllTagsFromSingleUser = tags => {
+  return { type: RECEIVE_ALL_TAGS_FROM_SINGLE_USER, tags };
 };
 
-export const fetchTags = () => dispatch => {
-  return Utils.getAllTags().then(tags => {
-    return dispatch(receiveAllTags(tags.data.body));
+export const receiveAllTagsFromEveryone = tags => {
+  return { type: RECEIVE_ALL_TAGS_FROM_EVERYONE, tags };
+};
+
+export const fetchTagsForCurrentUser = () => dispatch => {
+  return Utils.getAllTagsForCurrentUser().then(tags => {
+    return dispatch(receiveAllTagsFromSingleUser(tags.data.body));
+  });
+};
+
+export const fetchTagsOfEveryone = () => dispatch => {
+  return Utils.getAllTagsFromEveryone().then(tags => {
+    return dispatch(receiveAllTagsFromEveryone(tags.data.body));
   });
 };

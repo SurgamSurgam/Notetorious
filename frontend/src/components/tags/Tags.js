@@ -9,7 +9,8 @@ export default class Tags extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchTags();
+    this.props.fetchTagsForCurrentUser();
+    this.props.fetchTagsOfEveryone();
   }
 
   handleChange = e => {
@@ -20,25 +21,26 @@ export default class Tags extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
+    // router.post("/user/note/:note_id", loginRequired, addTag);
     axios
-      .post("/api/tags", this.state.newTag)
+      .post(`/api/tags/`, this.state.newTag) //add note_id
       .then(() => {
         this.setState({
           newTag: { name: "" }
         });
       })
       .then(() => {
-        this.props.fetchTags();
+        this.props.fetchTagsForCurrentUser();
+        this.props.fetchTagsOfEveryone();
       });
   };
 
   render() {
     console.log(this.state);
-    let tags;
+    let tagsFromEveryone;
 
-    if (this.props.tags) {
-      tags = Object.values(this.props.tags).reverse().map(tag => {
+    if (this.props.allTagsForEveryone) {
+      tagsFromEveryone = Object.values(this.props.allTagsForEveryone).reverse().map(tag => {
         return (
           <div className="allTagsDiv" key={tag.id}>
             <p>
@@ -52,7 +54,7 @@ export default class Tags extends React.Component {
     return (
       <>
         <h1>All Tags</h1>
-        <TagsDisplay tags={tags} />
+        <TagsDisplay tagsFromEveryone={tagsFromEveryone} />
         <AddTagDisplay
           newTag={this.state.newTag}
           handleChange={this.handleChange}

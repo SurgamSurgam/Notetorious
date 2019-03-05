@@ -1,16 +1,20 @@
 import Tags from "../components/tags/Tags.js";
 import { connect } from "react-redux";
-import { fetchTags } from "../actions/TagsActions.js";
+import { fetchTagsForCurrentUser } from "../actions/TagsActions.js";
+import { fetchTagsOfEveryone } from "../actions/TagsActions.js";
 
 const mapStateToProps = state => {
   return {
-    tags: state.tags
+    allTagsForSingleUser: state.tags.allTagsForSingleUser,
+    allTagsForEveryone: state.tags.allTagsForEveryone
+
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTags: () => dispatch(fetchTags())
+    fetchTagsForCurrentUser: () => dispatch(fetchTagsForCurrentUser()),
+    fetchTagsOfEveryone: () => dispatch(fetchTagsOfEveryone())
   };
 };
 

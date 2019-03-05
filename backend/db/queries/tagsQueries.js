@@ -1,5 +1,20 @@
 const db = require("../index.js");
 
+const getAllTagsFromAllUsers = (req, res, next) => {
+
+  db.any("SELECT * FROM tags")
+    .then(tags => {
+      res.status(200).json({
+        status: "success",
+        message: "Got all tags everywhere from ALL users.",
+        body: tags
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
 const getAllTags = (req, res, next) => {
 
   db.any(
@@ -9,7 +24,7 @@ const getAllTags = (req, res, next) => {
     .then(tags => {
       res.status(200).json({
         status: "success",
-        message: "Got all tags from this user.  (From all notebooks!)",
+        message: "Got all tags from this ONE user.  (From all notebooks!)",
         body: tags
       });
     })
@@ -38,7 +53,7 @@ const getSingleTag = (req, res, next) => {
     });
 };
 
-const addTag = async (req, res, next) => {
+const addTagWithNoteId = async (req, res, next) => {
   let note_id = +req.params.note_id;
 
   try {
@@ -53,12 +68,26 @@ const addTag = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      message: "Note successfully added to notebook!"
+      message: "Note successfully added to note!"
     });
   } catch (error) {
     console.error("Error from ASYNC/AWAIT");
     next(error);
   }
+};
+
+const addTagGenerallyWithoutNoteRef = (req, res, next) => {
+    db.none(
+      "INSERT INTO tags(name) VALUES (${name})",
+      req.body
+    ).then(()=> {
+      res.status(200).json({
+        status: "success",
+        message: "Note successfully added generally (not pointing to any note)!"
+      });
+    }).catch(error => {
+      next(error);
+    });
 };
 
 const editTag = (req, res, next) => {
@@ -92,9 +121,11 @@ const deleteTag = (req, res, next) => {
 };
 
 module.exports = {
+  getAllTagsFromAllUsers,
   getAllTags,
   getSingleTag,
-  addTag,
+  addTagWithNoteId,
   editTag,
-  deleteTag
+  deleteTag,
+  addTagGenerallyWithoutNoteRef
 };
