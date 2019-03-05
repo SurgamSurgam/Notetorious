@@ -39,12 +39,15 @@ class AddNoteDisplay extends React.Component {
 
     //NB>selectedNote>loadingEditor
     if (this.props.noteIdForSelectedNoteFromNotebook) {
+      debugger;
       await this.setState({
         selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook,
         allowShowFavorites: false
       });
       if (this.allowShowFavorites) {
+        debugger;
         if (this.state.selectedNoteId) {
+          debugger;
           this.setNotebookSelectedNote();
         }
       }
@@ -146,6 +149,7 @@ class AddNoteDisplay extends React.Component {
       },
       selectedNotebookId: selectedNoteFromNotesFromNB.notebook_id
     });
+    debugger;
   };
 
   handleEdit = async e => {
@@ -181,6 +185,7 @@ class AddNoteDisplay extends React.Component {
   };
 
   render() {
+    debugger;
     let { newNote, selectedNoteId } = this.state;
     console.log("STATE:", this.state);
 

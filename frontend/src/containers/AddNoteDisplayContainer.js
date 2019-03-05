@@ -7,7 +7,6 @@ import { toggleNewNote } from "../actions/NotesActions.js";
 import { fetchAllNotesFromSingleNotebook } from "../actions/NotesActions.js";
 
 const mapStateToProps = (state, ownProps) => {
-  debugger;
   return {
     notes: state.notes,
     notebooks: state.notebooks,
