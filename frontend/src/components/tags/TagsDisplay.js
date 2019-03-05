@@ -20,11 +20,10 @@ export const TagsDisplay = ({
                   type="text"
                   onChange={handleEditChange}
                   value={editUserInput}
+                  placeholder={tag.name}
                 />
-                <button type="submit">Submit Edit</button>
-                <button onClick={() => {toggleEditing(tag.id)}}>
-                  Cancel
-                </button>
+                {' '}<button onClick={() => {toggleEditing(tag.id)}}>Cancel</button>
+                {' '}<button type="submit">Submit Edit</button>
               </form>
             </div>
           )
@@ -33,10 +32,10 @@ export const TagsDisplay = ({
             <li key={tag.id}>
               {tag.name}
               <button onClick={(e) => {handleDelete(e, tag.id)}}>
-                Delete
+                Delete tag
               </button>
               <button onClick={() => {toggleEditing(tag.id)}}>
-                Edit
+                Edit tag name
               </button>
             </li>
           )
