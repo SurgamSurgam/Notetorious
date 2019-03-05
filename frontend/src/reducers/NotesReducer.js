@@ -1,11 +1,11 @@
 import { RECEIVE_ALL_NOTES } from "../actions/actionTypes.js";
 import { TOGGLE_NEW_NOTE } from "../actions/actionTypes.js";
 import { RECEIVE_ALL_NOTES_FROM_SINGLE_NOTEBOOK } from "../actions/actionTypes.js";
-import merge from 'lodash/merge';
+import merge from "lodash/merge";
 
 //also causes losing ORDER BY order as it rearranges items in an obj
 const normalizeData = arr => {
-  console.log('ARRAY all notes: ', arr);
+  console.log("ARRAY all notes: ", arr);
   let obj = {};
   arr.forEach(item => {
     obj[item.id] = item;
@@ -14,8 +14,27 @@ const normalizeData = arr => {
 };
 
 const initialState = {
-    generalUtil: { toggleNewNote: false }
-}
+  generalUtil: { toggleNewNote: false },
+  toolbarOptions: [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
+
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["clean"] // remove formatting button
+  ]
+};
 
 const NotesReducer = (oldState = initialState, action) => {
   Object.freeze(oldState);
@@ -23,18 +42,21 @@ const NotesReducer = (oldState = initialState, action) => {
     case RECEIVE_ALL_NOTES:
       let newState1 = merge({}, oldState);
       return {
-        ...newState1, notes: normalizeData(action.notes)
-      }
+        ...newState1,
+        notes: normalizeData(action.notes)
+      };
     case TOGGLE_NEW_NOTE:
       let newState2 = merge({}, oldState);
       return {
-        ...newState2, generalUtil: {toggleNewNote: action.value}
-      }
+        ...newState2,
+        generalUtil: { toggleNewNote: action.value }
+      };
     case RECEIVE_ALL_NOTES_FROM_SINGLE_NOTEBOOK:
       let newState3 = merge({}, oldState);
       return {
-        ...newState3, notesFromNB: normalizeData(action.notes)
-      }
+        ...newState3,
+        notesFromNB: normalizeData(action.notes)
+      };
     default:
       return oldState;
   }

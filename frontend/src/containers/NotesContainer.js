@@ -7,7 +7,8 @@ import { fetchNotebooks } from "../actions/NotebooksActions.js";
 const mapStateToProps = state => {
   return {
     notes: state.notes,
-    notebooks: state.notebooks
+    notebooks: state.notebooks,
+    toolbarOptions: state.notes.toolbarOptions
   };
 };
 

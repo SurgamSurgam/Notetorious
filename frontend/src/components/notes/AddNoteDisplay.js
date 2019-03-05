@@ -9,7 +9,7 @@ class AddNoteDisplay extends React.Component {
       newNote: { title: "", body: "", notebook_id: "" },
       selectedNotebookId: "",
       selectedNoteId: "",
-      allowShowFavorites: true,
+      allowShowFavorites: true
     };
     this.handleCancel = this.handleCancel.bind(this);
     this.handleNewNoteChange = this.handleNewNoteChange.bind(this);
@@ -17,8 +17,10 @@ class AddNoteDisplay extends React.Component {
 
   componentDidMount = async () => {
     //Favs>selectedNote>loadingEditor
-    if (this.props.noteIdForSelectedNoteFromFavorites && this.state.allowShowFavorites) {
-
+    if (
+      this.props.noteIdForSelectedNoteFromFavorites &&
+      this.state.allowShowFavorites
+    ) {
       await this.setState({
         selectedNoteId: this.props.noteIdForSelectedNoteFromFavorites
       });
@@ -29,7 +31,8 @@ class AddNoteDisplay extends React.Component {
             title: this.props.notes.notes[this.state.selectedNoteId].title,
             body: this.props.notes.notes[this.state.selectedNoteId].body
           },
-          selectedNotebookId: this.props.notes.notes[this.state.selectedNoteId].notebook_id
+          selectedNotebookId: this.props.notes.notes[this.state.selectedNoteId]
+            .notebook_id
         });
       }
     }
@@ -38,7 +41,7 @@ class AddNoteDisplay extends React.Component {
     if (this.props.noteIdForSelectedNoteFromNotebook) {
       await this.setState({
         selectedNoteId: this.props.noteIdForSelectedNoteFromNotebook,
-        allowShowFavorites: false,
+        allowShowFavorites: false
       });
       if (this.allowShowFavorites) {
         if (this.state.selectedNoteId) {
@@ -70,7 +73,7 @@ class AddNoteDisplay extends React.Component {
           });
         }
       } else {
-        console.log(' create a default nb here?');
+        console.log(" create a default nb here?");
       }
     }
 
@@ -82,24 +85,22 @@ class AddNoteDisplay extends React.Component {
 
   // needed to
   componentWillUnmount = () => {
-    this.unlisten()
+    this.unlisten();
     this.setState({
       allowShowFavorites: true
-    })
-  }
+    });
+  };
 
   handleNewNoteChange = e => {
     if (typeof e === "string") {
       this.setState({
         newNote: { ...this.state.newNote, body: e }
       });
-    }
-    else if (this.props.location.pathname === '/newNote' ){
+    } else if (this.props.location.pathname === "/newNote") {
       this.setState({
-        newNote: { ...this.state.newNote, title: e.target.value  }
+        newNote: { ...this.state.newNote, title: e.target.value }
       });
-    }
-    else {
+    } else {
       this.setState({
         newNote: { ...this.state.newNote, title: e.target.value }
       });
@@ -118,8 +119,8 @@ class AddNoteDisplay extends React.Component {
       .then(() => {
         this.props.fetchNotebooks();
         this.props.fetchNotes();
-        this.props.history.push('/notes');
-      })
+        this.props.history.push("/notes");
+      });
   };
 
   handleCancel = async () => {
@@ -128,8 +129,7 @@ class AddNoteDisplay extends React.Component {
     }
 
     this.setState({
-      newNote: { ...this.state.newNote, title: "", body: "", notebook_id: "" },
-
+      newNote: { ...this.state.newNote, title: "", body: "", notebook_id: "" }
     });
   };
 
@@ -149,7 +149,6 @@ class AddNoteDisplay extends React.Component {
   };
 
   handleEdit = async e => {
-
     e.preventDefault();
 
     await this.setState({
@@ -177,14 +176,13 @@ class AddNoteDisplay extends React.Component {
         );
       })
       .then(() => {
-        this.props.history.push('/notes')
-      })
+        this.props.history.push("/notes");
+      });
   };
 
   render() {
-
     let { newNote, selectedNoteId } = this.state;
-    console.log('STATE:',this.state);
+    console.log("STATE:", this.state);
 
     return (
       <div className="newNoteFormDiv">
@@ -201,14 +199,17 @@ class AddNoteDisplay extends React.Component {
           value={newNote.body}
           onChange={this.handleNewNoteChange}
           placeholder="Start writing/editing"
+          modules={{ toolbar: this.props.notes.toolbarOptions }}
         />
         <button className="CancelAddNoteButton" onClick={this.handleCancel}>
           Clear Note
         </button>
         {!!selectedNoteId ? (
-          !!newNote.title  && !!newNote.body  ? (<button className="addNoteButton" onClick={this.handleEdit}>
-            Submit Edit
-          </button>) : (null)
+          !!newNote.title && !!newNote.body ? (
+            <button className="addNoteButton" onClick={this.handleEdit}>
+              Submit Edit
+            </button>
+          ) : null
         ) : (
           <button className="addNoteButton" onClick={this.handleSubmit}>
             Save New Note

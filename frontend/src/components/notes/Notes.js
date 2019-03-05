@@ -2,7 +2,7 @@ import React from "react";
 import { NotesDisplay } from "./NotesDisplay.js";
 import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
-import axios from 'axios';
+import axios from "axios";
 
 export default class Notes extends React.Component {
   constructor(props) {
@@ -11,9 +11,9 @@ export default class Notes extends React.Component {
       currentNoteObj: "",
       toggleNewNote: true,
       toggleViewNoteInfo: false,
-      editedNoteObj: '',
+      editedNoteObj: "",
       discrepancyBtwnCurrentAndEdited: false,
-      originalNoteObj: "",
+      originalNoteObj: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -21,14 +21,17 @@ export default class Notes extends React.Component {
   async componentDidMount() {
     await this.props.fetchNotes();
 
-    let note = Object.values(this.props.notes.notes).reverse().find(
-      (note, i) => i === 0
-    );
+    let note = Object.values(this.props.notes.notes)
+      .reverse()
+      .find((note, i) => i === 0);
 
     if (note) {
       this.setCurrentNotetoFirstNote(note);
     } else {
-      this.setCurrentNotetoFirstNote({title: 'Welcome to Notetorious!', body: `Please create a Notebook and/or Notes to get started! Thanks!`});
+      this.setCurrentNotetoFirstNote({
+        title: "Welcome to Notetorious!",
+        body: `Please create a Notebook and/or Notes to get started! Thanks!`
+      });
     }
   }
 
@@ -36,7 +39,7 @@ export default class Notes extends React.Component {
     await this.setState({
       currentNoteObj: { ...this.state.currentNoteObj, body: e }
     });
-    this.checkDiscrepancyCurrentObjVsEditedObj()
+    this.checkDiscrepancyCurrentObjVsEditedObj();
   };
 
   handleChangeTitle = async e => {
@@ -44,7 +47,7 @@ export default class Notes extends React.Component {
       currentNoteObj: { ...this.state.currentNoteObj, title: e.target.value }
     });
 
-    this.checkDiscrepancyCurrentObjVsEditedObj()
+    this.checkDiscrepancyCurrentObjVsEditedObj();
   };
 
   handleToggleNewNote = () => {
@@ -75,28 +78,35 @@ export default class Notes extends React.Component {
 
   handleEditedNoteObj = () => {
     this.setState({
-      editedNoteObj: {...this.state.currentNoteObj}
-    })
-  }
+      editedNoteObj: { ...this.state.currentNoteObj }
+    });
+  };
 
   checkDiscrepancyCurrentObjVsEditedObj = () => {
-    if (this.state.currentNoteObj.title !== this.state.editedNoteObj.title || this.state.currentNoteObj.body !== this.state.editedNoteObj.body) {
+    if (
+      this.state.currentNoteObj.title !== this.state.editedNoteObj.title ||
+      this.state.currentNoteObj.body !== this.state.editedNoteObj.body
+    ) {
       this.setState({
         discrepancyBtwnCurrentAndEdited: true
-      })
+      });
       this.handleEditedNoteObj(); // updates edited obj to reflect change
     } else {
       this.setState({
         discrepancyBtwnCurrentAndEdited: false,
         currentNoteObj: { ...this.state.originalNoteObj }
-      })
+      });
     }
-  }
+  };
 
   handleEditSubmit = e => {
     e.preventDefault();
     axios
-      .patch(`/api/notes/${+this.state.editedNoteObj.notebook_id}/${+this.state.editedNoteObj.id}`, this.state.editedNoteObj)
+      .patch(
+        `/api/notes/${+this.state.editedNoteObj.notebook_id}/${+this.state
+          .editedNoteObj.id}`,
+        this.state.editedNoteObj
+      )
       .then(() => {
         this.setState({
           editedNoteObj: { ...this.state.editedNoteObj, title: "", body: "" }
@@ -110,47 +120,50 @@ export default class Notes extends React.Component {
 
   handleEditCancel = async () => {
     this.setState({
-      currentNoteObj: { ...this.state.editedNoteObj },
+      currentNoteObj: { ...this.state.editedNoteObj }
     });
-    this.checkDiscrepancyCurrentObjVsEditedObj() // rechecks for changes
-
+    this.checkDiscrepancyCurrentObjVsEditedObj(); // rechecks for changes
   };
 
   addToFavorite = async () => {
     await this.setState({
-      currentNoteObj: { ...this.state.currentNoteObj, favorited: !this.state.currentNoteObj.favorited }
+      currentNoteObj: {
+        ...this.state.currentNoteObj,
+        favorited: !this.state.currentNoteObj.favorited
+      }
     });
 
-    await axios.patch(`/api/notes/${+this.state.currentNoteObj.notebook_id}/${+this.state.currentNoteObj.id}`, this.state.currentNoteObj)
-
+    await axios.patch(
+      `/api/notes/${+this.state.currentNoteObj.notebook_id}/${+this.state
+        .currentNoteObj.id}`,
+      this.state.currentNoteObj
+    );
 
     this.props.fetchNotebooks();
     this.props.fetchNotes();
+  };
 
-  }
+  handleDelete = async deleteId => {
+    let note = Object.values(this.props.notes.notes)
+      .reverse()
+      .find(note => note.id === deleteId);
 
-  handleDelete = async (deleteId) => {
-    let note = Object.values(this.props.notes.notes).reverse().find(
-      (note) => note.id === deleteId
-    );
-
-    await axios.delete(`/api/notes/${note.notebook_id}/${note.id}`)
+    await axios.delete(`/api/notes/${note.notebook_id}/${note.id}`);
 
     await this.props.fetchNotebooks();
     await this.props.fetchNotes();
 
     //this resets what note is showing to whatever is first in notes array
-    let reSetMainNoteShown = Object.values(this.props.notes.notes).reverse().find(
-      (note, i) => i === 0
-    );
+    let reSetMainNoteShown = Object.values(this.props.notes.notes)
+      .reverse()
+      .find((note, i) => i === 0);
 
     if (reSetMainNoteShown) {
       this.setCurrentNotetoFirstNote(reSetMainNoteShown);
     }
-  }
+  };
 
   render() {
-
     console.log("STATE", this.state);
     console.log("PROPS", this.props);
     // console.log("PROPS", this.props.location.pathname);
@@ -158,46 +171,51 @@ export default class Notes extends React.Component {
     console.log("EDITED: ", this.state.editedNoteObj);
     console.log("ORIGINAL : ", this.state.originalNoteObj);
 
-
     let notes;
     if (this.props.notes.notes) {
-      notes = Object.values(this.props.notes.notes).reverse().map((note, i) => {
-        let updated_at = new Date(note.updated_at);
-        let created_at = new Date(note.created_at);
+      notes = Object.values(this.props.notes.notes)
+        .reverse()
+        .map((note, i) => {
+          let updated_at = new Date(note.updated_at);
+          let created_at = new Date(note.created_at);
 
-        return (
-          <div
-            className="allNotesDiv"
-            key={note.id}
-          >
-            <div className='allNotesContentInnerDiv' onClick={e => this.getSelectionDetails(e, note)}>
-              <p>
-                Id: {note.id}
-                <br />
-                Title: {note.title}
-                <br />
-                Body: {note.body}
-                <br />
-                {note.updated_at
-                  ? "Updated at " + updated_at
-                  : "Created at " + created_at}
-                <br />
-                Parent Notebook: {note.notebook_id}
-                <br />
-                Favorited:{String(note.favorited)}
-              </p>
+          return (
+            <div className="allNotesDiv" key={note.id}>
+              <div
+                className="allNotesContentInnerDiv"
+                onClick={e => this.getSelectionDetails(e, note)}
+              >
+                <p>
+                  Id: {note.id}
+                  <br />
+                  Title: {note.title}
+                  <br />
+                  Body: {note.body}
+                  <br />
+                  {note.updated_at
+                    ? "Updated at " + updated_at
+                    : "Created at " + created_at}
+                  <br />
+                  Parent Notebook: {note.notebook_id}
+                  <br />
+                  Favorited:{String(note.favorited)}
+                </p>
+              </div>
+              <button onClick={() => this.handleDelete(note.id)}>
+                Delete note
+              </button>
             </div>
-            <button onClick={()=>this.handleDelete(note.id)}>Delete note</button>
-          </div>
-        );
-      });
+          );
+        });
     }
 
     return (
       <>
         <h1>All Notes</h1>
         {this.props.notes.generalUtil.toggleNewNote ? (
-          <AddNoteDisplayContainer  setCurrentNotetoFirstNote={this.setCurrentNotetoFirstNote}/>
+          <AddNoteDisplayContainer
+            setCurrentNotetoFirstNote={this.setCurrentNotetoFirstNote}
+          />
         ) : (
           <SingleNoteDisplay
             currentNoteObj={this.state.currentNoteObj}
@@ -205,12 +223,15 @@ export default class Notes extends React.Component {
             handleChangeTitle={this.handleChangeTitle}
             handleToggleViewNoteInfo={this.handleToggleViewNoteInfo}
             toggleViewNoteInfo={this.state.toggleViewNoteInfo}
-            discrepancyBtwnCurrentAndEdited = {this.state.discrepancyBtwnCurrentAndEdited}
+            discrepancyBtwnCurrentAndEdited={
+              this.state.discrepancyBtwnCurrentAndEdited
+            }
             handleEditSubmit={this.handleEditSubmit}
             handleEditCancel={this.handleEditCancel}
             handleAddToFavorite={this.addToFavorite}
             isFavorited={this.state.currentNoteObj.favorited}
             handleDelete={this.handleDelete}
+            toolbarOptions={this.props.toolbarOptions}
           />
         )}
         <NotesDisplay notes={notes} />
