@@ -1,6 +1,5 @@
 import React from "react";
 import ReactQuill from "react-quill";
-// import Parser from "html-react-parser";
 
 export const SingleNoteDisplay = ({
   currentNoteObj,

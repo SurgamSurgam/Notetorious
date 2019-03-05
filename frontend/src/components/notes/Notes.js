@@ -3,6 +3,7 @@ import { NotesDisplay } from "./NotesDisplay.js";
 import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import axios from "axios";
+import ReactHtmlParser from "html-react-parser"; // could use to remove html tags in editor but makes whitespace
 
 export default class Notes extends React.Component {
   constructor(props) {
@@ -178,6 +179,7 @@ export default class Notes extends React.Component {
         .map((note, i) => {
           let updated_at = new Date(note.updated_at);
           let created_at = new Date(note.created_at);
+          const htmlString = note.body;
 
           return (
             <div className="allNotesDiv" key={note.id}>
@@ -185,21 +187,27 @@ export default class Notes extends React.Component {
                 className="allNotesContentInnerDiv"
                 onClick={e => this.getSelectionDetails(e, note)}
               >
-                <p>
-                  Id: {note.id}
-                  <br />
-                  Title: {note.title}
-                  <br />
-                  Body: {note.body}
-                  <br />
-                  {note.updated_at
-                    ? "Updated at " + updated_at
-                    : "Created at " + created_at}
-                  <br />
-                  Parent Notebook: {note.notebook_id}
-                  <br />
-                  Favorited:{String(note.favorited)}
-                </p>
+                <ul>
+                  {/*<li>Id: {note.id}</li>*/}
+
+                  <li>
+                    <b>{note.title}</b>
+                  </li>
+
+                  <li className="noteBodyLi">
+                    <i>{ReactHtmlParser(htmlString)}</i>
+                  </li>
+
+                  <li>
+                    {note.updated_at
+                      ? "Updated at " + updated_at
+                      : "Created at " + created_at}
+                  </li>
+
+                  {/*<li>Parent Notebook: {note.notebook_id}</li>*/}
+
+                  <li>Favorited: {String(note.favorited)}</li>
+                </ul>
               </div>
               <button onClick={() => this.handleDelete(note.id)}>
                 Delete note

@@ -13,12 +13,12 @@ export default class Favorites extends React.Component {
 
     if (this.props.notes) {
       let notes = Object.values(this.props.notes.notes).filter(note => {
-        return (!!note.favorited)
-      })
+        return !!note.favorited;
+      });
 
       this.setState({
         favoritedNotes: notes
-      })
+      });
     }
   }
 
@@ -34,9 +34,15 @@ export default class Favorites extends React.Component {
     if (favoritedNotes.length) {
       notes = favoritedNotes.map(note => {
         return (
-          <div className="allFavoritesDiv" key={note.id} onClick={this.handleOnClick}>
+          <div
+            className="allFavoritesDiv"
+            key={note.id}
+            onClick={this.handleOnClick}
+          >
             <ul>
-              <li value={note.id}><b>Title</b> {note.title}</li>
+              <li value={note.id}>
+                Title <b>{note.title}</b>
+              </li>
             </ul>
           </div>
         );
