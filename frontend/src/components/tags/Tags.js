@@ -47,24 +47,6 @@ export default class Tags extends React.Component {
 
   render() {
     console.log(this.state);
-    let tagsFromEveryone;
-
-    if (this.props.allTagsForEveryone) {
-      tagsFromEveryone = Object.values(this.props.allTagsForEveryone)
-        .reverse()
-        .map(tag => {
-          return (
-            <div className="allTagsDiv" key={tag.id}>
-              <p>
-                Id: {tag.id} Name: <b>{tag.name}</b>{" "}
-                <button onClick={e => this.handleDelete(e, tag.id)}>
-                  Delete tag
-                </button>
-              </p>
-            </div>
-          );
-        });
-    }
 
     return (
       <>
@@ -74,7 +56,11 @@ export default class Tags extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-        <TagsDisplay tagsFromEveryone={tagsFromEveryone} />
+
+        <TagsDisplay
+          allTagsForEveryone={this.props.allTagsForEveryone}
+          handleDelete={this.handleDelete}
+        />
       </>
     );
   }
