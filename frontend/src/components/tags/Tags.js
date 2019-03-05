@@ -5,7 +5,9 @@ import { AddTagDisplay } from "./AddTagDisplay.js";
 
 export default class Tags extends React.Component {
   state = {
-    newTag: { name: "" }
+    newTag: { name: "" },
+    editing: null,
+    editUserInput: ""
   };
 
   componentDidMount() {
@@ -45,6 +47,37 @@ export default class Tags extends React.Component {
     this.props.fetchTagsOfEveryone();
   };
 
+  // edit title stuff
+  toggleEditing = id => {
+    if (this.state.editing !== id) {
+      this.setState({
+        editing: id
+      });
+    } else {
+      this.setState({
+        editing: null
+      });
+    }
+  };
+
+  handleEditChange = e => {
+    this.setState({
+      editUserInput: e.target.value
+    });
+  };
+
+  handleEditSubmit = (e, tag_id) => {
+    e.preventDefault();
+    axios
+      .patch(`/api/tags/${tag_id}`, { name: this.state.editUserInput })
+      .then(() => {
+        this.props.fetchTagsForCurrentUser();
+        this.props.fetchTagsOfEveryone();
+        this.toggleEditing(null);
+        this.setState({editUserInput: ''})
+      });
+  };
+
   render() {
     console.log(this.state);
 
@@ -60,6 +93,11 @@ export default class Tags extends React.Component {
         <TagsDisplay
           allTagsForEveryone={this.props.allTagsForEveryone}
           handleDelete={this.handleDelete}
+          toggleEditing={this.toggleEditing}
+          handleEditChange={this.handleEditChange}
+          handleEditSubmit={this.handleEditSubmit}
+          editing={this.state.editing}
+          editUserInput={this.state.editUserInput}
         />
       </>
     );
