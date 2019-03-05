@@ -5,9 +5,10 @@ import { fetchNotes } from "../actions/NotesActions.js";
 import { withRouter } from "react-router";
 import { toggleNewNote } from "../actions/NotesActions.js";
 import { fetchAllNotesFromSingleNotebook } from "../actions/NotesActions.js";
+import { receiveIdForSelectedNoteFromFavorites } from "../actions/FavoritesActions.js";
 
 const mapStateToProps = (state, ownProps) => {
-  debugger;
+
   return {
     notes: state.notes,
     notebooks: state.notebooks,
@@ -27,7 +28,9 @@ const mapDispatchToProps = dispatch => {
     fetchNotes: () => dispatch(fetchNotes()),
     toggleNewNote: value => dispatch(toggleNewNote(value)),
     fetchAllNotesFromSingleNotebook: notebook_id =>
-      dispatch(fetchAllNotesFromSingleNotebook(notebook_id))
+      dispatch(fetchAllNotesFromSingleNotebook(notebook_id)),
+    receiveIdForSelectedNoteFromFavorites: note_id =>
+      dispatch(receiveIdForSelectedNoteFromFavorites(note_id))
   };
 };
 

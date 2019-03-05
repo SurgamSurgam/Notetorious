@@ -13,7 +13,7 @@ export default class Notebooks extends React.Component {
     toBeNewDefaultNotebook: ""
   };
 
-  componentDidMount = async () => {
+  async componentDidMount(){
     await this.props.fetchNotebooks();
     await this.props.fetchNotes(); // in case user goes directly to /notebooks
     this.setNoteCount();
@@ -55,7 +55,7 @@ export default class Notebooks extends React.Component {
   };
 
   handleSubmit = e => {
-    debugger;
+    
     e.preventDefault();
     axios
       .post("/api/notebooks", this.state.newNotebook)
@@ -110,13 +110,13 @@ export default class Notebooks extends React.Component {
   };
 
   onClickTest = async (e, note_id) => {
-    debugger;
+    
     await this.props.receiveIdForSelectedNoteFromNotebook(note_id);
     this.props.history.push("/newNote");
   };
 
   handleDelete = async deleteId => {
-    debugger;
+    
     let notebook = Object.values(this.props.notebooks).find(
       notebook => notebook.id === deleteId
     );
@@ -153,7 +153,7 @@ export default class Notebooks extends React.Component {
       `/api/notebooks/${notebook_id}`,
       this.state.toBeNewDefaultNotebook
     );
-    debugger;
+    
     await axios.patch(
       `/api/notebooks/${this.state.currentDefaultNotebook.id}`,
       { ...this.state.currentDefaultNotebook, is_default: false }
