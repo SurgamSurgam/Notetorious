@@ -10,7 +10,7 @@ const LoggedInLinks = (props) => {
     <div>
       <ul className="right">
           <li><span className="black-text ">{props.user}</span></li>
-          <li><NavLink to='/'><span className="black-text ">Search Field</span></NavLink></li>
+          //<li><NavLink to='/'><span className="black-text ">Search Field</span></NavLink></li> //Extra - not MVP
           <li>
             {addNoteInAllNotes}
           </li>
