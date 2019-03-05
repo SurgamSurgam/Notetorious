@@ -35,6 +35,17 @@ export default class Tags extends React.Component {
       });
   };
 
+  handleDelete = async(e, deleteId) => {
+
+    let tag = Object.values(this.props.allTagsForEveryone).find(
+      (tag) => tag.id === deleteId
+    );
+
+    await axios.delete(`/api/tags/${tag.id}`)
+    this.props.fetchTagsForCurrentUser();
+    this.props.fetchTagsOfEveryone();
+  }
+
   render() {
     console.log(this.state);
     let tagsFromEveryone;
@@ -44,7 +55,7 @@ export default class Tags extends React.Component {
         return (
           <div className="allTagsDiv" key={tag.id}>
             <p>
-              Id: {tag.id} Name: {tag.name}
+              Id: {tag.id} Name: {tag.name} <button onClick={(e)=>this.handleDelete(e,tag.id)}>Delete tag</button>
             </p>
           </div>
         );
@@ -54,12 +65,12 @@ export default class Tags extends React.Component {
     return (
       <>
         <h1>All Tags</h1>
-        <TagsDisplay tagsFromEveryone={tagsFromEveryone} />
         <AddTagDisplay
-          newTag={this.state.newTag}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+        newTag={this.state.newTag}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
         />
+        <TagsDisplay tagsFromEveryone={tagsFromEveryone} />
       </>
     );
   }
