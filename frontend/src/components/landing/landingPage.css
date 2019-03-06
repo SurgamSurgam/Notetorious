@@ -47,7 +47,7 @@ main {
 
 .content > h1 {
   /* font-family: Soleil_Medium, Helvetica, Arial, sans-serif; */
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-size: 50px;
   letter-spacing: -1px;
   line-height: 72px;
@@ -61,7 +61,7 @@ main {
 
 .content > div {
   /* font-family: Soleil_Light, Helvetica, Arial, sans-serif; */
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-weight: 300;
   font-size: 21px;
   line-height: 40px;
@@ -73,7 +73,7 @@ main {
   /* margin-bottom: 75px; */
 }
 
-.content > button {
+.buttonPrimaryWhite {
   font-family: Soleil_Bold, Helvetica, Arial, sans-serif;
   font-size: 16px;
   min-width: 240px;
@@ -90,8 +90,114 @@ main {
   letter-spacing: 1.5px;
 }
 
-.content > button:hover {
+.buttonPrimaryWhite:hover {
   background-color: #f7f7f7;
   color: #00a82d;
   cursor: pointer;
+}
+
+.landingPageSection {
+  height: 876px;
+  background-color: #f7f7f7;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+}
+
+.sectionHeaderDiv {
+  width: 1220px;
+  height: 288px;
+
+  /* background-color: lightcoral; */
+  margin-bottom: 100px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 122px;
+}
+
+.sectionHeaderDiv > img {
+  width: 105px;
+  height: 119px;
+}
+
+.sectionHeaderDiv > h2 {
+  width: 1220px;
+  height: 64px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  font-size: 45px;
+  line-height: 64px;
+}
+
+.sectionContentMainDiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  color: #888b8d;
+  font-size: 28px;
+  line-height: 2;
+  width: 1300px;
+  height: 308px;
+}
+
+.sectionContentInnerDiv {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 300;
+  width: 353.328px;
+  height: 192px;
+  letter-spacing: 0;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.footerDiv {
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+  padding-top: 80px;
+}
+
+.footerLogoDiv {
+  width: 1220px;
+  height: 40px;
+  border-bottom: 3px solid #000;
+  margin-bottom: 0 87.5px 48px 87.5px;
+  padding-bottom: 48px;
+}
+
+.logoNameSpan {
+  font-size: 2.5em;
+  color: #4ea92f;
+}
+
+.logoTitleSpan {
+  color: black;
+  font-size: 32px;
+  margin-left: 8px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+.socialLinksUl {
+  border-bottom: 1px solid rgba(136, 139, 141, 0.5);
+  margin: 75px 0 40px 0;
+  padding-bottom: 35px;
+  width: 1220px;
+  height: 40px;
+  display: flex;
+  list-style-type: none;
+  overflow: hidden;
+  justify-content: flex-end;
+}
+
+.socialLinksUl > li {
+  margin-right: 28px;
+}
+
+.github {
+  max-width: 16px;
+  margin: 8px;
 }
