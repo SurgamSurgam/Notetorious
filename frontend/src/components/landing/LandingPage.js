@@ -6,6 +6,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
+        <div className="whiteSpaceDiv" />
         <main className="landingPageMain">
           <div className="landingPageContainer">
             <div className="landingPageDiv">
