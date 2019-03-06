@@ -1,0 +1,97 @@
+main {
+  height: 617px;
+  background-color: #4ea92f;
+  background-image: url(https://evernote.com/img/backgrounds/patterns/main-green.png);
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+}
+
+.landingPageContainer {
+  /* justify-content: space-between; */
+  width: 1355px;
+  padding: 0 40px;
+
+  /* background-color: skyblue; */
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.landingPageDiv {
+  width: 1220px;
+  height: 377px;
+  padding: 20px 0 120px 0;
+  margin: 0 67.5px;
+
+  /* background-color: lightcoral; */
+  display: flex;
+  align-self: end;
+  justify-content: space-between;
+}
+
+.content {
+  /* display: grid;
+  grid-auto-rows: 100%; */
+}
+
+.image {
+  grid-column-start: 2 / span 1;
+  justify-self: stretch;
+  align-self: center;
+}
+
+.desktopOnlyImage {
+  width: 607.938px;
+  height: 362.016px;
+}
+
+.content > h1 {
+  /* font-family: Soleil_Medium, Helvetica, Arial, sans-serif; */
+  font-family: 'Roboto Mono', monospace;
+  font-size: 50px;
+  letter-spacing: -1px;
+  line-height: 72px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: white;
+  width: 568.062px;
+  height: 144px;
+  margin-bottom: 20px;
+}
+
+.content > div {
+  /* font-family: Soleil_Light, Helvetica, Arial, sans-serif; */
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+  font-size: 21px;
+  line-height: 40px;
+  margin-bottom: 35px;
+  width: 568.062px;
+  height: 120px;
+  color: white;
+
+  /* margin-bottom: 75px; */
+}
+
+.content > button {
+  font-family: Soleil_Bold, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  min-width: 240px;
+  text-transform: uppercase;
+  color: #00a82d;
+  background-color: white;
+  display: inline-block;
+  line-height: normal;
+  text-decoration: none;
+  text-align: center;
+  border: 0;
+  border-radius: 3px;
+  padding: 18px 32px 17px;
+  letter-spacing: 1.5px;
+}
+
+.content > button:hover {
+  background-color: #f7f7f7;
+  color: #00a82d;
+  cursor: pointer;
+}

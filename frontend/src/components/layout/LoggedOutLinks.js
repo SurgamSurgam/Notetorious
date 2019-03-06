@@ -4,11 +4,11 @@ import { withRouter } from 'react-router';
 
 const LoggedOutLinks = () => {
   return (
-    <div>
+    <div className='loggedOutLinksDiv'>
       <ul className="right">
-          <li><NavLink to='/signup'><span className="green-text lighten-2">Sign up</span></NavLink></li>
-          <li><span className="black-text">or</span></li>
-          <li><NavLink to='/login'><span className="green-text lighten-1">Log in</span></NavLink></li>
+          <li className="signUpSpan"><NavLink to='/signup'>Sign up</NavLink></li>
+          <li className="black-text">or</li>
+          <NavLink to='/login' className="logInSpan"><li >Log in</li></NavLink>
       </ul>
     </div>
   );
