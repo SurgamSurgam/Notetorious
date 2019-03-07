@@ -1,4 +1,8 @@
-.nav-wrapper {
+.navWrapper.hide {
+  display: none;
+}
+
+.navWrapper {
   display: grid;
   grid-template-columns: 100%;
   justify-items: center;
@@ -6,7 +10,7 @@
   width: 100%;
 }
 
-.nav-wrapper > div {
+.navWrapper > div {
   justify-content: space-between;
   background-color: white;
   height: 130px;
@@ -14,7 +18,7 @@
   align-items: center;
   z-index: 10;
   width: 85%;
-  padding: 0px 100%;
+  padding: 0 100%;
 }
 
 .brand-logo {

@@ -1,6 +1,6 @@
 import React from "react";
-import "./landingPage.css";
 import { Link } from "react-router-dom";
+import "./LandingPage.css";
 
 class LandingPage extends React.Component {
   render() {
@@ -38,16 +38,16 @@ class LandingPage extends React.Component {
               src="https://evernote.com/c/assets/homepage/homepage-focus.png?f7ba411f33fad3d4"
               alt=""
             />
-            <h2 class="sectionHeading">Focus on what matters most</h2>
+            <h2 className="sectionHeading">Focus on what matters most</h2>
           </div>
           <div className="sectionContentMainDiv">
-            <div class="sectionContentInnerDiv">
+            <div className="sectionContentInnerDiv">
               Manage everything from big projects to personal moments.
             </div>
-            <div class="sectionContentInnerDiv">
+            <div className="sectionContentInnerDiv">
               Capture ideas and inspiration in notes, voice, and pictures.
             </div>
-            <div class="sectionContentInnerDiv">
+            <div className="sectionContentInnerDiv">
               Never lose track of your tasks and deadlines.
             </div>
           </div>
@@ -55,7 +55,7 @@ class LandingPage extends React.Component {
         <footer className="landingPageFooter">
           <div className="footerDiv">
             <div className="footerLogoDiv">
-              <Link to={"/"} className="brand-logo">
+              <Link to={"/signup"} className="brand-logo">
                 <span className="logoNameSpan">
                   <i className="fas fa-book-dead">
                     <span className="logoTitleSpan">Notetorious</span>
