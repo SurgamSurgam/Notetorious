@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import Auth from "../../utils/Auth";
 import LoginDisplay from "./LoginDisplay.js";
+import "./Login.css";
+import { Link } from "react-router-dom";
 
 class LogIn extends React.Component {
   state = {
@@ -52,18 +54,9 @@ class LogIn extends React.Component {
         });
       })
       .then(() => {
-        this.props.history.push('/notes')
-      })
+        this.props.history.push("/notes");
+      });
   };
-  // handleOnSubmit = async e => {
-  //   e.preventDefault();
-  //   // await this.props.addUser(this.state.newUser);
-  //   this.setState({
-  //     username: "",
-  //     password: ""
-  //   });
-  //   // this.props.history.push(`/users`);
-  // };
 
   render() {
     console.log("LOGIN PROPS!!", this.props);
@@ -71,15 +64,48 @@ class LogIn extends React.Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div className="logInDisplayWrapper">
-        <LoginDisplay
-          username={username}
-          password={password}
-          isLoggedIn={isLoggedIn}
-          loginUser={this.loginUser}
-          handleChange={this.handleChange}
-          demoLogin={this.demoLogin}
-        />
+      <div className="loginMain">
+        <div className="logInDisplayWrapper">
+          <div className="heading">
+            <span className="logoNameSpan">
+              <i className="fas fa-book-dead" />
+              <span className="logoTitleSpan">Notetorious</span>
+            </span>
+            <p className="tagline">Remember everything important.</p>
+          </div>
+          <ol>
+            <li className="Row">
+              <div className="oauthGoogle">
+                <img
+                  src="https://www.evernote.com/redesign/OpenID/img/GGL_logo_googleg_18.png"
+                  alt=""
+                />
+                <div className="oauthGoogleText">Continue with Google</div>
+              </div>
+            </li>
+            <li className="Row horizontalRow">
+              <div className="horizontalLine" />
+            </li>
+            <LoginDisplay
+              username={username}
+              password={password}
+              isLoggedIn={isLoggedIn}
+              loginUser={this.loginUser}
+              handleChange={this.handleChange}
+              demoLogin={this.demoLogin}
+            />
+            <li className="rememberMeCheckbox">
+              <input type="checkbox" />
+              Remember me for 30 days
+            </li>
+          </ol>
+          <div className="redirectToSignUpFromLogIn">
+            <p>Don't have an account?</p>
+            <h1 className="linkToLogIn">
+              <Link to="/signup">Create account</Link>
+            </h1>
+          </div>
+        </div>
       </div>
     );
   }

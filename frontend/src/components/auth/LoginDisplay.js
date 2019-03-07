@@ -11,26 +11,31 @@ const LoginDisplay = ({
 }) => {
   return (
     <React.Fragment>
-      <h1>Login Page</h1>
       <form onSubmit={loginUser}>
         <input
+          className="loginUsernameInput"
           type="text"
           value={username}
           name="username"
-          placeholder="username"
+          placeholder="Username"
           onChange={handleChange}
           required
         />
         <input
+          className="loginPasswordInput"
           type="text"
           value={password}
           name="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={handleChange}
           required
         />
-        <button type="submit">Sign in</button>
-        <button className='demoButton' onClick={demoLogin}>Demo log in</button>
+        <button className="loginSubmitButton" type="submit">
+          Continue
+        </button>
+        <button className="demoButton" onClick={demoLogin}>
+          Demo log in
+        </button>
       </form>
 
       <p>{isLoggedIn ? "Logged In!" : ""}</p>
