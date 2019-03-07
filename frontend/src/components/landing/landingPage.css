@@ -174,7 +174,7 @@ main {
   padding-bottom: 48px;
 }
 
-.logoNameSpan {
+.logoNameSpanInLandingPage {
   font-size: 2.5em;
   color: #4ea92f;
 }
@@ -190,7 +190,7 @@ main {
 .socialLinksUl {
   border-bottom: 1px solid rgba(136, 139, 141, 0.5);
   margin: 75px 0 40px 0;
-  padding-bottom: 35px;
+  padding-bottom: 5px;
   width: 1220px;
   height: 40px;
   display: flex;

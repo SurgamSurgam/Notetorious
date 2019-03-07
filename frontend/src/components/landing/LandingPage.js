@@ -56,7 +56,7 @@ class LandingPage extends React.Component {
           <div className="footerDiv">
             <div className="footerLogoDiv">
               <Link to={"/signup"} className="brand-logo">
-                <span className="logoNameSpan">
+                <span className="logoNameSpanInLandingPage">
                   <i className="fas fa-book-dead">
                     <span className="logoTitleSpan">Notetorious</span>
                   </i>

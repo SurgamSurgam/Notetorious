@@ -67,7 +67,7 @@ class LogIn extends React.Component {
       <div className="loginMain">
         <div className="logInDisplayWrapper">
           <div className="heading">
-            <span className="logoNameSpan">
+            <span className="logoNameSpanInLogin">
               <i className="fas fa-book-dead" />
               <span className="logoTitleSpan">Notetorious</span>
             </span>
