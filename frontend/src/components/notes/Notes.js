@@ -196,14 +196,14 @@ export default class Notes extends React.Component {
                   {/*<li>Id: {note.id}</li>*/}
 
                   <li className="noteTitleLiWrapper">
-                    <li className="noteTitleLi">{note.title}</li>
+                    <div className="noteTitleLi">{note.title}</div>
                     {note.favorited ? (
                       <span className="favoritedHeartSolid">
-                        <i class="fas fa-heart" />
+                        <i className="fas fa-heart" />
                       </span>
                     ) : (
                       <span className="favoritedHeartClear">
-                        <i class="far fa-heart" />
+                        <i className="far fa-heart" />
                       </span>
                     )}
                   </li>
