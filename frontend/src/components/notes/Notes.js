@@ -4,6 +4,8 @@ import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import axios from "axios";
 import ReactHtmlParser from "html-react-parser"; // could use to remove html tags in editor but makes whitespace
+import "./Notes.css";
+import TimeAgo from "react-timeago";
 
 export default class Notes extends React.Component {
   constructor(props) {
@@ -178,7 +180,10 @@ export default class Notes extends React.Component {
         .reverse()
         .map((note, i) => {
           let updated_at = new Date(note.updated_at);
-          let created_at = new Date(note.created_at);
+          // let created_at = new Date(note.created_at);
+          // let updated_at = <TimeAgo date={note.updated_at} />;
+          // let created_at = <TimeAgo date={note.created_at} />;
+
           const htmlString = note.body;
 
           return (
@@ -190,60 +195,79 @@ export default class Notes extends React.Component {
                 <ul>
                   {/*<li>Id: {note.id}</li>*/}
 
-                  <li>
-                    <b>{note.title}</b>
+                  <li className="noteTitleLiWrapper">
+                    <li className="noteTitleLi">{note.title}</li>
+                    {note.favorited ? (
+                      <span className="favoritedHeartSolid">
+                        <i class="fas fa-heart" />
+                      </span>
+                    ) : (
+                      <span className="favoritedHeartClear">
+                        <i class="far fa-heart" />
+                      </span>
+                    )}
                   </li>
 
-                  <li className="noteBodyLi">
-                    <i>{ReactHtmlParser(htmlString)}</i>
+                  <li className="noteBodyLi">{ReactHtmlParser(htmlString)}</li>
+                  <li className="timeStampLi">
+                    {note.updated_at ? (
+                      "Updated at " + updated_at
+                    ) : (
+                      <TimeAgo date={note.created_at} />
+                    )}
                   </li>
-
-                  <li>
-                    {note.updated_at
-                      ? "Updated at " + updated_at
-                      : "Created at " + created_at}
-                  </li>
-
                   {/*<li>Parent Notebook: {note.notebook_id}</li>*/}
-
-                  <li>Favorited: {String(note.favorited)}</li>
+                  {/*<li>Favorited: {String(note.favorited)}</li>*/}
+                  {/*<li />*/}
                 </ul>
               </div>
-              <button onClick={() => this.handleDelete(note.id)}>
-                Delete note
-              </button>
+              <div className="deleteNoteButtonWrapper">
+                <button
+                  className="deleteNoteButton"
+                  onClick={() => this.handleDelete(note.id)}
+                >
+                  Delete note
+                </button>
+              </div>
             </div>
           );
         });
     }
 
     return (
-      <>
-        <h1>All Notes</h1>
-        {this.props.notes.generalUtil.toggleNewNote ? (
-          <AddNoteDisplayContainer
-            setCurrentNotetoFirstNote={this.setCurrentNotetoFirstNote}
-          />
-        ) : (
-          <SingleNoteDisplay
-            currentNoteObj={this.state.currentNoteObj}
-            handleChange={this.handleChange}
-            handleChangeTitle={this.handleChangeTitle}
-            handleToggleViewNoteInfo={this.handleToggleViewNoteInfo}
-            toggleViewNoteInfo={this.state.toggleViewNoteInfo}
-            discrepancyBtwnCurrentAndEdited={
-              this.state.discrepancyBtwnCurrentAndEdited
-            }
-            handleEditSubmit={this.handleEditSubmit}
-            handleEditCancel={this.handleEditCancel}
-            handleAddToFavorite={this.addToFavorite}
-            isFavorited={this.state.currentNoteObj.favorited}
-            handleDelete={this.handleDelete}
-            toolbarOptions={this.props.toolbarOptions}
-          />
-        )}
-        <NotesDisplay notes={notes} />
-      </>
+      <div className="notesMainWrapper">
+        <div className="notesEditorMainWrapper">
+          {this.props.notes.generalUtil.toggleNewNote ? (
+            <AddNoteDisplayContainer
+              setCurrentNotetoFirstNote={this.setCurrentNotetoFirstNote}
+            />
+          ) : (
+            <SingleNoteDisplay
+              currentNoteObj={this.state.currentNoteObj}
+              handleChange={this.handleChange}
+              handleChangeTitle={this.handleChangeTitle}
+              handleToggleViewNoteInfo={this.handleToggleViewNoteInfo}
+              toggleViewNoteInfo={this.state.toggleViewNoteInfo}
+              discrepancyBtwnCurrentAndEdited={
+                this.state.discrepancyBtwnCurrentAndEdited
+              }
+              handleEditSubmit={this.handleEditSubmit}
+              handleEditCancel={this.handleEditCancel}
+              handleAddToFavorite={this.addToFavorite}
+              isFavorited={this.state.currentNoteObj.favorited}
+              handleDelete={this.handleDelete}
+              toolbarOptions={this.props.toolbarOptions}
+            />
+          )}
+        </div>
+        <div className="notesAllNotesMainWrapper">
+          <div className="allNotesH1TitleDiv">
+            <h1>All Notes</h1>
+          </div>
+          <div className="divider" />
+          <NotesDisplay notes={notes} />
+        </div>
+      </div>
     );
   }
 }

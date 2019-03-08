@@ -2,17 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LoggedInLinks from "./LoggedInLinks.js";
 import LoggedOutLinks from "./LoggedOutLinks.js";
-import "./Navbar.css";
+import "./NavbarHorizontal.css";
 
-export const Navbar = props => {
+export const NavbarHorizontal = props => {
   console.log("NAV PROPS!", props);
 
   let { isLoggedIn, user } = props.user;
 
   //to control nav display
+  // const classNames = ["navWrapper"];
+  // if (props.location.pathname !== "/") {
+  //   classNames.push("hide");
+  // }
+
   const classNames = ["navWrapper"];
-  if (props.location.pathname !== "/") {
-    classNames.push("hide");
+  if (props.location.pathname !== '/') {
+    classNames.push("hideLoggedOutLinks");
   }
 
   return (
@@ -25,15 +30,7 @@ export const Navbar = props => {
             </i>
           </span>
         </Link>
-        {isLoggedIn ? (
-          <LoggedInLinks
-            user={user}
-            logoutUser={props.logoutUser}
-            toggleNewNote={props.toggleNewNote}
-          />
-        ) : (
-          <LoggedOutLinks />
-        )}
+        {!isLoggedIn ? <LoggedOutLinks /> : null}
       </div>
     </nav>
   );

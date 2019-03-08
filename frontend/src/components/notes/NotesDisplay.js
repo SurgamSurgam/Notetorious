@@ -2,7 +2,7 @@ import React from "react";
 
 export const NotesDisplay = ({ notes }) => {
   if (!!notes) {
-    return <div>{notes}</div>;
+    return <div className='allNotesDivWrapper'>{notes}</div>;
   } else {
     return null;
   }

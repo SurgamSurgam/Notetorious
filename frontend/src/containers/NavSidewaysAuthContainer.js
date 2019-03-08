@@ -1,4 +1,4 @@
-import { Navbar } from "../components/layout/Navbar.js";
+import { NavbarSideways } from "../components/layout/NavbarSideways.js";
 import { connect } from "react-redux";
 import { checkAuthenticateStatus } from "../actions/AuthActions.js";
 import { logoutUser } from "../actions/AuthActions.js";
@@ -14,11 +14,11 @@ const mapDispatchToProps = dispatch => {
   return {
     checkAuthenticateStatus: () => dispatch(checkAuthenticateStatus()),
     logoutUser: () => dispatch(logoutUser()),
-    toggleNewNote: (value) => dispatch(toggleNewNote(value))
+    toggleNewNote: value => dispatch(toggleNewNote(value))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Navbar);
+)(NavbarSideways);

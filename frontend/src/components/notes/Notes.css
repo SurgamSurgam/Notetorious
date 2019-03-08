@@ -1,0 +1,150 @@
+.notesMainWrapper {
+  display: grid;
+  grid-template-columns: 347px 846px;
+  background-color: #f8f8f8;
+}
+
+.notesAllNotesMainWrapper {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: row1-start;
+  grid-row-end: row1-end;
+  width: 345px;
+  height: 770px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.notesEditorMainWrapper {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: row1-start;
+  grid-row-end: row1-end;
+  background-color: #fff;
+}
+
+.allNotesH1TitleDiv {
+  width: 302px;
+  height: 56px;
+  padding: 15px 18px 30px 25px;
+}
+
+.allNotesH1TitleDiv > h1 {
+  width: 290px;
+  height: 30px;
+  padding-right: 12px;
+  margin: 13.4px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  color: #333;
+  font-family: Roboto, sans-serif;
+}
+
+.divider {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #e6e6e6;
+  margin: 1em 0;
+  padding: 0;
+  margin-top: 35px;
+  margin-bottom: 0;
+}
+
+.allNotesDivWrapper {
+  display: block;
+  height: 100%;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  height: 632px;
+}
+
+.allNotesDiv {
+  width: 294px;
+  height: 89px;
+  padding: 15px 25px;
+  cursor: grab;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid #e6e6e6;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.1s ease-out;
+  font-size: 13px;
+  color: #4d4d4d;
+  background: #f8f8f8;
+}
+
+.allNotesContentInnerDiv > ul {
+  list-style: none;
+}
+
+.noteTitleLi {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #333;
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 2px;
+  width: 293px;
+  height: 24px;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+}
+
+.noteBodyLi {
+  width: 293px;
+  height: 30px;
+  font-weight: 300;
+  font-size: 13px;
+  color: #4d4d4d;
+  margin-bottom: 5px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.timeStampLi {
+  width: 293px;
+  height: 18px;
+  font-size: 12px;
+  color: #a6a6a6;
+}
+
+.noteTitleLiWrapper {
+  display: flex;
+}
+
+span.favoritedHeartSolid {
+  color: #4ea92f;
+  cursor: pointer;
+}
+
+span.favoritedHeartClear {
+  color: #4ea92f;
+  cursor: pointer;
+}
+
+.deleteNoteButtonWrapper {
+  text-align: center;
+}
+
+.deleteNoteButton {
+  background-color: white;
+  color: black;
+  border: 1px outset #e6e6e6;
+  transition-duration: 0.4s;
+  font-weight: 300;
+  font-size: 11.5px;
+  width: 149px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.deleteNoteButton:hover {
+  border-radius: 5px;
+  background-color: lightsteelblue;
+  color: white;
+}

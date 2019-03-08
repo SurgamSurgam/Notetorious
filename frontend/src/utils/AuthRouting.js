@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Auth from "./Auth";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -20,4 +20,22 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+export const MainPagePrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      Auth.isUserAuthenticated() ? (
+        <Redirect
+          to={{
+            pathname: "/notes",
+            state: { from: props.location }
+          }}
+        />
+      ) : (
+      <Component {...props} {...rest} />
+      )
+    }
+  />
+);
+
+// export default PrivateRoute;

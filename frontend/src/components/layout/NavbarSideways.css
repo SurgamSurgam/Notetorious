@@ -1,0 +1,108 @@
+.navWrapperSideways {
+  /* display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+  position: fixed;
+  width: 100%; */
+  display: flex;
+  flex-direction: row;
+  background: #1a1a1a;
+  position: relative;
+  white-space: nowrap;
+  color: #fff;
+  width: 242px;
+  height: 770px;
+  overflow: hidden;
+}
+
+/*
+.navWrapperSideways > div {
+  justify-content: space-between;
+  background-color: white;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  width: 85%;
+  padding: 0 100%;
+}
+
+.brand-logo-Sideways {
+  text-decoration: none;
+}
+
+.logoNameSpanSideways {
+  font-size: 2.5em;
+  color: #4ea92f;
+}
+
+.logoTitleSpanSideways {
+  color: black;
+  font-size: 32px;
+  margin-left: 8px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+.loggedInLinksDiv > ul {
+  display: flex;
+  width: 222.047px;
+  height: 40px;
+  justify-content: space-around;
+  align-items: center;
+} */
+
+/* .signUpSpan {
+  color: #00a82d;
+  font-size: 16px;
+  font-family: Soleil, Helvetica, Arial, sans-serif;
+  font-weight: 400px;
+  line-height: 21px;
+  list-style: none;
+}
+
+.signUpSpan > a {
+  color: #00a82d;
+  text-decoration: none;
+  width: 57.2px;
+  height: 25px;
+}
+
+.signUpSpan > a:hover {
+  color: #14cc45;
+} */
+
+/* .black-text-Sideways {
+  list-style: none;
+  font-family: Times;
+  font-size: 16px;
+  font-weight: 400px;
+  line-height: normal;
+  width: 13.33px;
+  height: 21px;
+} */
+
+/* .logInSpan {
+  background-color: white;
+  border: 2px solid #00a82d;
+  color: #00a82d;
+  font-size: 14px;
+  font-family: Soleil, Helvetica, Arial, sans-serif;
+  font-weight: 400px;
+  line-height: 37px;
+  list-style: none;
+  display: inline-block;
+  height: 36px;
+  min-width: 96px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  border-radius: 3px;
+  padding: 0 10px;
+}
+
+.logInSpan:hover {
+  color: #14cc45;
+  border: 2px solid #14cc45;
+}
+*/
