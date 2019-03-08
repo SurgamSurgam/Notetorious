@@ -71,7 +71,10 @@ const LoggedInLinks = props => {
           </li>
         </div>
         <li>
-          <button className="deleteNoteButton" onClick={props.logoutUser}>
+          <button
+            className="deleteNoteButton logout"
+            onClick={props.logoutUser}
+          >
             Logout
           </button>
         </li>
