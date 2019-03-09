@@ -16,13 +16,15 @@ const TagsReducer = (oldState = [], action) => {
     case RECEIVE_ALL_TAGS_FROM_SINGLE_USER:
       let newState1 = merge({}, oldState);
       return {
-        ...newState1, allTagsForSingleUser: normalizeData(action.tags)
-      }
+        ...newState1,
+        allTagsForSingleUser: normalizeData(action.tags)
+      };
     case RECEIVE_ALL_TAGS_FROM_EVERYONE:
       let newState2 = merge({}, oldState);
       return {
-        ...newState2, allTagsForEveryone: normalizeData(action.tags)
-      }
+        ...newState2,
+        allTagsForEveryone: normalizeData(action.tags)
+      };
     default:
       return oldState;
   }

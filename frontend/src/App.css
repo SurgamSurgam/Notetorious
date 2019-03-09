@@ -1,11 +1,40 @@
 /*  comment out .appDashboardDiv and .appSideNavDiv to fix display on Logged Out Pages  */
-.appDashboardDiv {
-  display: grid;
-  grid-template-columns: 242px 1193px;
-  background-color: #fff;
+
+/* ==============================================TOGGLE================================================ */
+
+button {
+  background-color: white;
+  color: black;
+  border: 1px outset #e6e6e6;
+  transition-duration: 0.4s;
+  font-weight: 300;
+  font-size: 11.5px;
+  width: 149px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 1px;
 }
 
-.appSideNavDiv {
-  grid-column-start: 1;
-  grid-column-end: 1;
+button:hover {
+  border-radius: 5px;
+  background-color: lightsteelblue;
+  color: white;
 }
+
+/* input {
+  font-family: "Philosopher", sans-serif;
+  font-size: 14px;
+  margin: 10px;
+  padding: 5px;
+} */
+
+/* button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+} */

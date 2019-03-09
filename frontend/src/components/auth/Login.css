@@ -5,6 +5,8 @@
   display: grid;
   grid-template-columns: 100%;
   justify-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .logInDisplayWrapper {
@@ -12,12 +14,13 @@
   max-width: 512px;
   height: 561px;
   margin: 0 auto 28px auto;
-  padding: 62.12px 99px 110px;
+  padding: 50px 99px 120px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   text-align: left;
   background: #fff;
-  margin-top: 33px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .logoNameSpanInLogin {
@@ -43,7 +46,7 @@
   font-family: "Roboto", "Oxygen", "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 400;
-  margin-bottom: 44px;
+  margin-bottom: 33px;
   width: 314px;
   height: 22px;
   text-align: center;
@@ -87,6 +90,14 @@ ol {
   margin-top: 26px;
 }
 
+form {
+  width: 314px;
+  padding-left: 0;
+  margin-left: 0;
+  padding-right: 0;
+  margin-right: 0;
+}
+
 .horizontalLine {
   display: block;
   height: 1px;
@@ -105,7 +116,7 @@ ol {
   border-radius: 7px;
   line-height: 1.1875;
   font-size: 16.5px;
-  margin-bottom: 7px;
+  margin-bottom: 14px;
 }
 
 .loginUsernameInput:focus {
@@ -205,7 +216,7 @@ ol {
   width: 314px;
   height: 46px;
   text-align: center;
-  margin-top: 38px;
+  margin-top: 20px;
   font-family: "Roboto", "Oxygen", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -225,7 +236,7 @@ ol {
   font-weight: 400;
   line-height: 18px;
   text-decoration: none;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
 }
 
 .linkToLogIn > a {

@@ -1,0 +1,30 @@
+.tagsMainWrapper {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  min-height: 84.5vh;
+  margin-left: 100px;
+}
+
+.tagsMainWrapper > ul {
+  text-decoration: none;
+  list-style: none;
+}
+
+.tagsWrapper {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  min-height: 84.5vh;
+  margin-left: 100px;
+}

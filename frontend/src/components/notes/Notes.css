@@ -148,3 +148,29 @@ span.favoritedHeartClear {
   background-color: lightsteelblue;
   color: white;
 }
+
+.SingleNoteDisplayDiv {
+}
+
+.everythingAboveEditor {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-around;
+  height: 54px;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* .singleNoteInputTitleDiv {
+  font-family: "Philosopher", sans-serif;
+  font-size: 14px;
+  margin: 10px;
+  padding: 5px;
+} */
+
+/*
+.singleNoteInputTitleDiv:hover {
+  padding: 7px 15px;
+  border-radius: 5px;
+} */

@@ -2,6 +2,7 @@ import React from "react";
 import NotebooksDisplay from "./NotebooksDisplay.js";
 import { AddNotebookDisplay } from "./AddNotebookDisplay.js";
 import axios from "axios";
+import "./Notebooks.css";
 
 export default class Notebooks extends React.Component {
   state = {
@@ -13,11 +14,11 @@ export default class Notebooks extends React.Component {
     toBeNewDefaultNotebook: ""
   };
 
-  async componentDidMount(){
+  async componentDidMount() {
     await this.props.fetchNotebooks();
     await this.props.fetchNotes(); // in case user goes directly to /notebooks
     this.setNoteCount();
-  };
+  }
 
   setNoteCount = async () => {
     let count = await this.noteCountTracker();
@@ -55,7 +56,6 @@ export default class Notebooks extends React.Component {
   };
 
   handleSubmit = e => {
-    
     e.preventDefault();
     axios
       .post("/api/notebooks", this.state.newNotebook)
@@ -82,13 +82,9 @@ export default class Notebooks extends React.Component {
           .reverse()
           .map(note => {
             return (
-              <div
-                className="allNotesFromNB"
-                key={note.id}
-
-              >
+              <div className="allNotesFromNB" key={note.id}>
                 <ul>
-                  <li onClick={(e)=>this.onClickTest(e,note.id)}>
+                  <li onClick={e => this.onClickTest(e, note.id)}>
                     <i>{note.title}</i>
                   </li>
                 </ul>
@@ -110,13 +106,11 @@ export default class Notebooks extends React.Component {
   };
 
   onClickTest = async (e, note_id) => {
-    
     await this.props.receiveIdForSelectedNoteFromNotebook(note_id);
     this.props.history.push("/newNote");
   };
 
   handleDelete = async deleteId => {
-    
     let notebook = Object.values(this.props.notebooks).find(
       notebook => notebook.id === deleteId
     );
@@ -153,7 +147,7 @@ export default class Notebooks extends React.Component {
       `/api/notebooks/${notebook_id}`,
       this.state.toBeNewDefaultNotebook
     );
-    
+
     await axios.patch(
       `/api/notebooks/${this.state.currentDefaultNotebook.id}`,
       { ...this.state.currentDefaultNotebook, is_default: false }
@@ -223,7 +217,7 @@ export default class Notebooks extends React.Component {
       });
 
     return (
-      <>
+      <div className="notebooksMainWrapper">
         <h1>All Notebooks</h1>
         <NotebooksDisplay notebook={notebooks} />
         <AddNotebookDisplay
@@ -232,7 +226,7 @@ export default class Notebooks extends React.Component {
           handleSubmit={this.handleSubmit}
           handleCancel={this.handleCancel}
         />
-      </>
+      </div>
     );
   }
 }

@@ -1,9 +1,27 @@
+/* .appDashboardDiv {
+  display: grid;
+  grid-template-columns: 242px 1193px;
+  background-color: #fff;
+}
+
+.appSideNavDiv {
+  grid-column-start: 1;
+  grid-column-end: 1;
+} */
+
+.appDashboardContainer {
+  display: grid;
+  grid-template-columns: 242px 345px 632px;
+}
+
+.notesMainWrapper {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
 .navWrapperSideways {
-  /* display: grid;
-  grid-template-columns: 100%;
-  justify-items: center;
-  position: fixed;
-  width: 100%; */
+  grid-column-start: 1;
+  grid-column-end: 1;
   background: #1a1a1a;
   white-space: nowrap;
   color: #fff;

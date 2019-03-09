@@ -28,36 +28,39 @@ export const SingleNoteDisplay = ({
 
   if (!!currentNoteObj) {
     return (
-      <div>
-        <button onClick={handleToggleViewNoteInfo}>View note info...</button>
-        {toggleViewNoteInfo ? noteInfo : null}{" "}
-        {isFavorited ? (
-          <label htmlFor="favoriteCheckbox">
-            <input
-              id="favoriteCheckbox"
-              className="favoriteInput"
-              type="checkbox"
-              value={currentNoteObj.favorited}
-              onClick={handleAddToFavorite}
-            />
-            <span>Remove from Favorites</span>
-          </label>
-        ) : (
-          <label htmlFor="favoriteCheckbox">
-            <input
-              id="favoriteCheckbox"
-              className="favoriteInput"
-              type="checkbox"
-              value={currentNoteObj.favorited}
-              onClick={handleAddToFavorite}
-            />
-            <span>Add to Favorites</span>
-          </label>
-        )}
-        <button onClick={() => handleDelete(currentNoteObj.id)}>
-          Delete note
-        </button>
+      <div className="SingleNoteDisplayDiv">
+        <div className="everythingAboveEditor">
+          <button onClick={handleToggleViewNoteInfo}>View note info...</button>
+          {toggleViewNoteInfo ? noteInfo : null}{" "}
+          {isFavorited ? (
+            <label htmlFor="favoriteCheckbox">
+              <input
+                id="favoriteCheckbox"
+                className="favoriteInput"
+                type="checkbox"
+                value={currentNoteObj.favorited}
+                onClick={handleAddToFavorite}
+              />
+              <span>Remove from Favorites</span>
+            </label>
+          ) : (
+            <label htmlFor="favoriteCheckbox">
+              <input
+                id="favoriteCheckbox"
+                className="favoriteInput"
+                type="checkbox"
+                value={currentNoteObj.favorited}
+                onClick={handleAddToFavorite}
+              />
+              <span>Add to Favorites</span>
+            </label>
+          )}
+          <button onClick={() => handleDelete(currentNoteObj.id)}>
+            Delete note
+          </button>
+        </div>
         <input
+          className="singleNoteInputTitleDiv"
           type="text"
           name="title"
           placeholder="Title"
@@ -65,6 +68,7 @@ export const SingleNoteDisplay = ({
           onChange={handleChangeTitle}
           required
         />
+
         <ReactQuill
           value={currentNoteObj.body}
           onChange={handleChange}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Favorites.css";
 
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export default class Favorites extends React.Component {
     }
   }
 
-  handleOnClick = async (e,note_id) => {
+  handleOnClick = async (e, note_id) => {
     debugger;
     await this.props.receiveIdForSelectedNoteFromFavorites(note_id);
     this.props.history.push("/newNote");
@@ -35,13 +36,9 @@ export default class Favorites extends React.Component {
     if (favoritedNotes.length) {
       notes = favoritedNotes.map(note => {
         return (
-          <div
-            className="allFavoritesDiv"
-            key={note.id}
-
-          >
+          <div className="allFavoritesDiv" key={note.id}>
             <ul>
-              <li onClick={(e)=>this.handleOnClick(e,note.id)}>
+              <li onClick={e => this.handleOnClick(e, note.id)}>
                 Title <b>{note.title}</b>
               </li>
             </ul>
@@ -51,10 +48,10 @@ export default class Favorites extends React.Component {
     }
 
     return (
-      <>
+      <div className="favoritesMainWrapper">
         <h1>All Favorites</h1>
         {notes}
-      </>
+      </div>
     );
   }
 }

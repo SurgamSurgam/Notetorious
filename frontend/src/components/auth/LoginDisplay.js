@@ -23,7 +23,7 @@ const LoginDisplay = ({
         />
         <input
           className="loginPasswordInput"
-          type="text"
+          type="password"
           value={password}
           name="password"
           placeholder="Password"

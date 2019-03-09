@@ -32,7 +32,7 @@ const SignUpDisplay = ({
         />
         <input
           className="signUpPasswordInput"
-          type="text"
+          type="password"
           value={password}
           name="password"
           placeholder="Password"

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { TagsDisplay } from "./TagsDisplay.js";
 import { AddTagDisplay } from "./AddTagDisplay.js";
+import "./Tags.css";
 
 export default class Tags extends React.Component {
   state = {
@@ -74,7 +75,7 @@ export default class Tags extends React.Component {
         this.props.fetchTagsForCurrentUser();
         this.props.fetchTagsOfEveryone();
         this.toggleEditing(null);
-        this.setState({editUserInput: ''})
+        this.setState({ editUserInput: "" });
       });
   };
 
@@ -82,7 +83,7 @@ export default class Tags extends React.Component {
     console.log(this.state);
 
     return (
-      <>
+      <div className="tagsMainWrapper">
         <h1>All Tags</h1>
         <AddTagDisplay
           newTag={this.state.newTag}
@@ -99,7 +100,7 @@ export default class Tags extends React.Component {
           editing={this.state.editing}
           editUserInput={this.state.editUserInput}
         />
-      </>
+      </div>
     );
   }
 }

@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import LoggedInLinks from "./LoggedInLinks.js";
 import LoggedOutLinks from "./LoggedOutLinks.js";
 import "./NavbarSideways.css";
+import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
+import FavoritesContainer from "../../containers/FavoritesContainer.js";
+import NotesContainer from "../../containers/NotesContainer.js";
+import NotebooksContainer from "../../containers/NotebooksContainer.js";
+import TagsContainer from "../../containers/TagsContainer.js";
+import { PrivateRoute } from "../../utils/AuthRouting";
+import { Switch } from "react-router-dom";
 
 export const NavbarSideways = props => {
   console.log("NAV PROPS!", props);
@@ -10,7 +17,7 @@ export const NavbarSideways = props => {
   let { isLoggedIn, user } = props.user;
 
   // to control nav display
-  const classNames = ["navWrapperSideways"];
+  const classNames = ["navWrapperSideways", "appSideNavDiv"];
   if (
     props.location.pathname !== "/newNote" ||
     props.location.pathname !== "/favorites" ||
@@ -21,17 +28,31 @@ export const NavbarSideways = props => {
     classNames.push("hide");
   }
 
+  // <div className="appMainComponentsDiv">
+  //
+  //   <div className="appDashboardDiv">
+
+  // <nav className={classNames.join(" ")}>
   return (
-    <nav className={classNames.join(" ")}>
-      <div className="containerSideways">
-        {isLoggedIn ? (
-          <LoggedInLinks
-            user={user}
-            logoutUser={props.logoutUser}
-            toggleNewNote={props.toggleNewNote}
-          />
-        ) : null}
-      </div>
-    </nav>
+    <div className="appDashboardContainer">
+      <nav className="navWrapperSideways">
+        <div className="containerSideways">
+          {isLoggedIn ? (
+            <LoggedInLinks
+              user={user}
+              logoutUser={props.logoutUser}
+              toggleNewNote={props.toggleNewNote}
+            />
+          ) : null}
+        </div>
+      </nav>
+      <Switch>
+        <PrivateRoute path="/newNote" component={AddNoteDisplayContainer} />
+        <PrivateRoute path="/favorites" component={FavoritesContainer} />
+        <PrivateRoute path="/notes" component={NotesContainer} />
+        <PrivateRoute path="/notebooks" component={NotebooksContainer} />
+        <PrivateRoute path="/tags" component={TagsContainer} />
+      </Switch>
+    </div>
   );
 };
