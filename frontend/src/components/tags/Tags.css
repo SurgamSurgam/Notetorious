@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  min-height: 84.5vh;
+  height: 793px;
   margin-left: 100px;
 }
 
@@ -25,6 +25,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  min-height: 84.5vh;
   margin-left: 100px;
+  flex-wrap: wrap;
+  overflow-y: auto;
 }

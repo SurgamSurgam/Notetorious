@@ -17,15 +17,10 @@ export const NavbarSideways = props => {
   let { isLoggedIn, user } = props.user;
 
   // to control nav display
-  const classNames = ["navWrapperSideways", "appSideNavDiv"];
-  if (
-    props.location.pathname !== "/newNote" ||
-    props.location.pathname !== "/favorites" ||
-    props.location.pathname !== "/notes" ||
-    props.location.pathname !== "/notebooks" ||
-    props.location.pathname !== "/tags"
-  ) {
-    classNames.push("hide");
+  const classNames = ["appDashboardContainer"];
+  if (props.location.pathname !== "/newNote") {
+    classNames.pop();
+    classNames.push("appDashboardContainerForEverythingElse");
   }
 
   if (!isLoggedIn) {
@@ -41,7 +36,7 @@ export const NavbarSideways = props => {
     debugger;
   } else {
     return (
-      <div className="appDashboardContainer">
+      <div className={classNames}>
         <nav className="navWrapperSideways">
           <div className="containerSideways">
             {isLoggedIn ? (

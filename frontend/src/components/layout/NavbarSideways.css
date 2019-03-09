@@ -1,22 +1,11 @@
-/* .appDashboardDiv {
-  display: grid;
-  grid-template-columns: 242px 1193px;
-  background-color: #fff;
-}
-
-.appSideNavDiv {
-  grid-column-start: 1;
-  grid-column-end: 1;
-} */
-
 .appDashboardContainer {
   display: grid;
   grid-template-columns: 242px 345px 632px;
 }
 
-.notesMainWrapper {
-  grid-column-start: 2;
-  grid-column-end: 3;
+.appDashboardContainerForEverythingElse {
+  display: grid;
+  grid-template-columns: 242px 1193px;
 }
 
 .navWrapperSideways {
@@ -26,8 +15,9 @@
   white-space: nowrap;
   color: #fff;
   width: 242px;
-  height: 770px;
+  height: 100%;
   overflow: hidden;
+  min-height: 793px;
 }
 
 ..containerSideways {
@@ -60,8 +50,8 @@
 }
 
 .logoBackground > i {
-  margin-right: 4px;
-  margin-top: 2px;
+  margin-right: 1px;
+  margin-top: 1px;
 }
 
 .logoNameSpanSidewaysWrapper {
