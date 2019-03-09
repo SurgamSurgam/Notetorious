@@ -2,6 +2,12 @@
 
 /* ==============================================TOGGLE================================================ */
 
+.loaderDiv {
+  margin-top: 250px;
+  display: grid;
+  place-items: center center;
+}
+
 button {
   background-color: white;
   color: black;

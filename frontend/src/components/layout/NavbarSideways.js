@@ -28,31 +28,39 @@ export const NavbarSideways = props => {
     classNames.push("hide");
   }
 
-  // <div className="appMainComponentsDiv">
-  //
-  //   <div className="appDashboardDiv">
-
-  // <nav className={classNames.join(" ")}>
-  return (
-    <div className="appDashboardContainer">
-      <nav className="navWrapperSideways">
-        <div className="containerSideways">
-          {isLoggedIn ? (
-            <LoggedInLinks
-              user={user}
-              logoutUser={props.logoutUser}
-              toggleNewNote={props.toggleNewNote}
-            />
-          ) : null}
-        </div>
-      </nav>
-      <Switch>
-        <PrivateRoute path="/newNote" component={AddNoteDisplayContainer} />
-        <PrivateRoute path="/favorites" component={FavoritesContainer} />
-        <PrivateRoute path="/notes" component={NotesContainer} />
-        <PrivateRoute path="/notebooks" component={NotebooksContainer} />
-        <PrivateRoute path="/tags" component={TagsContainer} />
-      </Switch>
-    </div>
-  );
+  if (!isLoggedIn) {
+    return (
+      <div className="loaderDiv">
+        <span className="logoNameSpanInLogin">
+          <i className="fas fa-book-dead" />
+          <span className="logoTitleSpan">Notetorious</span>
+        </span>
+        <img src={require("./Ripple-1s-200px.svg")} alt="" />
+      </div>
+    );
+    debugger;
+  } else {
+    return (
+      <div className="appDashboardContainer">
+        <nav className="navWrapperSideways">
+          <div className="containerSideways">
+            {isLoggedIn ? (
+              <LoggedInLinks
+                user={user}
+                logoutUser={props.logoutUser}
+                toggleNewNote={props.toggleNewNote}
+              />
+            ) : null}
+          </div>
+        </nav>
+        <Switch>
+          <PrivateRoute path="/newNote" component={AddNoteDisplayContainer} />
+          <PrivateRoute path="/favorites" component={FavoritesContainer} />
+          <PrivateRoute path="/notes" component={NotesContainer} />
+          <PrivateRoute path="/notebooks" component={NotebooksContainer} />
+          <PrivateRoute path="/tags" component={TagsContainer} />
+        </Switch>
+      </div>
+    );
+  }
 };

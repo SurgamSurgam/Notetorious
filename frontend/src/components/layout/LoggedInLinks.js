@@ -8,11 +8,7 @@ const LoggedInLinks = props => {
     props.location.pathname === "/notebooks" ? (
       <NavLink to="/newNote">
         <span className="addNewNoteInNotesWrapper ">
-          <img
-            className="addButtonImg"
-            src="chrome-extension://bhlhnicpbhignbdhedgjhgdocnmhomnp/images/checkmark-icon.png"
-            alt=""
-          />
+          <img className="addButtonImg" src="green-plus.png" alt="" />
           <div className="newNoteTitleh1">New Note</div>
         </span>
       </NavLink>
@@ -29,8 +25,15 @@ const LoggedInLinks = props => {
       <ul className="rightSideways">
         <div className="logoNameSpanSidewaysWrapper">
           <span className="logoNameSpanSideways brand-logo-Sideways">
-            <i className="fas fa-book-dead" />
-            <span className="usernameSideways ">{props.user}</span>
+            <span className="logoBackground">
+              <i className="fas fa-book-dead" />
+            </span>
+            <span className="usernameSideways ">
+              {props.user
+                .split("")[0]
+                .toUpperCase()
+                .concat(props.user.slice(1))}
+            </span>
           </span>
         </div>
 
@@ -40,7 +43,11 @@ const LoggedInLinks = props => {
           <li className="sideNavLinks">
             <NavLink to="/favorites">
               <span className="logoNameSpanSideways brand-logo-Sideways">
-                <i className="fas fa-book-dead" />
+                <img
+                  className="greyStar sideNavLogo"
+                  src="greyStar1.png"
+                  alt=""
+                />
                 <span className="sideNavLinksTitles ">Shortcuts</span>
               </span>
             </NavLink>
@@ -48,7 +55,11 @@ const LoggedInLinks = props => {
           <li className="sideNavLinks">
             <NavLink to="/notes">
               <span className="logoNameSpanSideways brand-logo-Sideways">
-                <i className="fas fa-book-dead" />
+                <img
+                  className="greyNote sideNavLogo"
+                  src="greyNote.png"
+                  alt=""
+                />
                 <span className="sideNavLinksTitles ">All Notes</span>
               </span>
             </NavLink>
@@ -56,7 +67,11 @@ const LoggedInLinks = props => {
           <li className="sideNavLinks">
             <NavLink to="/notebooks">
               <span className="logoNameSpanSideways brand-logo-Sideways">
-                <i className="fas fa-book-dead" />
+                <img
+                  className="greyNotebook sideNavLogo"
+                  src="greyNotebook.png"
+                  alt=""
+                />
                 <span className="sideNavLinksTitles ">Notebooks</span>
               </span>
             </NavLink>
@@ -64,17 +79,14 @@ const LoggedInLinks = props => {
           <li className="sideNavLinks">
             <NavLink to="/tags">
               <span className="logoNameSpanSideways brand-logo-Sideways">
-                <i className="fas fa-book-dead" />
+                <img className="greyTag sideNavLogo" src="greyTag.png" alt="" />
                 <span className="sideNavLinksTitles ">Tags</span>
               </span>
             </NavLink>
           </li>
         </div>
-        <li>
-          <button
-            className="deleteNoteButton logout"
-            onClick={props.logoutUser}
-          >
+        <li className="logoutButtonLi">
+          <button className="logoutButton logout" onClick={props.logoutUser}>
             Logout
           </button>
         </li>
