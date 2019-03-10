@@ -15,6 +15,13 @@ let initalState = {
     user: null,
     isLoggedIn: false
   }
+  // notebooks: {
+  //   1: {
+  //     id: 1,
+  //     is_default: true,
+  //     title: "My First Notebook"
+  //   }
+  // }
 };
 
 let store = createStore(

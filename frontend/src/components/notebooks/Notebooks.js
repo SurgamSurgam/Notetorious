@@ -147,12 +147,11 @@ export default class Notebooks extends React.Component {
       `/api/notebooks/${notebook_id}`,
       this.state.toBeNewDefaultNotebook
     );
-
     await axios.patch(
       `/api/notebooks/${this.state.currentDefaultNotebook.id}`,
       { ...this.state.currentDefaultNotebook, is_default: false }
     );
-
+    console.log("DF", this.state.currentDefaultNotebook.id);
     this.props.fetchNotebooks();
   };
 
@@ -167,17 +166,20 @@ export default class Notebooks extends React.Component {
         }
         let noteCountInNotebooks = this.state.noteCountInNotebooks[notebook.id];
         return (
-          <div
-            className="allNotebooksDiv"
-            key={i}
-            onClick={async () => {
-              await this.props.fetchAllNotesFromSingleNotebook(notebook.id);
-              this.getNotesByNB(notebook.id);
-            }}
-          >
+          <div className="allNotebooksDiv" key={i}>
             <ul>
               <li className="individualNotebookDiv">
-                Id: {notebook.id} Title: <b>{notebook.title}</b>{" "}
+                <div
+                  className="notebookIdAndTitle"
+                  onClick={async () => {
+                    await this.props.fetchAllNotesFromSingleNotebook(
+                      notebook.id
+                    );
+                    this.getNotesByNB(notebook.id);
+                  }}
+                >
+                  Id: {notebook.id} Title: <b>{notebook.title}</b>{" "}
+                </div>
                 <i>({noteCountInNotebooks ? noteCountInNotebooks : 0})</i>
                 {"      "}
                 {notebook.is_default ? (

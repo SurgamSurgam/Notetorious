@@ -49,24 +49,30 @@ class AddNoteDisplay extends React.Component {
         notebook => notebook.is_default === true
       );
 
+      if (!defaultNotebook) {
+        defaultNotebook = Object.values(this.props.notebooks)[
+          Object.values(this.props.notebooks).length - 1
+        ];
+      }
+
       //will show on top - will create new users a default notebook if none found
 
-      if (defaultNotebook) {
-        if (this.state.selectedNotebookId) {
-          this.setState({
-            newNote: {
-              ...this.state.newNote,
-              notebook_id: +this.state.selectedNotebookId
-            }
-          });
-        } else {
-          this.setState({
-            newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
-          });
-        }
+      // if (defaultNotebook) {
+      if (this.state.selectedNotebookId) {
+        this.setState({
+          newNote: {
+            ...this.state.newNote,
+            notebook_id: +this.state.selectedNotebookId
+          }
+        });
       } else {
-        console.log(" create a default nb here?");
+        this.setState({
+          newNote: { ...this.state.newNote, notebook_id: +defaultNotebook.id }
+        });
       }
+      // } else {
+      //   console.log(" create a default nb here?");
+      // }
     }
 
     //allows me to listen to when route is hit and what to fire ala CDM.. and it returns an unlisten function that I can fire on CWU.  This function helps to always keep first note showing and not the edited mode (of create newNote) if people don't cancel it.

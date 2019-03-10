@@ -13,9 +13,11 @@ export default class Favorites extends React.Component {
     await this.props.fetchNotes();
 
     if (this.props.notes) {
-      let notes = Object.values(this.props.notes.notes).filter(note => {
-        return !!note.favorited;
-      });
+      let notes = Object.values(this.props.notes.notes)
+        .reverse()
+        .filter(note => {
+          return !!note.favorited;
+        });
 
       this.setState({
         favoritedNotes: notes
@@ -24,7 +26,6 @@ export default class Favorites extends React.Component {
   }
 
   handleOnClick = async (e, note_id) => {
-    debugger;
     await this.props.receiveIdForSelectedNoteFromFavorites(note_id);
     this.props.history.push("/newNote");
   };

@@ -19,6 +19,7 @@ export default class Notes extends React.Component {
       originalNoteObj: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.addToFavorite = this.addToFavorite.bind(this);
   }
 
   async componentDidMount() {
@@ -197,15 +198,14 @@ export default class Notes extends React.Component {
 
                   <li className="noteTitleLiWrapper">
                     <div className="noteTitleLi">{note.title}</div>
-                    {note.favorited ? (
+                    {/*{note.favorited ? (
                       <span className="favoritedHeartSolid">
-                        <i className="fas fa-heart" />
+                        <i
+                          className="fas fa-heart"
+                          onClick={this.addToFavorite}
+                        />
                       </span>
-                    ) : (
-                      <span className="favoritedHeartClear">
-                        <i className="far fa-heart" />
-                      </span>
-                    )}
+                    ) : null}*/}
                   </li>
 
                   <li className="noteBodyLi">{ReactHtmlParser(htmlString)}</li>
