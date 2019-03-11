@@ -17,7 +17,9 @@ export default class Notes extends React.Component {
       editedNoteObj: "",
       discrepancyBtwnCurrentAndEdited: false,
       originalNoteObj: "",
-      showModal: false
+      showModal: false,
+      isSearchedModeOn: false,
+      searchedResultsObj: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.addToFavorite = this.addToFavorite.bind(this);
@@ -197,6 +199,18 @@ export default class Notes extends React.Component {
     }
   };
 
+  handleIsSearchModeOn = value => {
+    if (value === "on") {
+      this.setState({
+        isSearchedModeOn: true
+      });
+    } else {
+      this.setState({
+        isSearchedModeOn: false
+      });
+    }
+  };
+
   render() {
     console.log("STATE", this.state);
     console.log("PROPS", this.props);
@@ -299,7 +313,10 @@ export default class Notes extends React.Component {
             <h1>All Notes</h1>
           </div>
           <div className="divider" />
-          <NotesDisplay notes={notes} />
+          <NotesDisplay
+            notes={notes}
+            handleIsSearchModeOn={this.handleIsSearchModeOn}
+          />
         </div>
       </div>
     );

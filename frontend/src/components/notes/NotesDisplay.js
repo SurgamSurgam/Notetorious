@@ -11,6 +11,13 @@ const mapStateToProps = state => {
 
 // {Object.values(this.props.notes.notes)}
 class NotesDisplay extends React.Component {
+  componentDidMount() {
+    if (this.props.savedSearchResults.length) {
+      this.props.handleIsSearchModeOn("on");
+    } else {
+      this.props.handleIsSearchModeOn("off");
+    }
+  }
   render() {
     if (this.props.savedSearchResults.length) {
       let searchedResults = Object.values(this.props.savedSearchResults)
@@ -47,6 +54,7 @@ class NotesDisplay extends React.Component {
             </div>
           );
         });
+
       return <div className="searchedResultsDiv">{searchedResults}</div>;
     } else if (!!this.props.notes) {
       return <div className="allNotesDivWrapper">{this.props.notes}</div>;
