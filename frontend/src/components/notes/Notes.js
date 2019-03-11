@@ -51,8 +51,9 @@ export default class Notes extends React.Component {
     this.handleToggleViewNoteInfo();
   }
 
-  handleSelectDropdownChange = dropdownSelection => {
-    switch (dropdownSelection.value) {
+  handleSelectDropdownChange = (e, obj) => {
+    debugger;
+    switch (e.value) {
       case "delete":
         this.handleDelete(this.state.currentNoteObj.id);
         break;

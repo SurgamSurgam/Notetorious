@@ -65,6 +65,9 @@ class LoggedInLinks extends React.Component {
                 onChange={this.props.logoutUser}
                 options={options}
                 placeholder={""}
+                defaultMenuIsOpen={false}
+                openMenuOnFocus={false}
+                cacheOptions={false}
               />
             </span>
           </div>

@@ -86,10 +86,16 @@ export const SingleNoteDisplay = ({
 
           <div className="menuAboveEditor">
             <Select
-              onChange={handleSelectDropdownChange}
+              onChange={e => {
+                handleSelectDropdownChange(e, "deselect-option");
+              }}
               options={options}
               placeholder={""}
+              closeMenuOnSelect={true}
+              isOptionSelected={options => false}
+              isFocused={false}
             />
+
             {/*<span className="verticalEllipsis">
               <i className="fas fa-ellipsis-v" onClick={handleOpenModal} />
             </span>*/}
