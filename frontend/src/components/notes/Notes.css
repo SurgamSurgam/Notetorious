@@ -162,6 +162,7 @@ span.favoritedHeartClear {
 .everythingAboveEditor {
   display: flex;
   justify-content: space-between;
+  margin-top: -14px;
 
   /* width: 150px;
   display: inline;
@@ -176,16 +177,24 @@ span.favoritedHeartClear {
 }
 
 .singleNoteInputTitleDiv {
+  position: absolute;
+  margin-top: 114px;
+  margin-left: 39px;
+  font-size: 32px;
   border: none;
   font-family: Roboto, sans-serif;
-  font-weight: 400;
-  margin-left: 23px;
-  font-size: x-large;
+  font-weight: 300;
 }
 
 .ql-toolbar.ql-snow {
   border-top: 1px solid #ece9f2;
   margin-top: 15px;
+  margin-left: 13px;
+  margin-bottom: 58px;
+}
+
+.ql-container.ql-snow {
+  margin-left: 15px;
 }
 
 .noteInfoUl {
@@ -204,6 +213,19 @@ span.favoritedHeartClear {
 
 .menuAboveEditor {
   display: flex;
+  margin-inline-start: auto;
+}
+
+.submitEditDiv {
+  display: flex;
+  justify-content: space-around;
+  justify-content: center;
+}
+
+.submitEditDiv > button {
+  margin-left: 60px;
+  margin-right: 60px;
+  width: 100px;
 }
 
 /* select dropdown */
@@ -219,6 +241,7 @@ span.favoritedHeartClear {
 
 .css-10nd86i > .css-vj8t7z {
   background-color: transparent;
+  cursor: pointer;
 }
 
 .css-vj8t7z {
@@ -258,7 +281,6 @@ span.favoritedHeartClear {
   position: relative;
   box-sizing: border-box;
   margin-right: 25px;
-  cursor: pointer;
 }
 
 /* removing hovering effect from text */
