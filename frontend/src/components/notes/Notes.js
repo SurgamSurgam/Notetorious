@@ -16,10 +16,13 @@ export default class Notes extends React.Component {
       toggleViewNoteInfo: false,
       editedNoteObj: "",
       discrepancyBtwnCurrentAndEdited: false,
-      originalNoteObj: ""
+      originalNoteObj: "",
+      showModal: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.addToFavorite = this.addToFavorite.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   async componentDidMount() {
@@ -38,6 +41,32 @@ export default class Notes extends React.Component {
       });
     }
   }
+
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+    this.handleToggleViewNoteInfo();
+  }
+
+  handleSelectDropdownChange = dropdownSelection => {
+    switch (dropdownSelection.value) {
+      case "delete":
+        this.handleDelete(this.state.currentNoteObj.id);
+        break;
+      case "favorites":
+        this.addToFavorite();
+        break;
+      case "noteInfo":
+        this.handleToggleViewNoteInfo();
+        this.handleOpenModal();
+        break;
+      default:
+        return;
+    }
+  };
 
   handleChange = async e => {
     await this.setState({
@@ -221,14 +250,14 @@ export default class Notes extends React.Component {
                   {/*<li />*/}
                 </ul>
               </div>
-              <div className="deleteNoteButtonWrapper">
+              {/*<div className="deleteNoteButtonWrapper">
                 <button
                   className="deleteNoteButton"
                   onClick={() => this.handleDelete(note.id)}
                 >
                   Delete note
                 </button>
-              </div>
+              </div>*/}
             </div>
           );
         });
@@ -257,6 +286,10 @@ export default class Notes extends React.Component {
               isFavorited={this.state.currentNoteObj.favorited}
               handleDelete={this.handleDelete}
               toolbarOptions={this.props.toolbarOptions}
+              handleOpenModal={this.handleOpenModal}
+              handleCloseModal={this.handleCloseModal}
+              showModal={this.state.showModal}
+              handleSelectDropdownChange={this.handleSelectDropdownChange}
             />
           )}
         </div>

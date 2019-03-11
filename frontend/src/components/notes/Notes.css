@@ -160,7 +160,10 @@ span.favoritedHeartClear {
 }
 
 .everythingAboveEditor {
-  width: 150px;
+  display: flex;
+  justify-content: space-between;
+
+  /* width: 150px;
   display: inline;
   flex-direction: column;
   align-items: flex-end;
@@ -169,7 +172,7 @@ span.favoritedHeartClear {
   flex-wrap: nowrap;
   overflow: hidden;
   margin-right: 50px;
-  margin-top: 15px;
+  margin-top: 15px; */
 }
 
 .singleNoteInputTitleDiv {
@@ -197,4 +200,54 @@ span.favoritedHeartClear {
   margin-right: 500px;
   border: 1px solid;
   padding: 18px;
+}
+
+.menuAboveEditor {
+  display: flex;
+}
+
+/* select dropdown */
+
+.css-xp4uvy {
+  display: none;
+}
+
+.css-10nd86i {
+  width: 162px;
+  height: 36px;
+}
+
+.css-vj8t7z {
+  width: 37px;
+}
+
+.css-vj8t7z > div {
+  height: 0;
+}
+
+/* .css-1hwfws3 {
+  display: none;
+  heigh: 0;
+  width: 0;
+} */
+
+.css-1hwfws3 > {
+  /* display: none; */
+}
+
+.css-d8oujb {
+  display: none;
+}
+
+.css-1g6gooi > div {
+  display: none;
+}
+
+/* dropdown flipped */
+.css-10nd86i {
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+  box-sizing: border-box;
+  margin-right: 25px;
 }

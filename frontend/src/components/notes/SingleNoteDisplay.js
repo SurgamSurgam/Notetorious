@@ -1,5 +1,9 @@
 import React from "react";
 import ReactQuill from "react-quill";
+import Modal from "react-modal";
+import Select from "react-select";
+
+Modal.setAppElement("#root");
 
 export const SingleNoteDisplay = ({
   currentNoteObj,
@@ -13,7 +17,11 @@ export const SingleNoteDisplay = ({
   handleAddToFavorite,
   isFavorited,
   handleDelete,
-  toolbarOptions
+  toolbarOptions,
+  showModal,
+  handleCloseModal,
+  handleOpenModal,
+  handleSelectDropdownChange
 }) => {
   let noteInfo = (
     <ul className="noteInfoUl">
@@ -26,58 +34,75 @@ export const SingleNoteDisplay = ({
     </ul>
   );
 
+  const options = [
+    { value: "", label: "" },
+    { value: "delete", label: "Delete note" },
+    {
+      value: "favorites",
+      label: currentNoteObj.favorited ? "Remove shortcut" : "Add shortcut"
+    },
+    { value: "noteInfo", label: "View note info..." }
+  ];
+
   if (!!currentNoteObj) {
     return (
       <div className="SingleNoteDisplayDiv">
-        <input
-          className="singleNoteInputTitleDiv"
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={currentNoteObj.title}
-          onChange={handleChangeTitle}
-          required
-        />
         <div className="everythingAboveEditor">
-          <button onClick={handleToggleViewNoteInfo}>View note info...</button>
-          {isFavorited ? (
+          {/*Title Below*/}
+          <input
+            className="singleNoteInputTitleDiv"
+            type="text"
+            name="title"
+            placeholder="Title"
+            value={currentNoteObj.title}
+            onChange={handleChangeTitle}
+            required
+          />
+          {/*{isFavorited ? (
             <label htmlFor="favoriteCheckbox">
-              {/*<input
-                id="favoriteCheckbox"
-                className="favoriteInput"
-                type="checkbox"
-                value={currentNoteObj.favorited}
 
-              />*/}
               <span
                 className="favoritedHeartClear"
                 onClick={handleAddToFavorite}
               >
-                Remove <i className="far fa-heart" />
+                <i className="far fa-heart" />
               </span>
             </label>
           ) : (
             <label htmlFor="favoriteCheckbox">
-              {/*<input
-                id="favoriteCheckbox"
-                className="favoriteInput"
-                type="checkbox"
-                value={currentNoteObj.favorited}
 
-              />*/}
               <span
                 className="favoritedHeartSolid"
                 onClick={handleAddToFavorite}
               >
-                Add <i className="fas fa-heart" />
+                 <i className="fas fa-heart" />
               </span>
             </label>
-          )}
-          <button onClick={() => handleDelete(currentNoteObj.id)}>
+          )}*/}
+          {/*<button onClick={() => handleDelete(currentNoteObj.id)}>
             Delete note
-          </button>
+          </button>*/}
+          {/*menu above editor*/}
+
+          <div className="menuAboveEditor">
+            <Select
+              onChange={handleSelectDropdownChange}
+              options={options}
+              placeholder={""}
+            />
+            {/*<span className="verticalEllipsis">
+              <i className="fas fa-ellipsis-v" onClick={handleOpenModal} />
+            </span>*/}
+            {/*<button onClick={handleToggleViewNoteInfo}>
+              View note info...
+            </button>*/}
+            <Modal isOpen={showModal} contentLabel="Minimal Modal Example">
+              <button onClick={handleCloseModal}>Close Modal</button>
+              <div>{toggleViewNoteInfo ? noteInfo : null} </div>
+            </Modal>
+          </div>
         </div>
-        {toggleViewNoteInfo ? noteInfo : null}{" "}
+        {/*Title and Editor Below*/}
         <ReactQuill
           value={currentNoteObj.body}
           onChange={handleChange}
