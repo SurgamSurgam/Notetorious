@@ -217,6 +217,10 @@ span.favoritedHeartClear {
   height: 36px;
 }
 
+.css-10nd86i > .css-vj8t7z {
+  background-color: transparent;
+}
+
 .css-vj8t7z {
   width: 37px;
 }
@@ -266,8 +270,13 @@ span.favoritedHeartClear {
   /* cursor: pointer; */
 }
 
+.css-15k3avv > .css-11unzgr {
+  background: transparent;
+}
+
 .css-11unzgr > .css-wqgs6e {
   text-align: center;
   font-size: 12px;
   color: #555;
+  background-color: #f5f5f5;
 }

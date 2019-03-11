@@ -234,9 +234,8 @@
   /* background-color: white; */
 
   color: #555;
-}
 
-/* .deleteNoteButton.logout {
+  /* .deleteNoteButton.logout {
   background-color: whitesmoke;
   color: black;
   border: 1px outset #e6e6e6;
@@ -255,7 +254,7 @@
   color: white;
 } */
 
-/* .logoTitleSpanSideways {
+  /* .logoTitleSpanSideways {
   color: black;
   font-size: 32px;
   margin-left: 8px;
@@ -263,7 +262,7 @@
   font-weight: 700;
 } */
 
-/*
+  /*
 .loggedInLinksDiv > ul {
   display: flex;
   width: 222.047px;
@@ -292,7 +291,7 @@
   color: #14cc45;
 } */
 
-/* .black-text-Sideways {
+  /* .black-text-Sideways {
   list-style: none;
   font-family: Times;
   font-size: 16px;
@@ -302,7 +301,7 @@
   height: 21px;
 } */
 
-/* .logInSpan {
+  /* .logInSpan {
   background-color: white;
   border: 2px solid #00a82d;
   color: #00a82d;
@@ -326,3 +325,4 @@
   border: 2px solid #14cc45;
 }
 */
+}
