@@ -1,5 +1,6 @@
 import { RECEIVE_ALL_NOTEBOOKS } from "../actions/actionTypes.js";
 import { RECEIVE_ID_FOR_NOTE_SELECTED_FROM_ALL_NOTEBOOKS } from "../actions/actionTypes.js";
+import { RECEIVE_SEARCH_RESULTS } from "../actions/actionTypes.js";
 import merge from "lodash/merge";
 
 const normalizeData = arr => {
@@ -30,6 +31,12 @@ const NotebooksReducer = (oldState = [], action) => {
       return {
         ...newState1,
         noteIdForSelectedNoteFromNotebook: action.id
+      };
+    case RECEIVE_SEARCH_RESULTS:
+      let newState2 = merge({}, oldState);
+      return {
+        ...newState2,
+        savedSearchResults: action.results
       };
     default:
       return oldState;

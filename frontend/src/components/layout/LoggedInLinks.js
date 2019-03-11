@@ -3,14 +3,57 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./NavbarSideways.css";
 import Select from "react-select";
+import Fuse from "fuse.js";
+import { fetchNotes } from "../../actions/NotesActions.js";
+import { fetchNotebooks } from "../../actions/NotebooksActions.js";
+import { connect } from "react-redux";
+import { searchedResults } from "../../actions/NotebooksActions.js";
+
+const mapStateToProps = state => {
+  return {
+    notes: state.notes,
+    notebooks: state.notebooks,
+    savedSearchResults: state.notebooks.savedSearchResults
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchNotes: () => dispatch(fetchNotes()),
+    fetchNotebooks: () => dispatch(fetchNotebooks()),
+    searchedResults: results => dispatch(searchedResults(results))
+  };
+};
 
 class LoggedInLinks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: ""
+      searchQuery: "",
+      allNotesAndNotebooks: ""
     };
   }
+
+  async componentDidMount() {
+    await this.props.fetchNotes();
+    await this.props.fetchNotebooks();
+    this.concatAndRemoveDupes(
+      Object.values(this.props.notes.notes),
+      Object.values(this.props.notebooks)
+    );
+  }
+
+  removeDupes = arr => {
+    let set1 = new Set(arr);
+    return [...set1];
+  };
+
+  concatAndRemoveDupes = (arr1, arr2) => {
+    let allNotesAndNotebooks = this.removeDupes([...arr1, ...arr2]);
+    this.setState({
+      allNotesAndNotebooks: allNotesAndNotebooks
+    });
+  };
 
   handleSearchChange = e => {
     this.setState({
@@ -18,9 +61,24 @@ class LoggedInLinks extends React.Component {
     });
   };
 
-  handleSearchSubmit = () => {
-    debugger;
-  };
+  async handleSearchSubmit() {
+    //Search Query
+    let fuseOptions = {
+      caseSensitive: true,
+      shouldSort: true,
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ["title", "body"]
+    };
+    if (this.state.allNotesAndNotebooks && this.state.searchQuery) {
+      let fuse = new Fuse(this.state.allNotesAndNotebooks, fuseOptions); // "list" is the item array
+      let result = fuse.search(this.state.searchQuery);
+      await this.props.searchedResults(result);
+    }
+  }
 
   render() {
     console.log("SEARCHING:", this.state);
@@ -148,4 +206,9 @@ class LoggedInLinks extends React.Component {
   }
 }
 
-export default withRouter(LoggedInLinks);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LoggedInLinks)
+);

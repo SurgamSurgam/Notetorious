@@ -6,11 +6,11 @@ import { receiveIdForSelectedNoteFromNotebook } from "../actions/NotebooksAction
 import { fetchNotes } from "../actions/NotesActions.js"; // in case user goes directly to /notebooks
 
 const mapStateToProps = state => {
+  debugger;
   return {
     notebooks: state.notebooks,
     notesFromNB: state.notes.notesFromNB,
     notes: state.notes.notes
-
   };
 };
 
@@ -21,8 +21,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchAllNotesFromSingleNotebook(notebook_id)),
     receiveIdForSelectedNoteFromNotebook: note_id =>
       dispatch(receiveIdForSelectedNoteFromNotebook(note_id)),
-    fetchNotes: () => dispatch(fetchNotes()),
-
+    fetchNotes: () => dispatch(fetchNotes())
   };
 };
 

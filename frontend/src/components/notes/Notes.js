@@ -1,5 +1,5 @@
 import React from "react";
-import { NotesDisplay } from "./NotesDisplay.js";
+import NotesDisplay from "./NotesDisplay.js";
 import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import axios from "axios";
