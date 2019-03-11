@@ -41,7 +41,7 @@ export const SingleNoteDisplay = ({
       value: "favorites",
       label: currentNoteObj.favorited ? "Remove shortcut" : "Add shortcut"
     },
-    { value: "noteInfo", label: "View note info..." }
+    { value: "noteInfo", label: "Note info..." }
   ];
 
   if (!!currentNoteObj) {

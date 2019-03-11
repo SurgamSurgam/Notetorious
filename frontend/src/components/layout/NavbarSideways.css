@@ -178,6 +178,59 @@
   text-align: center;
 }
 
+ {
+  /* dropdown to logout */
+}
+
+.logoNameSpanSideways > .css-10nd86i {
+  width: 34px;
+  height: 36px;
+  font-size: medium;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.css-15k3avv {
+  width: 100px;
+}
+
+.css-10nd86i > div {
+  overflow: visible;
+  width: 10px;
+  cursor: pointer;
+}
+
+.css-11unzgr {
+  width: 100px;
+}
+
+/* the dropdown of the dropdown box */
+.css-10nd86i > .css-15k3avv {
+  top: 100%;
+  background-color: none;
+  border-radius: 0;
+  box-shadow: 0;
+  margin-bottom: 0;
+  margin-top: 10px;
+  position: absolute;
+  width: 105px;
+  z-index: 0;
+  box-sizing: border-box;
+  padding: 20px 0;
+  cursor: pointer;
+}
+
+.css-11unzgr > .css-wqgs6e {
+  border-radius: 10px;
+  text-align: center;
+  background-color: white;
+  font-size: 14px;
+  color: #555;
+  font-family: Roboto, sans-serif;
+  font-weight: 400px;
+  cursor: pointer;
+}
+
 /* .deleteNoteButton.logout {
   background-color: whitesmoke;
   color: black;

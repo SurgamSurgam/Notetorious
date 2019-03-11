@@ -2,8 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./NavbarSideways.css";
+import Select from "react-select";
 
 const LoggedInLinks = props => {
+  const options = [
+    {
+      value: "logout",
+      label: `Sign out`
+    }
+  ];
+
   let addNoteInAllNotes =
     props.location.pathname === "/notebooks" ? (
       <NavLink to="/newNote">
@@ -34,6 +42,11 @@ const LoggedInLinks = props => {
                 .toUpperCase()
                 .concat(props.user.slice(1))}
             </span>
+            <Select
+              onChange={props.logoutUser}
+              options={options}
+              placeholder={""}
+            />
           </span>
         </div>
 
@@ -85,11 +98,11 @@ const LoggedInLinks = props => {
             </NavLink>
           </li>
         </div>
-        <li className="logoutButtonLi">
+        {/*<li className="logoutButtonLi">
           <button className="logoutButton logout" onClick={props.logoutUser}>
             Logout
           </button>
-        </li>
+        </li>*/}
       </ul>
     </div>
   );
