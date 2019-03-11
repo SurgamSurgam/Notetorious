@@ -1,6 +1,6 @@
 import React from "react";
 import NotesDisplay from "./NotesDisplay.js";
-import { SingleNoteDisplay } from "./SingleNoteDisplay.js";
+import SingleNoteDisplay from "./SingleNoteDisplay.js";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import axios from "axios";
 import ReactHtmlParser from "html-react-parser"; // could use to remove html tags in editor but makes whitespace
@@ -17,9 +17,7 @@ export default class Notes extends React.Component {
       editedNoteObj: "",
       discrepancyBtwnCurrentAndEdited: false,
       originalNoteObj: "",
-      showModal: false,
-      isSearchedModeOn: false,
-      searchedResultsObj: ""
+      showModal: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.addToFavorite = this.addToFavorite.bind(this);

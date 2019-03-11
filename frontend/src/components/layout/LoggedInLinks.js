@@ -79,8 +79,9 @@ class LoggedInLinks extends React.Component {
       let result = fuse.search(this.state.searchQuery);
 
       await this.props.searchedResults(result);
+      this.props.history.push("/notes");
     }
-    debugger;
+    //add to show error in case nothing found!!!
   }
 
   render() {
