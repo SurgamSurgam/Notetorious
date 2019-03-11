@@ -48,12 +48,12 @@ class LoggedInLinks extends React.Component {
     return [...set1];
   };
 
-  concatAndRemoveDupes = (arr1, arr2) => {
+  async concatAndRemoveDupes(arr1, arr2) {
     let allNotesAndNotebooks = this.removeDupes([...arr1, ...arr2]);
-    this.setState({
+    await this.setState({
       allNotesAndNotebooks: allNotesAndNotebooks
     });
-  };
+  }
 
   handleSearchChange = e => {
     this.setState({
@@ -61,7 +61,8 @@ class LoggedInLinks extends React.Component {
     });
   };
 
-  async handleSearchSubmit() {
+  async handleSearchSubmit(e) {
+    e.preventDefault();
     //Search Query
     let fuseOptions = {
       caseSensitive: true,
@@ -73,11 +74,13 @@ class LoggedInLinks extends React.Component {
       minMatchCharLength: 1,
       keys: ["title", "body"]
     };
-    if (this.state.allNotesAndNotebooks && this.state.searchQuery) {
+    if (this.state.allNotesAndNotebooks.length && this.state.searchQuery) {
       let fuse = new Fuse(this.state.allNotesAndNotebooks, fuseOptions); // "list" is the item array
       let result = fuse.search(this.state.searchQuery);
+
       await this.props.searchedResults(result);
     }
+    debugger;
   }
 
   render() {
@@ -133,7 +136,7 @@ class LoggedInLinks extends React.Component {
           <li className="searchInputLi">
             <form
               className="searchInputForm"
-              onSubmit={this.handleSearchSubmit}
+              onSubmit={this.handleSearchSubmit.bind(this)}
             >
               <input
                 type="text"

@@ -21,11 +21,17 @@ const normalizeData = arr => {
 // }
 //================== GOOD CODE ABOVE
 
-const NotebooksReducer = (oldState = [], action) => {
+let initialState = {
+  savedSearchResults: {}
+};
+
+const NotebooksReducer = (oldState = initialState, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_ALL_NOTEBOOKS:
-      return normalizeData(action.notebooks);
+      let newState0 = merge({}, oldState);
+      let notebooks = normalizeData(action.notebooks);
+      return { ...newState0, notebooks };
     case RECEIVE_ID_FOR_NOTE_SELECTED_FROM_ALL_NOTEBOOKS:
       let newState1 = merge({}, oldState);
       return {
