@@ -1,9 +1,9 @@
 /*  comment out .appDashboardDiv and .appSideNavDiv to fix display on Logged Out Pages  */
 
-/* ==============================================TOGGLE================================================ */
+/* =============================================TOGGLE================================================ */
 
 .loaderDiv {
-  margin-top: 250px;
+  /* margin-top: 250px; */
   display: grid;
   place-items: center center;
 }
