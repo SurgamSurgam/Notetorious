@@ -1,9 +1,9 @@
-const db  = require("../index.js");
+const db = require("../index.js");
 const authHelpers = require("../../auth/helpers");
 
 const addUser = (req, res, next) => {
   const hash = authHelpers.createHash(req.body.password);
-  console.log('backend', req.body);
+  console.log("backend", req.body);
 
   db.none(
     "INSERT INTO users(username, email, password_digest) VALUES (${username}, ${email}, ${password})",
@@ -41,7 +41,10 @@ const editUser = (req, res, next) => {
   }
 
   db.none(
-    "UPDATE users SET " + queryString + " WHERE id=" + req.session.currentUser.id,
+    "UPDATE users SET " +
+      queryString +
+      " WHERE id=" +
+      req.session.currentUser.id,
     req.body
   )
     .then(() => {
