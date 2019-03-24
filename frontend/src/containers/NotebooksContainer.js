@@ -8,7 +8,7 @@ import { fetchNotes } from "../actions/NotesActions.js"; // in case user goes di
 const mapStateToProps = state => {
   debugger;
   return {
-    notebooks: state.notebooks,
+    notebooks: state.notebooks.notebooks,
     notesFromNB: state.notes.notesFromNB,
     notes: state.notes.notes
   };
