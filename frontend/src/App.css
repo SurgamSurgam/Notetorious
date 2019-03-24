@@ -2,6 +2,12 @@
 
 /* =============================================TOGGLE================================================ */
 
+.App {
+  position: fixed;
+}
+
+/* position fixed above messes up loader  */
+
 .loaderDiv {
   /* margin-top: 250px; */
   display: grid;
