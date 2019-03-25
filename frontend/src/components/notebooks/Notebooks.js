@@ -188,42 +188,54 @@ export default class Notebooks extends React.Component {
           <div className="allNotebooksDiv" key={i}>
             <ul>
               <li className="individualNotebookDiv">
-                <div
-                  className="notebookIdAndTitle"
-                  onClick={async () => {
-                    await this.props.fetchAllNotesFromSingleNotebook(
-                      notebook.id
-                    );
-                    this.getNotesByNB(notebook.id);
-                  }}
-                >
-                  Id: {notebook.id} Title: <b>{notebook.title}</b>{" "}
-                </div>
-                <i>({noteCountInNotebooks ? noteCountInNotebooks : 0})</i>
-                {"      "}
-                {notebook.is_default ? (
-                  <label htmlFor="defaultNotebookCheckbox">
-                    <input
-                      id="defaultNotebookCheckbox"
-                      className="defaultNotebookInput"
-                      type="checkbox"
-                      checked="checked"
-                      disabled="disabled"
-                    />
-                    <span>Current Default Notebook</span>
-                  </label>
-                ) : (
-                  <button
-                    className="defaultNotebookButton"
-                    value={notebook.is_default}
-                    onClick={e => this.handleNotebookDefault(e, notebook)}
-                  >
-                    <span>Set as default notebook</span>
-                  </button>
-                )}
-                <button onClick={() => this.handleDelete(notebook.id)}>
-                  Delete notebook
-                </button>
+                <table>
+                  <tbody>
+                    <tr id={i}>
+                      <td
+                        className="notebookIdAndTitle"
+                        onClick={async () => {
+                          await this.props.fetchAllNotesFromSingleNotebook(
+                            notebook.id
+                          );
+                          this.getNotesByNB(notebook.id);
+                        }}
+                      >
+                        <b>{notebook.title}</b> (
+                        {noteCountInNotebooks ? noteCountInNotebooks : 0})
+                      </td>
+
+                      <td>
+                        {notebook.is_default ? (
+                          <label htmlFor="defaultNotebookCheckbox">
+                            <input
+                              id="defaultNotebookCheckbox"
+                              className="defaultNotebookInput"
+                              type="checkbox"
+                              checked="checked"
+                              disabled="disabled"
+                            />
+                            <span>Current Default Notebook</span>
+                          </label>
+                        ) : (
+                          <button
+                            className="defaultNotebookButton"
+                            value={notebook.is_default}
+                            onClick={e =>
+                              this.handleNotebookDefault(e, notebook)
+                            }
+                          >
+                            <span>Set as default notebook</span>
+                          </button>
+                        )}
+                      </td>
+                      <td>
+                        <button onClick={() => this.handleDelete(notebook.id)}>
+                          Delete notebook
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </li>
               <ul className="notesForNbUl">
                 <li>

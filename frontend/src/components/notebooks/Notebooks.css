@@ -137,3 +137,37 @@ form {
 .secondLayerDiv > h3 {
   margin-top: 40px;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f8f8f8;
+}
+
+tr {
+  display: flex;
+  justify-content: space-around;
+}
+
+th {
+  background-color: #f8f8f8;
+  color: #b3b3b3;
+}
+
+.tableDiv {
+  width: 100%;
+}
+
+.theadRow {
+  border-top: 2px solid #586b71;
+  border-bottom: 1px solid #ededed;
+}
