@@ -37,21 +37,31 @@ export default class Favorites extends React.Component {
     if (favoritedNotes.length) {
       notes = favoritedNotes.map(note => {
         return (
-          <div className="allFavoritesDiv" key={note.id}>
-            <ul>
-              <li onClick={e => this.handleOnClick(e, note.id)}>
-                Title <b>{note.title}</b>
-              </li>
-            </ul>
-          </div>
+          <tbody className="allFavoritesDiv" key={note.id}>
+            <tr className="favRow">
+              <td onClick={e => this.handleOnClick(e, note.id)}>
+                {note.title}
+              </td>
+            </tr>
+          </tbody>
         );
       });
     }
 
     return (
       <div className="favoritesMainWrapper">
-        <h1>All Favorites</h1>
-        {notes}
+        <h1 className="favTitleH1">Shorcuts</h1>
+        <div className="allFavoritesDiv">
+          <h3>My shortcuts list</h3>
+          <table className="favsTable">
+            <thead>
+              <tr className="theadRow">
+                <th>TITLE</th>
+              </tr>
+            </thead>
+            {notes}
+          </table>
+        </div>
       </div>
     );
   }
