@@ -6,6 +6,7 @@ import { receiveIdForSelectedNoteFromNotebook } from "../actions/NotebooksAction
 import { fetchNotes } from "../actions/NotesActions.js"; // in case user goes directly to /notebooks
 
 const mapStateToProps = state => {
+  debugger;
   return {
     notebooks: state.notebooks.notebooks,
     notesFromNB: state.notes.notesFromNB,

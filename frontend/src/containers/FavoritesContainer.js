@@ -5,9 +5,10 @@ import { fetchNotebooks } from "../actions/NotebooksActions.js";
 import { receiveIdForSelectedNoteFromFavorites } from "../actions/FavoritesActions.js";
 
 const mapStateToProps = state => {
+  debugger;
   return {
     notes: state.notes,
-    notebooks: state.notebooks
+    notebooks: state.notebooks.notebooks
   };
 };
 
