@@ -7,7 +7,8 @@ const {
   getSingleNoteFromNotebook,
   addNote,
   editNote,
-  deleteNote
+  deleteNote,
+  idOnlyDeleteNote
 } = require("../db/queries/notesQueries.js");
 
 const { loginRequired } = require("../auth/helpers.js");
@@ -20,5 +21,6 @@ router.get("/:notebook_id/:note_id", loginRequired, getSingleNoteFromNotebook);
 router.post("/:notebook_id", loginRequired, addNote);
 router.patch("/:notebook_id/:note_id", loginRequired, editNote);
 router.delete("/:notebook_id/:note_id", loginRequired, deleteNote);
+router.delete("/:note_id", idOnlyDeleteNote);
 
 module.exports = router;

@@ -106,10 +106,12 @@ const editNote = (req, res, next) => {
   if (req.body.body && req.body.body.toLowerCase() === "null") {
     req.body.body = null;
   }
-  if (req.body.favorited && req.body.favorited.toString().toLowerCase() === "null") {
+  if (
+    req.body.favorited &&
+    req.body.favorited.toString().toLowerCase() === "null"
+  ) {
     req.body.favorited = false;
   }
-
 
   db.none(
     "UPDATE notes SET " +
@@ -136,8 +138,22 @@ const editNote = (req, res, next) => {
 const deleteNote = (req, res, next) => {
   db.result(
     "DELETE FROM notes WHERE author_id=$1 AND notebook_id=$2 AND id=$3",
-    [req.session.currentUser.id, +req.params.notebook_id, +req.params.note_id]
+    [+req.session.currentUser.id, +req.params.notebook_id, +req.params.note_id]
   )
+    .then(result => {
+      res.status(200).json({
+        status: "success",
+        message: "Note deleted from notebook!",
+        body: result
+      });
+    })
+    .catch(error => {
+      next(error);
+    });
+};
+
+const inOnlyDeleteNote = (req, res, next) => {
+  db.result("DELETE FROM notes WHERE notes.id=$1", [+req.params.note_id])
     .then(result => {
       res.status(200).json({
         status: "success",
@@ -157,5 +173,6 @@ module.exports = {
   getSingleNoteFromNotebook,
   addNote,
   editNote,
-  deleteNote
+  deleteNote,
+  inOnlyDeleteNote
 };

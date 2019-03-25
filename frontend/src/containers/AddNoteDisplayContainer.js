@@ -8,10 +8,9 @@ import { fetchAllNotesFromSingleNotebook } from "../actions/NotesActions.js";
 import { receiveIdForSelectedNoteFromFavorites } from "../actions/FavoritesActions.js";
 
 const mapStateToProps = (state, ownProps) => {
-
   return {
     notes: state.notes,
-    notebooks: state.notebooks,
+    notebooks: state.notebooks.notebooks,
     notesFromNB: state.notes.notesFromNB,
     noteIdForSelectedNoteFromNotebook:
       state.notebooks.noteIdForSelectedNoteFromNotebook,

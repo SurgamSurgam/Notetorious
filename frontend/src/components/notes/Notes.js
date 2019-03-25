@@ -182,7 +182,7 @@ export default class Notes extends React.Component {
       .reverse()
       .find(note => note.id === deleteId);
 
-    await axios.delete(`/api/notes/${note.notebook_id}/${note.id}`);
+    await axios.delete(`/api/notes/${36}/${note.id}`);
 
     await this.props.fetchNotebooks();
     await this.props.fetchNotes();
