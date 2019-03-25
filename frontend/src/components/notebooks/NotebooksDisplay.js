@@ -8,9 +8,9 @@ class NotebooksDisplay extends React.Component {
           <table>
             <thead>
               <tr className="theadRow">
-                <th>Title</th>
-                <th>Default State</th>
-                <th>Delete</th>
+                <th>TITLE</th>
+                <th>DEFAULT STATUS</th>
+                <th>DELETE</th>
               </tr>
             </thead>
           </table>

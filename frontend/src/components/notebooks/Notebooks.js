@@ -200,7 +200,7 @@ export default class Notebooks extends React.Component {
                           this.getNotesByNB(notebook.id);
                         }}
                       >
-                        <b>{notebook.title}</b> (
+                        {notebook.title} (
                         {noteCountInNotebooks ? noteCountInNotebooks : 0})
                       </td>
 
@@ -214,7 +214,9 @@ export default class Notebooks extends React.Component {
                               checked="checked"
                               disabled="disabled"
                             />
-                            <span>Current Default Notebook</span>
+                            <span className="defaultNbTag">
+                              Current Default Notebook
+                            </span>
                           </label>
                         ) : (
                           <button

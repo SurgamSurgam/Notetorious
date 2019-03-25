@@ -123,6 +123,7 @@ form {
   margin-left: 5px;
   font-family: "Roboto", "Oxygen", sans-serif;
   font-weight: normal;
+  font-size: 17px;
 }
 
 .textOpensModalIcon {
@@ -132,10 +133,14 @@ form {
 .nbTitle {
   font-size: 20px;
   margin-top: 30px;
+  font-family: "Roboto", "Oxygen", sans-serif;
+  font-weight: normal;
 }
 
 .secondLayerDiv > h3 {
   margin-top: 40px;
+  font-family: "Roboto", "Oxygen", sans-serif;
+  font-weight: normal;
 }
 
 table {
@@ -155,19 +160,38 @@ tr:nth-child(odd) {
 
 tr {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  height: 40px;
+  align-items: center;
+}
+
+tr:hover {
+  background-color: #f2f2f2;
 }
 
 th {
-  background-color: #f8f8f8;
   color: #b3b3b3;
+  font-family: "Roboto", "Oxygen", sans-serif;
+  font-weight: lighter;
+  font-size: 12px;
+  align-items: center;
 }
 
 .tableDiv {
-  width: 100%;
+  width: 1063px;
+  margin-top: 16px;
 }
 
 .theadRow {
   border-top: 2px solid #586b71;
   border-bottom: 1px solid #ededed;
+}
+
+.defaultNbTag {
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.notebookIdAndTitle {
+  font-size: 14px;
 }
