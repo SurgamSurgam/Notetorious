@@ -102,11 +102,23 @@ export default class Notebooks extends React.Component {
           .map(note => {
             return (
               <div className="allNotesFromNB" key={note.id}>
-                <ul>
-                  <li onClick={e => this.onClickTest(e, note.id)}>
-                    <i>{note.title}</i>
-                  </li>
-                </ul>
+                <table>
+                  <tbody>
+                    <tr className="tDnotes">
+                      <td
+                        className="notebookIdAndTitle nbIdTitleContainer"
+                        onClick={e => this.onClickTest(e, note.id)}
+                      >
+                        <img
+                          className="noteImg sideNavLogo"
+                          src="noteImg.png"
+                          alt=""
+                        />
+                        {note.title}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             );
           });
@@ -192,7 +204,7 @@ export default class Notebooks extends React.Component {
                   <tbody>
                     <tr id={i}>
                       <td
-                        className="notebookIdAndTitle"
+                        className="notebookIdAndTitle nbIdTitleContainer"
                         onClick={async () => {
                           await this.props.fetchAllNotesFromSingleNotebook(
                             notebook.id
@@ -200,6 +212,11 @@ export default class Notebooks extends React.Component {
                           this.getNotesByNB(notebook.id);
                         }}
                       >
+                        <img
+                          className="notebookImgBlack sideNavLogo"
+                          src="notebookImgBlack.png"
+                          alt=""
+                        />
                         {notebook.title} (
                         {noteCountInNotebooks ? noteCountInNotebooks : 0})
                       </td>
@@ -264,6 +281,7 @@ export default class Notebooks extends React.Component {
           <Modal
             isOpen={this.state.showModal}
             contentLabel="Minimal Modal Example"
+            overlayClassName="Overlay"
           >
             <button className="modalButton" onClick={this.handleCloseModal}>
               X

@@ -9,7 +9,7 @@
 
   /* justify-content: space-around; */
   min-height: 84.5vh;
-  margin-left: 100px;
+  margin-left: 30px;
 }
 
 .allNotebooksDiv > ul {
@@ -141,6 +141,7 @@ form {
   margin-top: 40px;
   font-family: "Roboto", "Oxygen", sans-serif;
   font-weight: normal;
+  font-size: 17px;
 }
 
 table {
@@ -163,6 +164,17 @@ tr {
   justify-content: space-between;
   height: 40px;
   align-items: center;
+  padding-left: 28px;
+}
+
+.tDnotes {
+  display: flex;
+  justify-content: flex-start;
+  height: 40px;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 16px solid white;
+  padding-left: 52px;
 }
 
 tr:hover {
@@ -178,7 +190,7 @@ th {
 }
 
 .tableDiv {
-  width: 1063px;
+  width: 1133px;
   margin-top: 16px;
 }
 
@@ -194,4 +206,16 @@ th {
 
 .notebookIdAndTitle {
   font-size: 14px;
+}
+
+.noteImg {
+  margin-right: 5px;
+}
+
+.notebookImgBlack {
+  margin-right: 5px;
+}
+
+.nbIdTitleContainer {
+  display: flex;
 }
