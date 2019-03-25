@@ -3,18 +3,30 @@ import axios from "axios";
 import { TagsDisplay } from "./TagsDisplay.js";
 import { AddTagDisplay } from "./AddTagDisplay.js";
 import "./Tags.css";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 export default class Tags extends React.Component {
   state = {
     newTag: { name: "" },
     editing: null,
-    editUserInput: ""
+    editUserInput: "",
+    showModal: false
   };
 
   componentDidMount() {
     this.props.fetchTagsForCurrentUser();
     this.props.fetchTagsOfEveryone();
   }
+
+  handleOpenModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
 
   handleChange = e => {
     this.setState({
@@ -84,13 +96,26 @@ export default class Tags extends React.Component {
 
     return (
       <div className="tagsMainWrapper">
-        <h1>All Tags</h1>
-        <AddTagDisplay
-          newTag={this.state.newTag}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-
+        <div className="secondLayerDiv tagsContainer">
+          <h1 className="nbTitle">Tags</h1>
+          <h3 className="textOpensModal" onClick={this.handleOpenModal}>
+            <i className="fas fa-book-dead textOpensModalIcon" />
+            New Tag
+          </h3>
+          <Modal
+            isOpen={this.state.showModal}
+            contentLabel="Minimal Modal Example"
+          >
+            <button className="modalButton" onClick={this.handleCloseModal}>
+              X
+            </button>
+            <AddTagDisplay
+              newTag={this.state.newTag}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            />
+          </Modal>
+        </div>
         <TagsDisplay
           allTagsForEveryone={this.props.allTagsForEveryone}
           handleDelete={this.handleDelete}

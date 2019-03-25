@@ -1,14 +1,7 @@
 .tagsMainWrapper {
   font-family: Roboto, sans-serif;
   font-size: 16px;
-
-  /* text-align: center; */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  height: 793px;
-  margin-left: 100px;
+  margin-left: 33px;
 }
 
 .tagsMainWrapper > ul {
@@ -19,13 +12,12 @@
 .tagsWrapper {
   font-family: Roboto, sans-serif;
   font-size: 16px;
-
-  /* text-align: center; */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
-  margin-left: 100px;
-  flex-wrap: wrap;
+  padding-top: 25px;
   overflow-y: auto;
+}
+
+.tagsContainer {
+  height: 46px;
+  border-bottom: 2px solid #586b71;
+  padding-bottom: 36px;
 }

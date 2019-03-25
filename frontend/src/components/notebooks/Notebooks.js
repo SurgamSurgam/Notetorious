@@ -24,13 +24,11 @@ export default class Notebooks extends React.Component {
   }
 
   handleOpenModal = () => {
-    console.log("yo");
     this.setState({ showModal: true });
   };
 
   handleCloseModal = () => {
     this.setState({ showModal: false });
-    this.handleToggleViewNoteInfo();
   };
 
   async componentDidMount() {
@@ -281,7 +279,6 @@ export default class Notebooks extends React.Component {
           <Modal
             isOpen={this.state.showModal}
             contentLabel="Minimal Modal Example"
-            overlayClassName="Overlay"
           >
             <button className="modalButton" onClick={this.handleCloseModal}>
               X
