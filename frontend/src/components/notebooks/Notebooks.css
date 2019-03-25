@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
+
+  /* justify-content: space-around; */
   min-height: 84.5vh;
   margin-left: 100px;
 }
@@ -48,8 +49,91 @@ form {
   cursor: pointer;
 }
 
-/* .newNotebookFormDiv {
+.newNotebookFormDivWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+  height: 100%;
+  justify-content: center;
+}
+
+.newNotebookFormDiv {
+  justify-content: center;
+  width: 500px;
+  height: 80px;
+  padding: 20px 25px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newNotebookForm {
+  width: 100%;
+}
+
+.newNotebookParagraph {
+  margin: 15px 0;
+}
+
+.newNotebookInput {
+  width: 480px;
+  height: 36px;
+  padding: 1px;
+  padding-left: 8px;
+  color: #333;
+  border: 1px solid #e6e6e6;
+  border-radius: 7px;
+  line-height: 1.1875;
+  font-size: 16px;
+  margin-bottom: 14px;
+  font-family: "Roboto", "Oxygen", sans-serif;
+}
+
+.newNotebookInput:focus {
+  outline: none;
+  border-color: #dff2e6;
+  box-shadow: 0 0 0 1px #dff2e6, 0 0 4px 0 #dff2e6;
+}
+
+.modalButton {
+  background-color: white;
+  color: black;
+  border: 1px outset #e6e6e6;
+  transition-duration: 0.4s;
+  font-weight: 300;
+  font-size: 11.5px;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 36px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  min-width: 70px;
+}
+
+.modalButton:hover {
+  border-radius: 5px;
+  background-color: lightsteelblue;
+  color: white;
+}
+
+.textOpensModal {
+  color: #00b114;
+  cursor: pointer;
+  margin-right: 85px;
+  margin-left: 5px;
+  font-family: "Roboto", "Oxygen", sans-serif;
+  font-weight: normal;
+}
+
+.textOpensModalIcon {
+  margin-right: 5px;
+}
+
+.nbTitle {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.secondLayerDiv > h3 {
+  margin-top: 40px;
+}

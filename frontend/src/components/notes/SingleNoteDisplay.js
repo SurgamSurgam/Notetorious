@@ -19,9 +19,7 @@ class SingleNoteDisplay extends React.Component {
   };
 
   componentDidMount() {
-    debugger;
     if (this.props.savedSearchResults.length) {
-      debugger;
       this.setState({
         title: this.props.savedSearchResults[0].title,
         body: this.props.savedSearchResults[0].body

@@ -3,15 +3,34 @@ import NotebooksDisplay from "./NotebooksDisplay.js";
 import { AddNotebookDisplay } from "./AddNotebookDisplay.js";
 import axios from "axios";
 import "./Notebooks.css";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 export default class Notebooks extends React.Component {
-  state = {
-    newNotebook: { title: "", is_default: false },
-    notesFromNBMapped: [],
-    notebookMappedId: null,
-    noteCountInNotebooks: "",
-    currentDefaultNotebook: "",
-    toBeNewDefaultNotebook: ""
+  constructor() {
+    super();
+    this.state = {
+      newNotebook: { title: "", is_default: false },
+      notesFromNBMapped: [],
+      notebookMappedId: null,
+      noteCountInNotebooks: "",
+      currentDefaultNotebook: "",
+      toBeNewDefaultNotebook: "",
+      showModal: false
+    };
+    // this.handleOpenModal.bind(this);
+    // this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  handleOpenModal = () => {
+    console.log("yo");
+    this.setState({ showModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+    this.handleToggleViewNoteInfo();
   };
 
   async componentDidMount() {
@@ -220,14 +239,30 @@ export default class Notebooks extends React.Component {
 
     return (
       <div className="notebooksMainWrapper">
-        <h1>All Notebooks</h1>
+        <h1 className="nbTitle">Notebooks</h1>
+        <div className="secondLayerDiv">
+          <h3>My notebook list</h3>
+          <h3 className="textOpensModal" onClick={this.handleOpenModal}>
+            <i className="fas fa-book-dead textOpensModalIcon" />
+            New Notebook
+          </h3>
+
+          <Modal
+            isOpen={this.state.showModal}
+            contentLabel="Minimal Modal Example"
+          >
+            <button className="modalButton" onClick={this.handleCloseModal}>
+              X
+            </button>
+            <AddNotebookDisplay
+              newNotebook={this.state.newNotebook}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              handleCancel={this.handleCancel}
+            />
+          </Modal>
+        </div>
         <NotebooksDisplay notebook={notebooks} />
-        <AddNotebookDisplay
-          newNotebook={this.state.newNotebook}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          handleCancel={this.handleCancel}
-        />
       </div>
     );
   }
