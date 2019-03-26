@@ -4,7 +4,7 @@ _[Trello](https://trello.com/b/BAHg7c4m/notetorious-evernote-app)_
 
 ## MVP
 
-This project is a full-stack web application inspired by Evernote and built using the PERN stack (Postgres, Express, React/Redux and NodeJS). Like Evernote, NOTEtorious helps users stay organized by allowing them to create, modify, tag, and store notes in notebooks.
+Notetorious is a full-stack web application fully inspired by Evernote and built with Postgres, Express, React/Redux and NodeJS. Like Evernote, this clone's mvp aims to help users stay organized by allowing them to create, modify, tag, and store notes in notebooks.
 
 ## Features
 
