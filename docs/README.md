@@ -25,7 +25,7 @@ Notetorious is a full-stack web application fully inspired by Evernote and built
 
 ## Project Design Docs
 
-View the original _[project proposal](https://trello.com/b/BAHg7c4m/notetorious-evernote-app)_ to see to a README including all [wireframes](./wireframes), [api endpoints](./api-endpoints.md), [database schema](./schema.md), a sample React [component hierarchy](./component-hierarchy.md), a [sample state](./sample-state.md), and the implementation timeline that covers 3 weeks.
+View the original _[project proposal](./original-readme.md)_ to see to a README including all [wireframes](./wireframes), [api endpoints](./api-endpoints.md), [database schema](./schema.md), a sample React [component hierarchy](./component-hierarchy.md), a [sample state](./sample-state.md), and the implementation timeline that covers 3 weeks.
 
 ## Usage
 
