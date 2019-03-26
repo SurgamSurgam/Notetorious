@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoggedInLinks from "./LoggedInLinks.js";
+// import LoggedInLinks from "./LoggedInLinks.js";
 import LoggedOutLinks from "./LoggedOutLinks.js";
 import "./NavbarHorizontal.css";
 
 export const NavbarHorizontal = props => {
   console.log("NAV PROPS!", props);
 
-  let { isLoggedIn, user } = props.user;
+  let { isLoggedIn } = props.user;
 
   //to control nav display
   // const classNames = ["navWrapper"];
@@ -16,7 +16,7 @@ export const NavbarHorizontal = props => {
   // }
 
   const classNames = ["navWrapper"];
-  if (props.location.pathname !== '/') {
+  if (props.location.pathname !== "/") {
     classNames.push("hideLoggedOutLinks");
   }
 

@@ -21,3 +21,45 @@
   border-bottom: 2px solid #586b71;
   padding-bottom: 36px;
 }
+
+.allTagsDivWrapper {
+  display: flex;
+  height: 35px;
+  align-items: center;
+}
+
+.allTagsDivWrapper:hover {
+  background-color: #f0f1f1;
+}
+
+.allTagsDivWrapper > h3 {
+  width: 275px;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.tagDeleteButtonDiv {
+  margin-right: 20px;
+}
+
+.allTagsDiv > form {
+  display: flex;
+  width: 100%;
+}
+
+.editTagInput {
+  width: 250px;
+  margin-right: 25px;
+  height: 15px;
+}
+
+.tagCancelButton {
+  margin-right: 20px;
+}
+
+input::placeholder {
+  font-size: 15px;
+  text-align: center;
+  align-items: center;
+}

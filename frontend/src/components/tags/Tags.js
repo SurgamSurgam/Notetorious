@@ -36,7 +36,6 @@ export default class Tags extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // router.post("/user/note/:note_id", loginRequired, addTag);
     axios
       .post(`/api/tags/`, this.state.newTag) //add note_id
       .then(() => {
@@ -50,7 +49,7 @@ export default class Tags extends React.Component {
       });
   };
 
-  handleDelete = async (e, deleteId) => {
+  handleDelete = async deleteId => {
     let tag = Object.values(this.props.allTagsForEveryone).find(
       tag => tag.id === deleteId
     );
@@ -124,6 +123,10 @@ export default class Tags extends React.Component {
           handleEditSubmit={this.handleEditSubmit}
           editing={this.state.editing}
           editUserInput={this.state.editUserInput}
+          handleOpenModal={this.handleOpenModal}
+          handleCloseModal={this.handleCloseModal}
+          showModal={this.state.showModal}
+          handleTagDropdown={this.handleTagDropdown}
         />
       </div>
     );

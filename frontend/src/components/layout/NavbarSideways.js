@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import LoggedInLinks from "./LoggedInLinks.js";
-import LoggedOutLinks from "./LoggedOutLinks.js";
+// import LoggedOutLinks from "./LoggedOutLinks.js";
 import "./NavbarSideways.css";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import FavoritesContainer from "../../containers/FavoritesContainer.js";
@@ -33,7 +33,6 @@ export const NavbarSideways = props => {
         <img src={require("./Ripple-1s-200px.svg")} alt="" />
       </div>
     );
-    debugger;
   } else {
     return (
       <div className={classNames}>
