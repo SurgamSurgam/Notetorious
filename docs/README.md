@@ -1,28 +1,15 @@
 # Notetorious
 
-_[Trello](https://trello.com/b/BAHg7c4m/notetorious-evernote-app)_
-
-## MVP
-
-Notetorious is a full-stack web application fully inspired by Evernote and built with Postgres, Express, React/Redux and NodeJS. Like Evernote, this clone's mvp aims to help users stay organized by allowing them to create, modify, tag, and store notes in notebooks.
+Notetorious is a full-stack web application fully inspired by Evernote and built with Postgres, Express, React/Redux and NodeJS. Like Evernote, Notetorious helps users stay organized by allowing them to create, modify, tag and store notes in notebooks.
 
 ## Features
 
-- New account creation, login, and guest/demo login
-- A production README
-- Hosting on Heroku
-- Notes (CRUD)
-- Notebooks (CRUD)
-- Rich-text editing(Quill.js/Draft.js)
-- Tags (Categorize)
-
-## Design Docs
-
-- [View Wireframes](./wireframes)
-- [API Endpoints](./api-endpoints.md)
-- [DB Schema](./schema.md)
-- [React Components](./component-hierarchy.md)
-- [Sample State](./sample-state.md)
+- Authentication using Passport.js for frontend/backend
+- User account creation via signup and login or guest/demo login
+- User can create, edit, delete notes and notebooks
+- Rich-text editing via Quill.js
+- Notes are searchable by title or content
+- Notes can be favorited and added as shortcuts
 
 ## Screenshots
 
@@ -36,33 +23,44 @@ Notetorious is a full-stack web application fully inspired by Evernote and built
 
 ![Notetorious](./images/notetorious-shortcuts-page.png "shortcuts")
 
-## Implementation Timeline
+## Project Design Docs
 
-### Phase 1: Backend setup (3 days)
+View the original _[project proposal](https://trello.com/b/BAHg7c4m/notetorious-evernote-app)_ to see to a README including all [wireframes](./wireframes), [api endpoints](./api-endpoints.md), [database schema](./schema.md), a sample React [component hierarchy](./component-hierarchy.md), a [sample state](./sample-state.md), and the implementation timeline that covers 3 weeks.
 
-- **Objective:** Functioning Express project with necessary routes and placeholder home page
+## Usage
 
-### Phase 2: Notes (3 days)
+#### Clone this repo
 
-- **Objective:** Implement CRUD via API. Research/choose Quill/Draft for rich text editing
+```
+$ git clone https://github.com/SurgamSurgam/Notetorious.git && cd Notetorious
+```
 
-### Phase 3: Notebooks (3 days)
+#### CD into `/backend` and run `npm install`
 
-- **Objective:** Implement CRUD via API. Filter notes by notebooks. Style notebook view, include dropdown for belonging notes
+```
+$ cd backend/ && npm install
+```
 
-### Phase 4: Tags (3 day)
+#### CD into `/frontend` and run `npm install`
 
-- **Objective:** Multiple tags can be added to one note. Notes can be untagged and tags can be deleted
+```
+$ cd frontend/ && npm install
+```
 
-### Extra Features: (TBD)
+### Running Server
 
-- Frontend/Backend Authentication
-- Add search for notes, notebooks and tags
-- Favorite notes shortcuts
-- Create Reminders for Notes
+#### CD into `/notetorious` and Run `npm start`
+
+```
+$ npm start
+```
+
+## Future Implementations
+
+- OAuth
+- Allow sharing of notes/notebooks via social media
+- Collaboration on notes
 - Multiple sessions
 - Add checklist/todo
-- Allow sharing of notes/notebooks via social media
+- Create Reminders for Notes
 - Autosave while editing
-- Collaboration on notes
-- Pagination / Infinite scroll
