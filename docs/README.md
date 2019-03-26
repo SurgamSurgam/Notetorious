@@ -49,7 +49,7 @@ $ cd frontend/ && npm install
 
 ### Running Server
 
-#### CD into `/notetorious` and Run `npm start`
+#### CD into `/Notetorious` and Run `npm start`
 
 ```
 $ npm start
