@@ -152,7 +152,7 @@ const deleteNote = (req, res, next) => {
     });
 };
 
-const inOnlyDeleteNote = (req, res, next) => {
+const idOnlyDeleteNote = (req, res, next) => {
   db.result("DELETE FROM notes WHERE notes.id=$1", [+req.params.note_id])
     .then(result => {
       res.status(200).json({
@@ -174,5 +174,5 @@ module.exports = {
   addNote,
   editNote,
   deleteNote,
-  inOnlyDeleteNote
+  idOnlyDeleteNote
 };

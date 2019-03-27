@@ -60,6 +60,6 @@
 
 input::placeholder {
   font-size: 15px;
-  text-align: center;
+  padding-left: 20px;
   align-items: center;
 }

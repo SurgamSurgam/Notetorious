@@ -178,6 +178,7 @@ class AddNoteDisplay extends React.Component {
     return (
       <div className="newNoteFormDiv">
         <input
+          className="newNoteInput"
           type="text"
           name="title"
           placeholder="Title"
@@ -186,26 +187,29 @@ class AddNoteDisplay extends React.Component {
           required
         />
         <ReactQuill
+          className="newNoteQuill"
           name="body"
           value={newNote.body}
           onChange={this.handleNewNoteChange}
           placeholder="Start writing/editing"
           modules={{ toolbar: this.props.notes.toolbarOptions }}
         />
-        <button className="CancelAddNoteButton" onClick={this.handleCancel}>
-          Clear Note
-        </button>
-        {!!selectedNoteId ? (
-          !!newNote.title && !!newNote.body ? (
-            <button className="addNoteButton" onClick={this.handleEdit}>
-              Submit Edit
-            </button>
-          ) : null
-        ) : (
-          <button className="addNoteButton" onClick={this.handleSubmit}>
-            Save New Note
+        <div className="submitEditDiv">
+          <button className="cancelAddNoteButton" onClick={this.handleCancel}>
+            Clear Note
           </button>
-        )}
+          {!!selectedNoteId ? (
+            !!newNote.title && !!newNote.body ? (
+              <button className="addNoteButton" onClick={this.handleEdit}>
+                Submit Edit
+              </button>
+            ) : null
+          ) : (
+            <button className="addNoteButton" onClick={this.handleSubmit}>
+              Save New Note
+            </button>
+          )}
+        </div>
       </div>
     );
   }
