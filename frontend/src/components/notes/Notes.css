@@ -179,7 +179,7 @@ span.favoritedHeartClear {
 
 .singleNoteInputTitleDiv {
   position: absolute;
-  margin-top: 114px;
+  margin-top: 135px;
   margin-left: 39px;
   font-size: 32px;
   border: none;
@@ -309,4 +309,50 @@ span.favoritedHeartClear {
   width: 100%;
   justify-content: space-between;
   align-items: center;
+}
+
+.newNoteFormDiv {
+  width: 1180px;
+}
+
+.newNoteQuill {
+  margin-top: 53px;
+  margin-left: 11px;
+}
+
+.newNoteInput {
+  position: absolute;
+  margin-top: 115px;
+  margin-left: 39px;
+  font-size: 32px;
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  width: 700px;
+}
+
+.newNoteInput::placeholder {
+  font-size: 20px;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.submitEditDiv > button {
+  height: 32px;
+}
+
+.submitEditDiv {
+  width: 100%;
+}
+
+.newNoteFormDiv > .submitEditDiv {
+  width: 900px;
+}
+
+.newNoteQuill > .ql-container {
+  height: 150px;
+}
+
+.ql-editor {
+  margin-top: 125px;
 }
