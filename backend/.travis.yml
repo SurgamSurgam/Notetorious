@@ -1,0 +1,9 @@
+deploy:
+  api_key: $HEROKU_AUTH_TOKEN
+  app: notetorious
+  provider: heroku
+  strategy: git
+  true: master
+language: node_js
+node_js:
+  - "11.10.1"
