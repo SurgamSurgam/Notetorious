@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently --kill-others \"cd frontend && npm start\" \"cd backend && npm start\""
+    "start": "cd backend && npm start",
+    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install && npm run postbuild"
   },
   "repository": {
     "type": "git",

@@ -43,14 +43,18 @@ app.use(passport.session());
 
 // passport stuff above:
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.use("/", indexRouter);
+
 app.use("/api/users", usersRouter);
 app.use("/api/notebooks", notebooksRouter);
 app.use("/api/notes", notesRouter);
 app.use("/api/tags", tagsRouter);
 app.use("/sessions", sessionsRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname + "/../frontend/build/index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
