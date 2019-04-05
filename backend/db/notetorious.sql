@@ -1,7 +1,9 @@
-DROP DATABASE IF EXISTS notetorious;
-CREATE DATABASE notetorious;
+DROP TABLE  IF EXISTS taggings;
+DROP TABLE IF EXISTS tags ;
+DROP TABLE  IF EXISTS notes;
+DROP TABLE  IF EXISTS notebooks;
+DROP TABLE  IF EXISTS users;
 
-\c notetorious;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
