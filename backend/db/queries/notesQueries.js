@@ -93,7 +93,6 @@ const addNote = (req, res, next) => {
 };
 
 const editNote = (req, res, next) => {
-  console.log("BODY: ", req.body, "PARAMS: ", req.params);
   let queryStringArray = [];
   let bodyKeys = Object.keys(req.body);
   bodyKeys.forEach(key => {

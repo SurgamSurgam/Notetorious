@@ -1,7 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import LoggedInLinks from "./LoggedInLinks.js";
-// import LoggedOutLinks from "./LoggedOutLinks.js";
 import "./NavbarSideways.css";
 import AddNoteDisplayContainer from "../../containers/AddNoteDisplayContainer.js";
 import FavoritesContainer from "../../containers/FavoritesContainer.js";
@@ -12,7 +10,6 @@ import { PrivateRoute } from "../../utils/AuthRouting";
 import { Switch } from "react-router-dom";
 
 export const NavbarSideways = props => {
-  console.log("NAV PROPS!", props);
 
   let { isLoggedIn, user } = props.user;
 

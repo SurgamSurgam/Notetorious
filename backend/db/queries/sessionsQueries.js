@@ -4,7 +4,6 @@ const logoutUser = (req, res, next) => {
 };
 
 const loginUser = (req, res) => {
-  console.log('backend REQ.USER', req.user);
   req.session.currentUser = req.user;
   res.json(req.user);
 };

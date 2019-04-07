@@ -85,7 +85,6 @@ class LoggedInLinks extends React.Component {
   }
 
   render() {
-    console.log("SEARCHING:", this.state);
     const options = [
       {
         value: "logout",

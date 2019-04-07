@@ -73,7 +73,7 @@ class SingleNoteDisplay extends React.Component {
       this.props.savedSearchResults.title &&
       this.props.savedSearchResults.body
     ) {
-      debugger;
+      
       return (
         <div className="SingleNoteDisplayDiv">
           <div className="everythingAboveEditor">

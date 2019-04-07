@@ -71,7 +71,7 @@ class AddNoteDisplay extends React.Component {
         });
       }
       // } else {
-      //   console.log(" create a default nb here?");
+      // " create a default nb here!"
       // }
     }
 
@@ -172,8 +172,6 @@ class AddNoteDisplay extends React.Component {
 
   render() {
     let { newNote, selectedNoteId } = this.state;
-    console.log("selectedNotebookId:", this.state.selectedNotebookId);
-    console.log("newNote:", this.state.newNote);
 
     return (
       <div className="newNoteFormDiv">

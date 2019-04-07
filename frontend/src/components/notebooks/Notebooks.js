@@ -158,14 +158,11 @@ export default class Notebooks extends React.Component {
   };
 
   handleNotebookDefault = async (e, notebook) => {
-    // console.log('TO BE DEFAULT:',notebook);
     await this.setState({
       toBeNewDefaultNotebook: { ...notebook, is_default: true }
     });
 
     this.handleEditSubmit(notebook.id);
-
-    console.log("boo", this.state.toBeNewDefaultNotebook);
     //axios call to back to change default value of old NB to false (handleSubmit?)
     //another axios call to change default value of selected NB to true
     //change state here to have newly defaulted NB ?? or does setInitialNotebookDefault takes care of it?
@@ -180,12 +177,11 @@ export default class Notebooks extends React.Component {
       `/api/notebooks/${this.state.currentDefaultNotebook.id}`,
       { ...this.state.currentDefaultNotebook, is_default: false }
     );
-    console.log("DF", this.state.currentDefaultNotebook.id);
     this.props.fetchNotebooks();
   };
 
   render() {
-    console.log("NB STATE!", this.state);
+
     let notebooks = Object.values(this.props.notebooks)
       .reverse()
       .map((notebook, i) => {
