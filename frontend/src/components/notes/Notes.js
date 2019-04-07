@@ -52,7 +52,7 @@ export default class Notes extends React.Component {
   }
 
   handleSelectDropdownChange = (e, obj) => {
-    debugger;
+
     switch (e.value) {
       case "delete":
         this.handleDelete(this.state.currentNoteObj.id);
@@ -210,12 +210,6 @@ export default class Notes extends React.Component {
   };
 
   render() {
-    console.log("STATE", this.state);
-    console.log("PROPS", this.props);
-    // console.log("PROPS", this.props.location.pathname);
-    console.log("STATE Obj", this.state.currentNoteObj);
-    console.log("EDITED: ", this.state.editedNoteObj);
-    console.log("ORIGINAL : ", this.state.originalNoteObj);
 
     let notes;
     if (this.props.notes.notes) {
@@ -223,9 +217,6 @@ export default class Notes extends React.Component {
         .reverse()
         .map((note, i) => {
           let updated_at = new Date(note.updated_at);
-          // let created_at = new Date(note.created_at);
-          // let updated_at = <TimeAgo date={note.updated_at} />;
-          // let created_at = <TimeAgo date={note.created_at} />;
 
           const htmlString = note.body;
 
@@ -236,18 +227,8 @@ export default class Notes extends React.Component {
                 onClick={e => this.getSelectionDetails(e, note)}
               >
                 <ul>
-                  {/*<li>Id: {note.id}</li>*/}
-
                   <li className="noteTitleLiWrapper">
                     <div className="noteTitleLi">{note.title}</div>
-                    {/*{note.favorited ? (
-                      <span className="favoritedHeartSolid">
-                        <i
-                          className="fas fa-heart"
-                          onClick={this.addToFavorite}
-                        />
-                      </span>
-                    ) : null}*/}
                   </li>
 
                   <li className="noteBodyLi">{ReactHtmlParser(htmlString)}</li>
@@ -258,19 +239,8 @@ export default class Notes extends React.Component {
                       <TimeAgo date={note.created_at} />
                     )}
                   </li>
-                  {/*<li>Parent Notebook: {note.notebook_id}</li>*/}
-                  {/*<li>Favorited: {String(note.favorited)}</li>*/}
-                  {/*<li />*/}
                 </ul>
               </div>
-              {/*<div className="deleteNoteButtonWrapper">
-                <button
-                  className="deleteNoteButton"
-                  onClick={() => this.handleDelete(note.id)}
-                >
-                  Delete note
-                </button>
-              </div>*/}
             </div>
           );
         });

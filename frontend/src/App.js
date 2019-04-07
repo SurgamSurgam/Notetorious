@@ -19,8 +19,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("APP PROPS!", this.props);
-
     return (
       <div className="App">
         <Route component={NavHorizontalAuthContainer} />

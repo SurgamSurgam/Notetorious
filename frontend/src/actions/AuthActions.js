@@ -3,7 +3,6 @@ import axios from "axios";
 import { RECEIVE_USER } from "./actionTypes";
 
 export const receiveUserStatus = user => {
-  console.log("AUTH ACTIONS !!", user);
   return { type: RECEIVE_USER, user };
 };
 

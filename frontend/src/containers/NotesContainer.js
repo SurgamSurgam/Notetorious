@@ -5,7 +5,7 @@ import { toggleNewNote } from "../actions/NotesActions.js";
 import { fetchNotebooks } from "../actions/NotebooksActions.js";
 
 const mapStateToProps = state => {
-  debugger;
+  
   return {
     notes: state.notes,
     notebooks: state.notebooks,
