@@ -15,19 +15,19 @@ let initalState = {
     user: null,
     isLoggedIn: false
   }
-  // notebooks: {
-  //   1: {
-  //     id: 1,
-  //     is_default: true,
-  //     title: "My First Notebook"
-  //   }
-  // }
 };
+
+const middlewares = [thunk];
+
+if (process.env.NODE_ENV !== 'production') {
+  const createLogger = require('redux-logger');
+  middlewares.push(createLogger());
+}
 
 let store = createStore(
   RootReducer,
   initalState,
-  applyMiddleware(thunk, logger)
+  applyMiddleware(...middlewares)
 );
 
 window.store = store;
