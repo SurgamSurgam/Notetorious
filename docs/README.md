@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/SurgamSurgam/Notetorious.svg?branch=master)](https://travis-ci.com/SurgamSurgam/Notetorious)
 # Notetorious
 
 Notetorious is a full-stack web application fully inspired by Evernote and built with Postgres, Express, React/Redux and NodeJS. Like Evernote, Notetorious helps users stay organized by allowing them to create, modify, tag and store notes in notebooks.
