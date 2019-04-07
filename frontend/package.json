@@ -18,8 +18,10 @@
     "react-select": "^2.4.1",
     "react-timeago": "^4.4.0",
     "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,5 +38,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3100/"
+  "proxy": "http://localhost:3100/",
 }
